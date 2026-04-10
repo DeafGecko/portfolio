@@ -7,9 +7,11 @@ interface ProjectCardProps {
   category: string;
   year: string;
   color: string;
+  description: string;
+  liveUrl?: string;
 }
 
-export const ProjectCard = ({ title, category, year, color }: ProjectCardProps) => {
+export const ProjectCard = ({ title, category, year, color, description, liveUrl }: ProjectCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const onMouseEnter = () => {
@@ -30,11 +32,18 @@ export const ProjectCard = ({ title, category, year, color }: ProjectCardProps) 
     });
   };
 
+  const handleClick = () => {
+    if (liveUrl && liveUrl !== '#') {
+      window.open(liveUrl, '_blank');
+    }
+  };
+
   return (
     <div
       ref={cardRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={handleClick}
       className="bg-white rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-all"
     >
       <div className={`h-48 ${color} flex items-center justify-center`}>
@@ -43,6 +52,7 @@ export const ProjectCard = ({ title, category, year, color }: ProjectCardProps) 
       <div className="p-6">
         <h3 className="text-xl font-bold mb-2">{title}</h3>
         <p className="text-gray-600 text-sm">{category}</p>
+        <p className="text-gray-500 text-sm mt-2">{description}</p>
         <p className="text-gray-400 text-xs mt-3">{year}</p>
       </div>
     </div>
