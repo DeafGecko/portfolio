@@ -97,7 +97,7 @@ export default function Navbar() {
                                     <LogoWide className="mb-2 text-[#e8e6e1]" />
                               </Link>
                               <span className="text-[12px] text-slate-200">
-                                    Dwight Rogers Portfolio
+                                    Frontend Engineering Portfolio
                               </span>
                         </div>
 
