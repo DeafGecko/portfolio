@@ -1,4 +1,6 @@
-export const sectionVariants = {
+import type { Variants } from "framer-motion";
+
+export const sectionVariants: Variants = {
       hidden: {
             opacity: 0,
             y: 40,
@@ -11,9 +13,4 @@ export const sectionVariants = {
                   ease: "easeOut",
             },
       },
-};
-
-export const stagger = {
-      hidden: {},
-      show: { transition: { staggerChildren: 0.15 } }
 };
