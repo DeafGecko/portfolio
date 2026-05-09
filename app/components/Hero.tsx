@@ -1,44 +1,69 @@
-'use client';
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { MagneticButton } from './MagneticButton';
+"use client";
 
-export const Hero = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLHeadingElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
+import { motion } from "framer-motion";
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const words = textRef.current?.querySelectorAll('.word');
-      if (words) {
-        gsap.fromTo(words,
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'back.out(1.2)' }
-        );
-      }
-      gsap.fromTo(lineRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 1, ease: 'power2.out', delay: 0.5 }
-      );
-    }, heroRef);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <div ref={heroRef} className="min-h-screen flex flex-col items-center justify-center relative">
-      <h1 ref={textRef} className="text-6xl md:text-8xl font-bold text-center max-w-4xl mx-auto">
-        {'Design Engineering'.split(' ').map((word, i) => (
-          <span key={i} className="word inline-block mx-2">{word}</span>
-        ))}
-      </h1>
-      <div ref={lineRef} className="h-1 bg-gradient-to-r from-purple-500 to-pink-500 w-48 mt-6 origin-left"></div>
-      <p className="text-gray-600 mt-8 text-xl max-w-md text-center">
-        11 years of design precision, now building motion-first platforms.
-      </p>
-      <div className="mt-12">
-        <MagneticButton>View Work →</MagneticButton>
-      </div>
-    </div>
-  );
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
 };
+
+const item = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+export default function Hero() {
+  return (
+    <motion.section
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="mx-auto grid min-h-[90vh] max-w-6xl items-center gap-12 px-6 md:grid-cols-2"
+    >
+      {/* LEFT */}
+      <div>
+        <motion.p variants={item} className="mt-4 mb-4 font-bold text-sm uppercase tracking-[0.2em] text-blue-400">
+          Front-End Developer
+        </motion.p>
+
+        <motion.h1 variants={item} className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
+          Building clean, fast, modern web apps.
+        </motion.h1>
+
+        <motion.p variants={item} className="mb-8 max-w-xl text-lg text-slate-400">
+          React, Next.js, and UI systems focused on performance, usability, and real-world products.
+        </motion.p>
+
+        <motion.div variants={item} className="flex gap-4">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            className="rounded-xl bg-blue-600 px-6 py-3 font-medium hover:bg-blue-500"
+          >
+            View Projects
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            className="rounded-xl border border-slate-700 px-6 py-3 font-medium hover:border-blue-500"
+          >
+            Contact
+          </motion.button>
+        </motion.div>
+      </div>
+
+      {/* RIGHT VISUAL */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+        className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-2xl"
+      >
+        <div className="h-80 rounded-2xl bg-linear-to-br from-blue-600/40 to-slate-800" />
+      </motion.div>
+    </motion.section>
+  );
+}

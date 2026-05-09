@@ -1,9 +1,10 @@
+// Root layout for the application, defining global styles and metadata
 import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: '09 labs',
-  description: 'Design engineering portfolio',
+  description: 'Front-End Engineering portfolio',
 };
 
 export default function RootLayout({
