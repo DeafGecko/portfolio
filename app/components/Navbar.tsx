@@ -15,30 +15,44 @@ export default function Navbar() {
       useEffect(() => {
             const sections = ["projects", "about", "lab", "contact"];
 
-            const observers: IntersectionObserver[] = [];
+            const handleScroll = () => {
+                  const scrollY = window.scrollY + window.innerHeight * 0.45;
 
-            sections.forEach((id) => {
-                  const el = document.getElementById(id);
-                  if (!el) return;
+                  const hero = document.getElementById("hero");
 
-                  const observer = new IntersectionObserver(
-                        ([entry]) => {
-                              if (entry.isIntersecting) {
-                                    setActiveSection(id);
-                              }
-                        },
-                        {
-                              root: null,
-                              threshold: 0.4, // 40% visible = active
+                  if (hero) {
+                        const heroTop = hero.offsetTop;
+                        const heroBottom = heroTop + hero.offsetHeight;
+
+                        if (scrollY >= heroTop && scrollY < heroBottom) {
+                              setActiveSection("");
+                              return;
                         }
-                  );
+                  }
 
-                  observer.observe(el);
-                  observers.push(observer);
-            });
+                  let current = "";
+
+                  for (const id of sections) {
+                        const el = document.getElementById(id);
+                        if (!el) continue;
+
+                        const top = el.offsetTop;
+                        const bottom = top + el.offsetHeight;
+
+                        if (scrollY >= top && scrollY < bottom) {
+                              current = id;
+                        }
+                  }
+
+                  setActiveSection(current);
+            };
+
+            handleScroll();
+
+            window.addEventListener("scroll", handleScroll, { passive: true });
 
             return () => {
-                  observers.forEach((o) => o.disconnect());
+                  window.removeEventListener("scroll", handleScroll);
             };
       }, []);
 
@@ -47,16 +61,60 @@ export default function Navbar() {
                   setScrolled(window.scrollY > 20);
             };
 
-            window.addEventListener("scroll", handleScroll);
-            return () => window.removeEventListener("scroll", handleScroll);
+            handleScroll();
+
+            window.addEventListener("scroll", handleScroll, { passive: true });
+
+            return () => {
+                  window.removeEventListener("scroll", handleScroll);
+            };
       }, []);
+
+      const scrollToSection = (id: string) => {
+            setActiveSection(id);
+            setOpen(false);
+
+            const html = document.documentElement;
+            const body = document.body;
+
+            html.style.scrollSnapType = "none";
+            body.style.scrollSnapType = "none";
+
+            if (id === "projects") {
+                  const projects = document.getElementById("projects");
+                  if (!projects) return;
+
+                  window.scrollTo({
+                        top: projects.offsetTop + 8,
+                        behavior: "smooth",
+                  });
+
+                  setTimeout(() => {
+                        html.style.scrollSnapType = "";
+                        body.style.scrollSnapType = "";
+                        setActiveSection("projects");
+                  }, 700);
+
+                  return;
+            }
+
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            window.scrollTo({
+                  top: el.offsetTop,
+                  behavior: "smooth",
+            });
+
+            setTimeout(() => {
+                  html.style.scrollSnapType = "";
+                  body.style.scrollSnapType = "";
+            }, 700);
+      };
 
       const navItem = (id: string, label: string) => (
             <button
-                  onClick={() => {
-                        scrollToId(id);
-                        setOpen(false);
-                  }}
+                  onClick={() => scrollToSection(id)}
                   className={`relative transition-colors ${activeSection === id
                         ? "text-blue-400"
                         : "text-slate-300 hover:text-white"
@@ -75,35 +133,33 @@ export default function Navbar() {
             <motion.nav
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  className={`sticky top-0 z-50 border-b transition-all duration-300
-                        ${scrolled
-                              ? "bg-slate-950/90 backdrop-blur-xl border-slate-800 shadow-lg shadow-black/20"
-                              : "bg-slate-950/40 backdrop-blur-md border-transparent"
-                        }
-                  `}
+                  className={`sticky top-0 z-50 border-b transition-all duration-300 ${scrolled
+                        ? "border-slate-800 bg-slate-950/90 shadow-lg shadow-black/20 backdrop-blur-xl"
+                        : "border-transparent bg-slate-950/40 backdrop-blur-md"
+                        }`}
             >
                   <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-
-                        {/* Logo */}
-                        <div className="flex flex-col leading-tight shrink-0">
+                        <div className="flex shrink-0 flex-col leading-tight">
                               <Link
                                     href="/"
-                                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                                    className="flex items-center gap-2 transition-opacity hover:opacity-80"
                                     onClick={(e) => {
                                           e.preventDefault();
-                                          window.scrollTo({ top: 0, behavior: "smooth" });
+                                          setActiveSection("");
+                                          scrollToId("hero");
+                                          setOpen(false);
                                     }}
                               >
                                     <div className="w-[150px]">
-                                          <LogoWide className="h-auto w-full pb-2 text-[#e8e6e1]" />
+                                          <LogoWide className="h-auto w-full text-[#e8e6e1]" />
                                     </div>
                               </Link>
+
                               <span className="text-[12px] text-slate-200">
                                     Frontend Engineering Portfolio
                               </span>
                         </div>
 
-                        {/* DESKTOP MENU */}
                         <div className="hidden gap-6 text-lg md:flex">
                               {navItem("projects", "projects")}
                               {navItem("about", "about")}
@@ -111,16 +167,15 @@ export default function Navbar() {
                               {navItem("contact", "contact")}
                         </div>
 
-                        {/* MOBILE BUTTON */}
                         <button
                               onClick={() => setOpen(!open)}
-                              className="md:hidden text-2xl text-slate-200"
+                              className="text-2xl text-slate-200 md:hidden"
+                              aria-label="Toggle navigation menu"
                         >
                               <MenuIcon open={open} />
                         </button>
                   </div>
 
-                  {/* MOBILE MENU */}
                   <AnimatePresence>
                         {open && (
                               <motion.div
@@ -128,44 +183,13 @@ export default function Navbar() {
                                     animate={{ height: "auto", opacity: 1 }}
                                     exit={{ height: 0, opacity: 0 }}
                                     transition={{ duration: 0.3 }}
-                                    className="md:hidden overflow-hidden border-t border-slate-800 bg-slate-950"
+                                    className="overflow-hidden border-t border-slate-800 bg-slate-950 md:hidden"
                               >
                                     <div className="flex flex-col gap-4 px-6 py-6 text-slate-300">
-                                          <button
-                                                onClick={() => {
-                                                      scrollToId("projects");
-                                                      setOpen(false);
-                                                }}
-                                          >
-                                                projects
-                                          </button>
-
-                                          <button
-                                                onClick={() => {
-                                                      scrollToId("about");
-                                                      setOpen(false);
-                                                }}
-                                          >
-                                                about
-                                          </button>
-
-                                          <button
-                                                onClick={() => {
-                                                      scrollToId("lab");
-                                                      setOpen(false);
-                                                }}
-                                          >
-                                                lab
-                                          </button>
-
-                                          <button
-                                                onClick={() => {
-                                                      scrollToId("contact");
-                                                      setOpen(false);
-                                                }}
-                                          >
-                                                contact
-                                          </button>
+                                          {navItem("projects", "projects")}
+                                          {navItem("about", "about")}
+                                          {navItem("lab", "lab")}
+                                          {navItem("contact", "contact")}
                                     </div>
                               </motion.div>
                         )}

@@ -18,7 +18,7 @@ export default function Lab() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
-                  className="snap-start mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 py-24"
+                  className="snap-start mx-auto flex min-h-screen max-w-6xl items-center px-6 pt-20"
             >
                   <div className="mb-12">
                         <p className="mb-3 text-sm uppercase tracking-[0.2em] text-blue-400">
@@ -37,7 +37,7 @@ export default function Lab() {
                                     whileHover={{ y: -6 }}
                                     className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-sm"
                               >
-                                    <div className="mb-6 h-32 rounded-xl bg-slate-800" />
+                                    <div className="mb-6 h-24 rounded-xl bg-slate-800" />
 
                                     <h3 className="text-xl font-semibold text-white">
                                           {item}

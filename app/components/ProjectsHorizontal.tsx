@@ -11,7 +11,7 @@ const projects = [
       },
       {
             title: "Event Photo App",
-            desc: "QR-based gallery experience for events, weddings, and shared photo moments.",
+            desc: "QR-based gallery experience for events and shared photo moments.",
             tag: "Next.js • UX • Upload Flow",
       },
       {
@@ -26,7 +26,7 @@ const projects = [
       },
 ];
 
-export default function Projects() {
+export default function ProjectsHorizontal() {
       const targetRef = useRef<HTMLElement | null>(null);
 
       const { scrollYProgress } = useScroll({
@@ -34,7 +34,7 @@ export default function Projects() {
             offset: ["start start", "end end"],
       });
 
-      const x = useTransform(scrollYProgress, [0, 1], ["0%", "-55%"]);
+      const x = useTransform(scrollYProgress, [0, 1], ["0%", "-58%"]);
 
       return (
             <section
@@ -42,7 +42,7 @@ export default function Projects() {
                   id="projects"
                   className="relative h-[300vh] snap-start"
             >
-                  <div className="sticky top-0 flex h-screen items-center overflow-hidden px-6 py-20">
+                  <div className="sticky top-0 flex h-screen items-center overflow-hidden px-6 pt-16">
                         <div className="mx-auto w-full max-w-6xl">
                               <div className="mb-12 max-w-2xl">
                                     <p className="mb-3 text-sm uppercase tracking-[0.2em] text-blue-400">
@@ -56,8 +56,8 @@ export default function Projects() {
 
                               <motion.div style={{ x }} className="flex gap-8">
                                     {projects.map((project, index) => (
-                                          <motion.div
-                                                key={index}
+                                          <motion.article
+                                                key={project.title}
                                                 whileHover={{ y: -10, scale: 1.02 }}
                                                 className="min-w-[320px] rounded-3xl border border-slate-800 bg-slate-900/70 p-6 backdrop-blur-sm md:min-w-[420px]"
                                           >
@@ -78,7 +78,7 @@ export default function Projects() {
                                                 <p className="leading-relaxed text-slate-400">
                                                       {project.desc}
                                                 </p>
-                                          </motion.div>
+                                          </motion.article>
                                     ))}
                               </motion.div>
                         </div>
