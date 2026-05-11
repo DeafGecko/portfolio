@@ -27,7 +27,7 @@ export default function Hero() {
       {/* LEFT */}
       <div>
         <motion.p variants={item} className="mt-4 mb-4 font-bold text-sm uppercase tracking-[0.2em] text-blue-400">
-          Front-End Developer
+          Dwight Rogers | DeafGecko
         </motion.p>
 
         <motion.h1 variants={item} className="mb-6 text-5xl font-bold leading-tight md:text-7xl">

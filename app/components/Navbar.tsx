@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { LogoWide } from "../lib/Logo.jsx";
 import MenuIcon from "../components/MenuIcon";
 import { scrollToId } from "../lib/helpers";
 
@@ -93,9 +94,9 @@ export default function Navbar() {
                                           window.scrollTo({ top: 0, behavior: "smooth" });
                                     }}
                               >
-                                    <span className="mb-1 text-2xl font-black tracking-tight text-white">
-                                          09<span className="text-blue-400"> Labs</span>
-                                    </span>
+                                    <div className="w-[150px]">
+                                          <LogoWide className="h-auto w-full pb-2 text-[#e8e6e1]" />
+                                    </div>
                               </Link>
                               <span className="text-[12px] text-slate-200">
                                     Frontend Engineering Portfolio
