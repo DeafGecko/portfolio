@@ -1,7 +1,14 @@
+import AmbientBackground from "./AmbientBackground";
+import CursorGlow from "./CursorGlow";
+import ScrollProgress from "./ScrollProgress";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
       return (
-            <main className="bg-slate-950 text-slate-100 min-h-screen">
+            <div className="relative min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+                  <AmbientBackground />
+                  <CursorGlow />
+                  <ScrollProgress />
                   {children}
-            </main>
+            </div>
       );
 }

@@ -1,11 +1,15 @@
-// Root layout for the application, defining global styles and metadata
-import type { Metadata } from 'next';
-import './globals.css';
+import { Space_Grotesk, Inter } from "next/font/google";
+import "./globals.css";
 
-export const metadata: Metadata = {
-  title: '09 labs',
-  description: 'Front-End Engineering portfolio',
-};
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
 
 export default function RootLayout({
   children,
@@ -13,8 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="antialiased">{children}</body>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${inter.variable}`}
+    >
+      <body>{children}</body>
     </html>
   );
 }

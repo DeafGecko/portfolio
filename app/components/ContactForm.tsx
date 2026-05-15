@@ -2,26 +2,28 @@
 
 export default function ContactForm() {
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-5">
       <input
-        className="p-3 rounded bg-slate-900 text-white"
+        type="text"
         placeholder="Your name"
+        className="rounded-xl border border-[var(--border)] bg-[rgba(18,18,18,0.72)] p-4 text-white placeholder:text-white/40 outline-none transition-all duration-300 focus:border-[var(--accent)]"
       />
 
       <input
-        className="p-3 rounded bg-slate-900 text-white"
+        type="email"
         placeholder="Email"
+        className="rounded-xl border border-[var(--border)] bg-[rgba(18,18,18,0.72)] p-4 text-white placeholder:text-white/40 outline-none transition-all duration-300 focus:border-[var(--accent)]"
       />
 
       <textarea
         rows={8}
-        className="min-h-[250px] resize-none rounded-xl border border-slate-800 bg-slate-900 p-4 text-white outline-none transition-colors focus:border-blue-500"
         placeholder="Tell me about your project, ideas, goals, or collaboration opportunity..."
+        className="resize-none rounded-xl border border-[var(--border)] bg-[rgba(18,18,18,0.72)] p-4 text-white placeholder:text-white/40 outline-none transition-all duration-300 focus:border-[var(--accent)]"
       />
 
       <button
         type="submit"
-        className="bg-blue-500 p-3 rounded text-white hover:bg-blue-600"
+        className="rounded-xl border border-[var(--accent)] bg-transparent p-4 font-medium text-white transition-all duration-300 hover:bg-[var(--accent)]"
       >
         Send Message
       </button>

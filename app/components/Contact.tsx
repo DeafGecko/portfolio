@@ -18,7 +18,7 @@ export default function Contact() {
 
                         {/* LEFT COLUMN */}
                         <div className="flex flex-col justify-center">
-                              <p className="mb-3 text-sm uppercase tracking-[0.2em] text-blue-400">
+                              <p className="mb-3 text-sm uppercase tracking-[0.2em] text-(--accent)">
                                     Contact
                               </p>
 
@@ -26,16 +26,16 @@ export default function Contact() {
                                     Let’s build modern frontend experiences together.
                               </h2>
 
-                              <p className="mb-8 text-lg leading-relaxed text-slate-400">
+                              <p className="mb-8 text-lg leading-relaxed text-white/70">
                                     I’m transitioning from a 10-year background in graphic
                                     design into Front-End Engineering, combining visual design,
                                     UI systems, and modern web technologies to create clean,
                                     interactive digital products.
                               </p>
 
-                              <div className="space-y-4 text-slate-300">
+                              <div className="space-y-4 text-white/70">
                                     <div>
-                                          <p className="text-sm uppercase tracking-wider text-slate-500">
+                                          <p className="text-sm uppercase tracking-wider text-[var(--accent)]">
                                                 Focus
                                           </p>
 
@@ -45,7 +45,7 @@ export default function Contact() {
                                     </div>
 
                                     <div>
-                                          <p className="text-sm uppercase tracking-wider text-slate-500">
+                                          <p className="text-sm uppercase tracking-wider text-[var(--accent)]">
                                                 Current Goal
                                           </p>
 
@@ -58,7 +58,7 @@ export default function Contact() {
                         </div>
 
                         {/* RIGHT COLUMN */}
-                        <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 backdrop-blur-sm">
+                        <div className="rounded-3xl border border-white/20 bg-[rgba(18,18,18,0.72)] p-8 backdrop-blur-sm">
                               <ContactForm />
                         </div>
 

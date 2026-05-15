@@ -20,35 +20,58 @@ export default function Lab() {
                   viewport={{ once: true, amount: 0.2 }}
                   className="snap-start mx-auto flex min-h-screen max-w-6xl items-center px-6 pt-20"
             >
-                  <div className="mb-12">
-                        <p className="mb-3 text-sm uppercase tracking-[0.2em] text-blue-400">
-                              Experimental Lab
-                        </p>
+                  <div className="w-full">
+                        {/* HEADER */}
+                        <div className="mb-14 max-w-3xl">
+                              <p className="mb-3 text-sm uppercase tracking-[0.2em] text-[var(--accent)]">
+                                    Experimental Lab
+                              </p>
 
-                        <h2 className="text-4xl font-bold text-white">
-                              Building interfaces, motion systems, and interactive ideas.
-                        </h2>
-                  </div>
+                              <h2 className="text-4xl font-black leading-tight text-white md:text-5xl">
+                                    Building interfaces, motion systems, and interactive frontend ideas.
+                              </h2>
 
-                  <div className="grid gap-6 md:grid-cols-2">
-                        {experiments.map((item, i) => (
-                              <motion.div
-                                    key={i}
-                                    whileHover={{ y: -6 }}
-                                    className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-sm"
-                              >
-                                    <div className="mb-6 h-24 rounded-xl bg-slate-800" />
+                              <p className="mt-6 text-lg leading-relaxed text-slate-400">
+                                    A collection of experimental concepts focused on interaction,
+                                    animation, layout systems, cinematic motion, and modern frontend
+                                    engineering.
+                              </p>
+                        </div>
 
-                                    <h3 className="text-xl font-semibold text-white">
-                                          {item}
-                                    </h3>
+                        {/* GRID */}
+                        <div className="grid gap-6 md:grid-cols-2">
+                              {experiments.map((item, i) => (
+                                    <motion.div
+                                          key={i}
+                                          whileHover={{
+                                                y: -8,
+                                                borderColor: "rgba(245,127,0,0.35)",
+                                                boxShadow: "0 0 30px rgba(245,127,0,0.08)",
+                                          }}
+                                          transition={{ duration: 0.25 }}
+                                          className="group rounded-3xl border border-[var(--border)] bg-[rgba(18,18,18,0.72)] p-6 backdrop-blur-xl"
+                                    >
+                                          {/* VISUAL */}
+                                          <div className="mb-6 flex h-28 items-center justify-center rounded-2xl border border-[var(--border)] bg-[rgba(28,28,28,0.82)]">
+                                                <span className="text-5xl font-black text-white/10">
+                                                      0{i + 1}
+                                                </span>
+                                          </div>
 
-                                    <p className="mt-3 text-sm leading-relaxed text-slate-400">
-                                          Experimental frontend concepts focused on interaction,
-                                          animation, layout systems, and modern UI architecture.
-                                    </p>
-                              </motion.div>
-                        ))}
+                                          {/* TITLE */}
+                                          <h3 className="text-2xl font-bold text-white transition-colors duration-300 group-hover:text-[var(--accent)]">
+                                                {item}
+                                          </h3>
+
+                                          {/* DESCRIPTION */}
+                                          <p className="mt-4 leading-relaxed text-slate-400">
+                                                Experimental frontend concepts focused on interaction systems,
+                                                animation architecture, immersive layouts, and modern UI
+                                                engineering patterns.
+                                          </p>
+                                    </motion.div>
+                              ))}
+                        </div>
                   </div>
             </motion.section>
       );

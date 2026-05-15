@@ -3,48 +3,37 @@
 import { motion } from "framer-motion";
 
 export default function MenuIcon({ open }: { open: boolean }) {
+      const topPath = open ? "M 6 6 L 18 18" : "M 3 6 L 21 6";
+      const middlePath = "M 3 12 L 21 12";
+      const bottomPath = open ? "M 6 18 L 18 6" : "M 3 18 L 21 18";
+
       return (
             <svg width="24" height="24" viewBox="0 0 24 24">
-                  {/* TOP LINE */}
                   <motion.path
+                        d={topPath}
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
-                        variants={{
-                              closed: { d: "M 3 6 L 21 6" },
-                              open: { d: "M 6 6 L 18 18" },
-                        }}
-                        animate={open ? "open" : "closed"}
-                        transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                        whileHover={{ scale: 1.3 }}
+                        animate={{ d: topPath }}
+                        transition={{ duration: 0.25 }}
                   />
 
-                  {/* MIDDLE LINE */}
                   <motion.path
+                        d={middlePath}
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
-                        variants={{
-                              closed: { d: "M 3 12 L 21 12", opacity: 1 },
-                              open: { d: "M 3 12 L 21 12", opacity: 0 },
-                        }}
-                        animate={open ? "open" : "closed"}
-                        transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                        whileHover={{ scale: 1.3 }}
+                        animate={{ opacity: open ? 0 : 1 }}
+                        transition={{ duration: 0.2 }}
                   />
 
-                  {/* BOTTOM LINE */}
                   <motion.path
+                        d={bottomPath}
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
-                        variants={{
-                              closed: { d: "M 3 18 L 21 18" },
-                              open: { d: "M 6 18 L 18 6" },
-                        }}
-                        animate={open ? "open" : "closed"}
-                        transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                        whileHover={{ scale: 1.3 }}
+                        animate={{ d: bottomPath }}
+                        transition={{ duration: 0.25 }}
                   />
             </svg>
       );

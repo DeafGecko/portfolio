@@ -11,33 +11,41 @@ export default function About() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
-                  className="snap-start mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 py-24"
+                  className="snap-start mx-auto flex min-h-screen max-w-6xl items-center px-6 py-24"
             >
-                  <div className="max-w-3xl">
-                        <p className="mb-3 text-sm uppercase tracking-[0.2em] text-blue-400">
-                              About Me
-                        </p>
+                  <div className="grid w-full gap-14 md:grid-cols-[0.9fr_1.1fr]">
+                        <div>
+                              <p className="mb-3 text-sm uppercase tracking-[0.2em] text-[var(--accent)]">
+                                    About
+                              </p>
 
-                        <h2 className="mb-8 text-4xl font-bold leading-tight text-white">
-                              Designer mindset transitioning into Front-End Engineering.
-                        </h2>
+                              <h2 className="text-4xl font-black leading-tight text-white md:text-5xl">
+                                    From visual design to creative frontend engineering.
+                              </h2>
+                        </div>
 
-                        <div className="space-y-6 text-lg leading-relaxed text-slate-400">
+                        <div className="space-y-6 text-lg leading-relaxed text-white/70">
                               <p>
-                                    I spent over 10 years working in graphic design, building visual systems, brand identity, and digital experiences focused on clarity and user engagement.
+                                    I’m Dwight Rogers, a frontend developer and creative technologist
+                                    transitioning from more than 10 years in graphic design into modern
+                                    frontend engineering.
                               </p>
 
                               <p>
-                                    Over time, I became increasingly interested in how products are actually built — not only how they look, but how they function, scale, and create real user interaction.
+                                    My background gives me a strong eye for composition, visual systems,
+                                    hierarchy, and brand clarity. I’m now applying that foundation to
+                                    React, Next.js, Tailwind CSS, Framer Motion, accessibility, and
+                                    interactive product interfaces.
                               </p>
 
                               <p>
-                                    Today, I am transitioning into Front-End Engineering with a focus on React, Next.js, modern UI architecture, animation systems, and responsive product design.
+                                    I’m focused on building clean, cinematic, responsive web experiences
+                                    that connect design thinking with real frontend implementation.
                               </p>
 
                               <p>
-                                    My goal is to combine strong visual design instincts with modern frontend development to create clean, performant, and meaningful
-                                    digital experiences.
+                                    Long term, I’m growing toward full-stack engineering so I can design,
+                                    build, and connect complete digital products from interface to data.
                               </p>
                         </div>
                   </div>
