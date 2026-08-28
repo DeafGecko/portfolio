@@ -39,7 +39,7 @@ import ContactButton from "./ContactButton";
         </div>
 
         <!-- Theme toggle (always visible) -->
-        <ThemeToggle client:load />
+        <ThemeToggle />
       </div>
     </div>
   </div>
@@ -114,6 +114,29 @@ import ContactButton from "./ContactButton";
 
 <script is:inline>
   const header = document.querySelector("[data-site-header]");
+  const themeToggle = document.querySelector("[data-theme-toggle]");
+
+  const syncThemeToggle = () => {
+    if (!themeToggle) return;
+    const isDark = document.documentElement.classList.contains("dark");
+    themeToggle.setAttribute("aria-checked", String(isDark));
+    themeToggle.setAttribute(
+      "aria-label",
+      `Switch to ${isDark ? "light" : "dark"} mode`,
+    );
+  };
+
+  syncThemeToggle();
+
+  themeToggle?.addEventListener("click", () => {
+    const nextIsDark = !document.documentElement.classList.contains("dark");
+    document.documentElement.classList.toggle("dark", nextIsDark);
+    localStorage.setItem("09labs-theme", nextIsDark ? "dark" : "light");
+
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    themeColor?.setAttribute("content", nextIsDark ? "#0a0e17" : "#dfe2e3");
+    syncThemeToggle();
+  });
 
   if (header) {
     header.dataset.hidden = "false";

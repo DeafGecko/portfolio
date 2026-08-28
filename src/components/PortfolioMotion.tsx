@@ -63,7 +63,7 @@ export default function PortfolioMotion() {
     if (finePointer && !reducedMotion) {
       const cards = Array.from(
         document.querySelectorAll<HTMLElement>(
-          ".slice, .tech-card, .experience-item",
+          ".slice, .experience-item",
         ),
       );
 
@@ -108,32 +108,6 @@ export default function PortfolioMotion() {
         });
       });
 
-      const accordion = document.querySelector("#worksAccordion");
-      if (accordion) {
-        const activeObserver = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            const target = mutation.target as HTMLElement;
-            if (!target.classList.contains("is-active")) return;
-            const content = target.querySelector<HTMLElement>(".slice-content");
-            if (content) {
-              animate(
-                content,
-                { opacity: [0.72, 1], x: [-8, 0] },
-                { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
-              );
-            }
-          });
-        });
-        accordion
-          .querySelectorAll(".slice")
-          .forEach((slice) =>
-            activeObserver.observe(slice, {
-              attributes: true,
-              attributeFilter: ["class"],
-            }),
-          );
-        cleanups.push(() => activeObserver.disconnect());
-      }
     }
 
     return () => cleanups.forEach((cleanup) => cleanup());

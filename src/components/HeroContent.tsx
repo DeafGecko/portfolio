@@ -50,7 +50,7 @@ export default function HeroContent({
     <motion.div
       className="hero-content-inner"
       variants={reduced ? still : container}
-      initial="hidden"
+      initial={false}
       animate="show"
     >
       <motion.p className="hero-name" variants={reduced ? stillVisible : fadeUp}>

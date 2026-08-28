@@ -1,17 +1,33 @@
 ---
 import { FileSearch } from "lucide-react";
 
+export interface CaseStudySection {
+  heading: string;
+  body: string;
+}
+
 export interface WorkItem {
   eyebrow: string;
   title: string[];
   category: string;
   summary?: string;
   tags?: string[];
+  /** reserved for future case study page — not yet implemented */
   caseStudyUrl?: string;
   githubUrl?: string;
+  /** shown as text in the modal instead of an icon link (e.g. "Private — available on request") */
+  githubNote?: string;
   websiteUrl?: string;
+  websiteUrl2?: string;
+  websiteUrl2Label?: string;
   /** optional real screenshot — falls back to a generated pattern */
   image?: string;
+  /** rich case study sections rendered inside the modal */
+  caseStudySections?: CaseStudySection[];
+  /** status badge shown at the bottom of the case study (e.g. "In development") */
+  caseStudyStatus?: string;
+  /** up to 2 screenshots shown in the modal gallery */
+  screenshots?: { src: string; alt: string }[];
 }
 
 export interface Props {
@@ -28,71 +44,310 @@ const {
       eyebrow: "VENUE OPERATIONS PLATFORM",
       title: ["THE FACTORY"],
       category: "factory",
+      image: "/images/factory01.png",
+      screenshots: [
+        { src: "/images/factory01.png", alt: "The Factory dashboard overview" },
+        { src: "/images/factory02.png", alt: "The Factory calendar view" },
+      ],
       summary:
         "A full booking and admin platform for venues — calendar, dashboard, role-based access, and CMS-driven theming. Currently in active development.",
-      tags: ["Astro", "React", "Tailwind", "Sanity", "Cloudflare"],
-      caseStudyUrl: "https://09labs.studio",
-      githubUrl: "https://github.com/DeafGecko/venue-operations",
-      websiteUrl: "https://factory.09labs.dev",
+      tags: [
+        "Astro",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Cloudflare Workers",
+        "D1",
+        "Sanity",
+      ],
+      githubNote: "Private — available on request",
+      websiteUrl: "https://venue-operations-api.dwirog.workers.dev/demo",
+      caseStudyStatus: "In development",
+      caseStudySections: [
+        {
+          heading: "What I Built",
+          body: "The Factory is a full-stack app for managing a venue.\n\nI wanted one place where staff can:\n\nSee events → Make bookings → Check the calendar → Manage clients\n\nThe project is still in development, but the main system works.",
+        },
+        {
+          heading: "Why I Built It",
+          body: "I looked at different venue software and some felt too complicated.\n\nI wanted to see if I could build something simpler and easier to use.\n\nI also wanted a real project where I could learn Astro and practice full-stack development.",
+        },
+        {
+          heading: "How I Built It",
+          body: "I started small:\n\nLogin → Calendar → Booking\n\nThen I added more features like the dashboard, clients, billing, and different user roles.\n\nI designed and built the project at the same time. When something did not feel right, I changed it and tested again.",
+        },
+        {
+          heading: "Tech I Used",
+          body: "Astro + React + TypeScript + Tailwind CSS\n\nFor the backend and data, I used Cloudflare Workers, D1, and Sanity.\n\nI chose Astro because the app has many pages that mostly show data. React is used when the page needs more interaction.",
+        },
+        {
+          heading: "What I Learned",
+          body: "The hardest part was getting everything to work correctly after deployment.\n\nSome things worked on my computer but failed on Cloudflare. I had to debug the code, learn how Cloudflare handles secrets, and fix a dependency problem.\n\nThat taught me something important:\n\nWorking locally does not always mean it will work in production.",
+        },
+        {
+          heading: "Where It Is Now",
+          body: "The main app works.\n\n✓ Login\n✓ Dashboard\n✓ Calendar\n✓ Bookings\n✓ User roles\n\nNext, I want to improve the UI, test accessibility, and finish the remaining features.",
+        },
+        {
+          heading: "Status",
+          body: "In development",
+        },
+      ],
+      // Add up to 2 screenshot images below when ready:
+      // screenshots: [
+      //   { src: "/images/factory-screen-1.png", alt: "The Factory dashboard view" },
+      //   { src: "/images/factory-screen-2.png", alt: "The Factory calendar view" },
+      // ],
     },
     {
       eyebrow: "DESIGN TOKEN & CONTRAST ENGINE",
       title: ["CHROMATIQUE", "STUDIO"],
       category: "chromatique",
-      image: "/images/chroma.png",
+      image: "/images/chroma01.png",
+      screenshots: [
+        { src: "/images/chroma01.png", alt: "Chromatique Studio overview" },
+      ],
       summary:
         "A design token and contrast auditing tool — real-time accessibility checks, live component preview, and one-click CSS variable export.",
       tags: ["Vue 3", "Vite", "Tailwind", "VueUse"],
-      caseStudyUrl: "https://09labs.studio",
       githubUrl: "https://github.com/DeafGecko/chromatique-studio",
-      websiteUrl: "https://chroma09.09labs.dev",
+      websiteUrl: "https://chroma.09labs.dev",
+      caseStudyStatus: "Live",
+      caseStudySections: [
+        {
+          heading: "What I Built",
+          body: "Chromatique Studio is a tool for designers and developers to test colors before using them in a project.\n\nThe main flow is simple:\n\nPick colors → Check contrast → Build tokens → Export CSS",
+        },
+        {
+          heading: "Why I Built It",
+          body: "A color can look good but still be hard to read.\n\nI wanted one tool where I could check accessibility while building a color system instead of finding problems later.\n\nIt also connects two things I work with:\n\nDesign + Development",
+        },
+        {
+          heading: "How I Built It",
+          body: "I started with the most important part:\nText color + Background color → Contrast score → Pass or Fail\n\nThen I added design tokens, previews, and CSS export.\n\nWhy Vue 3 + VueUse? \n\nMost of my projects use React, so I wanted to challenge myself with another framework.\n\nI built Chromatique Studio with Vue 3 to learn how Vue handles components, state, and reactivity.",
+        },
+        {
+          heading: "Tech I Used",
+          body: "Vue handles the interface and color changes. VueUse helps with things like saving data and copying CSS.",
+        },
+        {
+          heading: "Accessibility",
+          body: "Accessibility is part of the main purpose of this project.\n\nThe tool checks colors against WCAG AA and AAA contrast levels.\n\nI still plan to improve the tool's own keyboard navigation and focus states.",
+        },
+        {
+          heading: "What I Learned",
+          body: "This project helped me understand that accessibility can be part of the design process from the beginning.\n\nIt also gave me real practice using Vue instead of only learning it through tutorials.",
+        },
+        {
+          heading: "Where It Is Now",
+          body: "This project helped me understand that accessibility can be part of the design process from the beginning.\n\nIt also gave me real practice using Vue instead of only learning it through tutorials.",
+        },
+        {
+          heading: "Where It Is Now",
+          body: "The core tool is built.\n\n✓ Color testing\n✓ Contrast checking\n✓ Design tokens\n✓ Component previews\n✓ CSS export\n\nI am still testing and improving the experience before I consider it finished.",
+        },
+        {
+          heading: "Status",
+          body: "Functional and being polished.",
+        },
+      ],
     },
     {
       eyebrow: "MINIMALIST WRITING APP",
       title: ["KANSO"],
       category: "kanso",
-      image: "/images/Kanso.png",
+      image: "/images/Kanso01.png",
+      screenshots: [
+        { src: "/images/Kanso01.png", alt: "Kanso writing interface" },
+        { src: "/images/Kanso02.png", alt: "Kanso error view" },
+      ],
       summary:
         "A distraction-free writing app inspired by Japanese simplicity — theme and font controls, word/paragraph limits, local file save.",
       tags: ["React", "Tailwind"],
-      caseStudyUrl: "https://09labs.studio",
       githubUrl: "https://github.com/DeafGecko/kanso-2.0",
       websiteUrl: "https://kanso.09labs.dev",
+      caseStudyStatus: "Live",
+      caseStudySections: [
+        {
+          heading: "What I Built",
+          body: "Kanso is a simple writing app made to help people focus.\n\nThe idea is:\n\nOpen → Write → Focus → Save\n\nNo busy dashboard. No large toolbar. Just the tools needed for writing.",
+        },
+        {
+          heading: "Why I Built It",
+          body: "Many writing apps have a lot of buttons, menus, and features.\n\nSometimes I just want a quiet place to write.\n\nI wanted Kanso to feel simple and calm, based on the Japanese idea of Kanso — simplicity and removing what is not needed.",
+        },
+        {
+          heading: "How I Built It",
+          body: "I started with the writing area first.\n\nThen I slowly added tools that help the writing experience:\n\nWriting → Word count → Fonts → Limits → Save\n\nIf a feature did not help someone write, I tried not to add it.",
+        },
+        {
+          heading: "Tech I Used",
+          body: "I kept the stack simple because the app itself is meant to be simple.",
+        },
+        {
+          heading: "Main Features",
+          body: "✓ Clean writing space\n\n✓ Word and character count\n✓ Paragraph and page count\n✓ Writing limits\n✓ Font choices\n✓ Save and open files\n✓ New document",
+        },
+        {
+          heading: "Accessibility",
+          body: "I included serif and sans-serif font choices so users can choose what is easier for them to read.\n\nI still want to improve keyboard navigation, labels, and other accessibility details.",
+        },
+        {
+          heading: "What I Learned",
+          body: "Kanso taught me that good design is not always about adding more.\n\nSometimes the better question is:\n\n“Does the user really need this?”\n\nIt helped me think more carefully about simplicity, focus, and the writing experience.",
+        },
+        {
+          heading: "Where It Is Now",
+          body: "My next step is improving the design, interactions, and accessibility.",
+        },
+        {
+          heading: "Status",
+          body: "Functional and being polished.",
+        },
+      ],
     },
     {
       eyebrow: "STOREFRONT & CHECKOUT",
       title: ["SWISS E-COMMERCE"],
       category: "swiss",
-      image: "/images/ecommerce.png",
+      image: "/images/ecommerce01.png",
+      screenshots: [
+        { src: "/images/ecommerce01.png", alt: "Swiss E-Commerce wireframe" },
+        {
+          src: "/images/ecommerce02.png",
+          alt: "Swiss E-Commerce final design",
+        },
+      ],
       summary:
         "A responsive storefront with product filtering, cart, wishlist, and a mock checkout — built around Swiss design principles.",
       tags: ["React", "Tailwind", "Vercel"],
-      caseStudyUrl: "https://09labs.studio",
       githubUrl: "https://github.com/DeafGecko/swiss-ecommerce",
       websiteUrl: "https://ecommerce.09labs.dev",
+      caseStudyStatus: "Live",
+      caseStudySections: [
+        {
+          heading: "What I Built",
+          body: `Swiss E-Commerce is a responsive online store built with a clean Swiss design style.\n\nThe shopping flow is:\n\nBrowse → Find Product → Add to Cart → Checkout\n\nIt also includes a wishlist and product filtering.`,
+        },
+        {
+          heading: "Why I Built It",
+          body: `I wanted to practice building a real e-commerce experience instead of only making a product page.\n\nE-commerce gave me practice with:\n\nLayout + Components + State + Forms + Responsive Design`,
+        },
+        {
+          heading: "How I Built It",
+          body: `I built this project in 3 phases.\n\nPhase 1 — Structure\n\nBuild the wireframe, grid, spacing, and layout.\n↓\nPhase 2 — Color\nAdd the colors and visual style.\n↓\nPhase 3 — Motion\n\nAdd animation, hover effects, and interactions.\n\nThis helped me focus on one problem at a time.`,
+        },
+        {
+          heading: "My Challenge",
+          body: `My biggest challenge was actually not jumping ahead.\n\nAs a designer, I naturally wanted to start adding colors and animation while I was still building Phase 1.\n\nI had to tell myself:\n\nStructure first → Style second → Motion last\n\nStaying with the wireframe helped me understand how the layout worked before making it look finished.`,
+        },
+        {
+          heading: "What I Learned",
+          body: "This project taught me that a strong design starts underneath the final look.\n\nGood structure → Good foundation → Better final design\n\nI also learned that following a clear process can make development easier because I am solving one type of problem at a time.",
+        },
+        {
+          heading: "Where It Is Now",
+          body: "The storefront is working and live.\n\nThe project gave me more practice with React state, responsive layouts, shopping flows, and building a UI step by step.",
+        },
+        {
+          heading: "Status",
+          body: "Functional and being polished.",
+        },
+      ],
     },
     {
-      eyebrow: "COMMUNICATION AID",
+      eyebrow: "VISUAL COMMUNICATION APP",
       title: ["CLEARCARD"],
       category: "clearcard",
-      image: "/images/clearcard04.png",
+      image: "/images/clearcard01.png",
+      screenshots: [
+        {
+          src: "/images/clearcard01.png",
+          alt: "ClearCard application overview",
+        },
+      ],
       summary:
         "A card-based communication app built for the Deaf and Hard of Hearing community — fast, visual, and accessible by design.",
       tags: ["React", "PWA", "A11y"],
-      caseStudyUrl: "https://09labs.studio",
       githubUrl: "https://github.com/DeafGecko/clearcard",
       websiteUrl: "https://clearcard.09labs.dev",
+      caseStudyStatus: "Live",
+      caseStudySections: [
+        {
+          heading: "What I Built",
+          body: "ClearCard is a visual communication app for Deaf and Hard of Hearing people.\n\nThe idea is simple:\n\nChoose a card → Show the message → Communicate\n\nIt is designed for situations where someone needs to communicate quickly without depending on sound.",
+        },
+        {
+          heading: "Why I Built It",
+          body: "I wanted communication to be simple, visual, and quick.\n\nInstead of making people read through many menus, I wanted them to find what they need and show it.\n\nSee → Tap → Show.",
+        },
+        {
+          heading: "How I Built It",
+          body: "I focused on making the cards clear and easy to understand.\n\nWhile building it, I kept asking:\n“Can someone understand this quickly?”\n\nThat helped me think more about the user instead of just adding features.",
+        },
+        {
+          heading: "Tech I Used",
+          body: "React + Card-Based UI\n\nI kept the interface simple with large visual cards and clear text.",
+        },
+        {
+          heading: "Accessibility",
+          body: "Accessibility is the main purpose of this project.\n\nI focused on:\n\n✓ Visual communication\n✓ Clear text\n✓ Easy-to-understand cards\n✓ Large tap areas\n✓ No need for sound",
+        },
+        {
+          heading: "What I Learned",
+          body: "This project taught me that simple design can be difficult.\n\nAdding more features is easy.\n\nMaking something clear, fast, and easy to understand takes more thought.",
+        },
+        {
+          heading: "What's Next",
+          body: "I have two ideas I want to add:\n\nQuick Card — quickly type something that is not already available as a card.\n\nHistory — look back at messages used during a conversation.\n\nI also plan to improve the design and turn it into a PWA so it can feel more like an installed app.",
+        },
+        {
+          heading: "Status",
+          body: "Improvements planned.",
+        },
+      ],
     },
     {
       eyebrow: "COMPONENT LIBRARY & DESIGN SYSTEM",
       title: ["09 FOLIO"],
       category: "folio",
+      image: "",
       summary:
-        "A neo-brutalist component library and token system — proving the bridge between design background and production engineering.",
+        "An expressive minimalist component library and design system — connecting my design background with reusable frontend development",
       tags: ["React", "TypeScript", "Storybook"],
-      caseStudyUrl: "https://09labs.studio",
       githubUrl: "https://github.com/DeafGecko/09-folio",
       websiteUrl: "https://folio.09labs.dev",
+      caseStudyStatus: "In development",
+      caseStudySections: [
+        {
+          heading: "What I Built",
+          body: "09 Folio is a component library and design system I am building for my future projects.\n\nThe goal is simple:\n\nDesign → Build → Reuse\n\nInstead of rebuilding buttons, cards, forms, and layouts every time, I want one system I can reuse and improve.",
+        },
+        {
+          heading: "Design Direction",
+          body: "09 Folio will use Expression Minimalism.\n\nI want it to feel clean and simple, but still have personality.\n\nMinimal structure + Strong typography + Creative details + Purposeful motion\n\nI don't want the heavy, rough look of Neo-Brutalism.\n\nThe design should feel modern, expressive, and organized without becoming visually busy.",
+        },
+        {
+          heading: "Why I Built It",
+          body: "As I build more projects, I keep using similar UI pieces.\n\nSo I want to learn how to turn those pieces into a real system:\n\nColors → Typography → Spacing → Components → Patterns\n\nThis will help me keep future projects more consistent.",
+        },
+        {
+          heading: "What I Plan to Build",
+          body: "Buttons → Inputs → Cards → Navigation → Modals → Layouts\n\nEach component will have reusable styles, states, and variants.",
+        },
+        {
+          heading: "What I'm Learning",
+          body: "09 Folio will help me practice:\n\nReusable React components\nDesign tokens\nComponent variants\nAccessibility\nResponsive design\nDocumentation\n\nIt also gives me a place to bring my design and development skills together.",
+        },
+        {
+          heading: "Goal",
+          body: "My goal is to build a small but useful system that I can actually use in my own projects.\n\nNot hundreds of components.\n\nJust components that are clear, reusable, expressive, and well built.",
+        },
+        {
+          heading: "Status",
+          body: "In development",
+        },
+      ],
     },
   ],
 } = Astro.props;
@@ -114,19 +369,25 @@ const {
           class:list={[{ "is-active": i === 0 }]}
           data-index={i}
           role="listitem"
-          tabindex="0"
-          aria-expanded={i === 0 ? "true" : "false"}
         >
           <div
-            class={`slice-bg pattern-${work.category}`}
+            class={`slice-bg pattern-${work.category}${work.image ? " has-image" : ""}`}
             style={work.image ? `background-image:url(${work.image})` : ""}
           />
           <div class="slice-overlay" />
+          <button
+            class="slice-activator"
+            type="button"
+            aria-expanded={i === 0 ? "true" : "false"}
+            aria-label={`Show ${work.title.join(" ")} project details`}
+          />
           <div class="slice-topline">
             <span class="slice-number">{String(i + 1).padStart(2, "0")}</span>
           </div>
           <div class="slice-vertical-label" aria-hidden="true">
-            <span class="slice-vertical-name">{work.title.join(" ")} · {String(i + 1).padStart(2, "0")}</span>
+            <span class="slice-vertical-name">
+              {work.title.join(" ")} · {String(i + 1).padStart(2, "0")}
+            </span>
           </div>
           <div class="slice-content">
             <p class="slice-eyebrow">{work.eyebrow}</p>
@@ -138,9 +399,7 @@ const {
                 </>
               ))}
             </h3>
-            {work.summary && (
-              <p class="slice-summary">{work.summary}</p>
-            )}
+            {work.summary && <p class="slice-summary">{work.summary}</p>}
             {work.tags && work.tags.length > 0 && (
               <div class="slice-tags">
                 {work.tags.map((tag) => (
@@ -148,9 +407,7 @@ const {
                 ))}
               </div>
             )}
-          </div>
-          <div class="slice-links">
-            {work.caseStudyUrl && (
+            <div class="slice-links">
               <button
                 type="button"
                 class="project-link project-case-study"
@@ -158,13 +415,30 @@ const {
                 data-title={work.title.join(" ")}
                 data-eyebrow={work.eyebrow}
                 data-summary={
-                  work.summary ??
-                  "Project case study details are being prepared."
+                  work.summary ?? "Project details are being prepared."
                 }
                 data-tags={JSON.stringify(work.tags ?? [])}
                 data-github-url={work.githubUrl ?? ""}
+                data-github-note={work.githubNote ?? ""}
                 data-website-url={work.websiteUrl ?? ""}
-                aria-label={`Open the ${work.title.join(" ")} case study`}
+                data-website-url2={work.websiteUrl2 ?? ""}
+                data-website-url2-label={work.websiteUrl2Label ?? ""}
+                data-case-study-sections={JSON.stringify(
+                  work.caseStudySections ?? [],
+                )}
+                data-case-study-status={work.caseStudyStatus ?? ""}
+                data-screenshots={JSON.stringify(
+                  work.screenshots ??
+                    (work.image
+                      ? [
+                          {
+                            src: work.image,
+                            alt: `${work.title.join(" ")} project screenshot`,
+                          },
+                        ]
+                      : []),
+                )}
+                aria-label={`Open ${work.title.join(" ")} case study`}
               >
                 <FileSearch
                   className="case-study-trigger-icon"
@@ -174,41 +448,72 @@ const {
                 />
                 Case Study
               </button>
-            )}
-            {work.githubUrl && (
-              <a
-                class="project-link"
-                href={work.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`View ${work.title.join(" ")} on GitHub`}
-                title="View GitHub repository"
-              >
-                <img
-                  class="project-link-icon"
-                  src="/github.svg"
-                  alt=""
-                  aria-hidden="true"
-                />
-              </a>
-            )}
-            {work.websiteUrl && (
-              <a
-                class="project-link"
-                href={work.websiteUrl}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Visit ${work.title.join(" ")} website`}
-                title="Open live demo"
-              >
-                <img
-                  class="project-link-icon"
-                  src="/website-icon.svg"
-                  alt=""
-                  aria-hidden="true"
-                />
-              </a>
-            )}
+              {work.githubUrl && (
+                <a
+                  class="project-link"
+                  href={work.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`View ${work.title.join(" ")} on GitHub`}
+                  title="View GitHub repository"
+                >
+                  <img
+                    class="project-link-icon"
+                    src="/github.svg"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </a>
+              )}
+              {work.websiteUrl && (
+                <a
+                  class="project-link"
+                  href={work.websiteUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Visit ${work.title.join(" ")} website`}
+                  title="Open live demo"
+                >
+                  <img
+                    class="project-link-icon"
+                    src="/website-icon.svg"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </a>
+              )}
+              {work.websiteUrl2 && (
+                <a
+                  class="project-link"
+                  href={work.websiteUrl2}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={
+                    work.websiteUrl2Label ??
+                    `Visit ${work.title.join(" ")} (alt)`
+                  }
+                  title={work.websiteUrl2Label ?? "Open alternate link"}
+                >
+                  <svg
+                    class="project-link-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="7.5" cy="15.5" r="5.5" />
+                    <path d="M21 2l-9.6 9.6" />
+                    <path d="M15.5 7.5l3 3L22 7l-3-3" />
+                  </svg>
+                </a>
+              )}
+            </div>
           </div>
         </article>
       ))
@@ -236,19 +541,73 @@ const {
         aria-label="Technologies used"
       >
       </div>
+      <!-- screenshot gallery (populated by JS when screenshots present) -->
+      <div class="case-study-gallery" id="caseStudyGallery" hidden></div>
+      <div class="case-study-preview" id="caseStudyPreview" aria-hidden="true">
+        <img id="caseStudyPreviewImage" alt="" />
+      </div>
+      <!-- rich case study sections (populated by JS when caseStudySections present) -->
+      <div class="case-study-body" id="caseStudyBody" hidden></div>
       <div class="case-study-actions">
         <a
           class="case-study-action"
           id="caseStudyGithub"
           target="_blank"
-          rel="noreferrer">GitHub</a
+          rel="noreferrer"
+          aria-label="View on GitHub"
+          title="View on GitHub"
         >
+          <img
+            class="case-study-action-icon"
+            src="/github.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </a>
+        <!-- shown instead of icon when repo is private -->
+        <span class="case-study-github-note" id="caseStudyGithubNote" hidden
+        ></span>
         <a
           class="case-study-action"
           id="caseStudyWebsite"
           target="_blank"
-          rel="noreferrer">Visit Website</a
+          rel="noreferrer"
+          aria-label="Visit website"
+          title="Visit website"
         >
+          <img
+            class="case-study-action-icon"
+            src="/website-icon.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </a>
+        <a
+          class="case-study-action"
+          id="caseStudyWebsite2"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Visit alternate site"
+          title="Visit alternate site"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="7.5" cy="15.5" r="5.5"></circle>
+            <path d="M21 2l-9.6 9.6"></path>
+            <path d="M15.5 7.5l3 3L22 7l-3-3"></path>
+          </svg>
+        </a>
+        <span class="case-study-status" id="caseStudyStatus" hidden></span>
       </div>
     </div>
   </dialog>
@@ -326,7 +685,7 @@ const {
     font-family: "Azeret Mono", monospace;
     font-size: 0.82rem;
     line-height: 1.6;
-    color: #20469f;
+    color: #17377e;
     font-weight: 500;
     letter-spacing: 0.5px;
     max-width: 280px;
@@ -335,7 +694,7 @@ const {
   }
 
   :global(.dark) .works-hint {
-    color: rgba(100, 170, 255, 0.7);
+    color: #9bc1ff;
   }
 
   .works-accordion {
@@ -384,7 +743,10 @@ const {
     text-align: left;
     font: inherit;
     color: inherit;
-    transition: flex-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+      flex-grow 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease;
   }
 
   :global(.dark) .slice {
@@ -414,16 +776,36 @@ const {
     pointer-events: none;
   }
 
+  .slice:hover,
+  .slice:has(.slice-activator:focus-visible) {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  }
+
   .slice:hover::before,
-  .slice:focus-visible::before {
+  .slice:has(.slice-activator:focus-visible)::before {
     opacity: 1;
     animation: work-border-travel 2.4s linear infinite;
   }
 
-  .slice:focus-visible {
-    outline: 2px solid #6a9eff;
-    outline-offset: -2px;
+  .slice:has(.slice-activator:focus-visible) {
+    outline: 3px solid #5a8eff;
+    outline-offset: 2px;
     z-index: 3;
+  }
+
+  .slice-activator {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .slice-activator:focus-visible {
+    outline: none;
   }
 
   .slice.is-active {
@@ -453,6 +835,20 @@ const {
 
   html:not(.dark) .slice.is-active .slice-bg {
     filter: grayscale(1) contrast(0.96) brightness(1.04);
+  }
+
+  /* real photos need more light than flat CSS patterns */
+  .slice-bg.has-image {
+    filter: grayscale(1) contrast(1.05) brightness(0.72);
+  }
+  .slice.is-active .slice-bg.has-image {
+    filter: grayscale(1) contrast(1) brightness(0.88);
+  }
+  html:not(.dark) .slice-bg.has-image {
+    filter: grayscale(1) contrast(0.9) brightness(1.08);
+  }
+  html:not(.dark) .slice.is-active .slice-bg.has-image {
+    filter: grayscale(1) contrast(0.92) brightness(1.12);
   }
 
   /* generated circuit-like placeholder patterns — swap via the `image` prop */
@@ -587,6 +983,19 @@ const {
       );
   }
 
+  /* extra tint for bright screenshots where text gets hard to read */
+  .pattern-factory ~ .slice-overlay,
+  .pattern-chromatique ~ .slice-overlay,
+  .pattern-swiss ~ .slice-overlay,
+  .pattern-clearcard ~ .slice-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.68) 50%,
+      rgba(0, 0, 0, 0.96) 100%
+    );
+  }
+
   .slice-overlay {
     position: absolute;
     inset: 0;
@@ -688,23 +1097,26 @@ const {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+    transition:
+      opacity 0.25s ease,
+      visibility 0s linear 0.25s;
   }
 
   .slice.is-active .slice-content {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition: opacity 0.3s ease 0.15s, visibility 0s linear 0.15s;
+    transition:
+      opacity 0.3s ease 0.15s,
+      visibility 0s linear 0.15s;
   }
 
   .slice-links {
-    position: absolute;
-    right: 1.1rem;
-    bottom: 1.1rem;
-    z-index: 3;
     display: flex;
     gap: 0.45rem;
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(214, 230, 255, 0.15);
     opacity: 0;
     transform: translateY(6px);
     pointer-events: none;
@@ -722,8 +1134,8 @@ const {
   .project-link {
     position: relative;
     display: inline-flex;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
     align-items: center;
     justify-content: center;
     color: #d6e6ff;
@@ -842,19 +1254,20 @@ const {
     margin-top: 1.5rem;
   }
 
-  .case-study-tag {
-    padding: 0.4rem 0.7rem;
-    color: #173f9f;
-    border: 1px solid rgba(42, 82, 204, 0.45);
+  :global(.case-study-tag) {
+    padding: 0.25rem 0.5rem;
+    color: #4a6199;
+    border: 1px solid rgba(42, 82, 204, 0.28);
     border-radius: 4px;
     font:
-      600 0.75rem/1.2 "Azeret Mono",
+      500 0.62rem/1.2 "Azeret Mono",
       monospace;
+    letter-spacing: 0.25px;
   }
 
-  :global(.dark) .case-study-tag {
-    color: #8aacdf;
-    border-color: rgba(106, 158, 255, 0.35);
+  :global(.dark) :global(.case-study-tag) {
+    color: #6880a8;
+    border-color: rgba(106, 158, 255, 0.2);
   }
 
   .case-study-actions {
@@ -865,14 +1278,18 @@ const {
   }
 
   .case-study-action {
-    padding: 0.75rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
     color: #173f9f;
     border: 1px solid #2a52cc;
     border-radius: 4px;
-    font:
-      600 0.78rem/1 "Azeret Mono",
-      monospace;
     text-decoration: none;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
   }
 
   :global(.dark) .case-study-action {
@@ -880,8 +1297,203 @@ const {
     border-color: #5a8eff;
   }
 
+  .case-study-action-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(23%) sepia(50%) saturate(800%)
+      hue-rotate(200deg);
+  }
+
+  :global(.dark) .case-study-action-icon {
+    filter: brightness(0) invert(1);
+  }
+
   .case-study-action:hover {
+    color: #2a52cc;
+    border-color: #2a52cc;
     border-width: 2px;
+  }
+
+  /* rich case study body */
+  .case-study-body {
+    margin-top: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  :global(.cs-section) {
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(42, 82, 204, 0.15);
+  }
+
+  :global(.cs-section:last-child) {
+    border-bottom: 1px solid rgba(42, 82, 204, 0.15);
+  }
+
+  :global(.dark) :global(.cs-section) {
+    border-top-color: rgba(106, 158, 255, 0.15);
+  }
+
+  :global(.dark) :global(.cs-section:last-child) {
+    border-bottom-color: rgba(106, 158, 255, 0.15);
+  }
+
+  :global(.cs-section-heading) {
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #1e2530;
+    margin: 0 0 0.4rem;
+  }
+
+  :global(.dark) :global(.cs-section-heading) {
+    color: #f0f4ff;
+  }
+
+  :global(.cs-section-body) {
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #5a6472;
+    margin: 0;
+  }
+
+  :global(.cs-section-body + .cs-section-body) {
+    margin-top: 0.9rem;
+  }
+
+  :global(.dark) :global(.cs-section-body) {
+    color: #7e95b2;
+  }
+
+  /* screenshot gallery */
+  .case-study-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  @media (max-width: 34rem) {
+    .case-study-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  :global(.cs-screenshot) {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(42, 82, 204, 0.18);
+    display: block;
+    cursor: zoom-in;
+    transition: border-color 0.2s ease;
+  }
+
+  :global(.cs-screenshot:focus-visible) {
+    outline: 3px solid #2a52cc;
+    outline-offset: -3px;
+  }
+
+  :global(.dark) :global(.cs-screenshot) {
+    border-color: rgba(106, 158, 255, 0.2);
+  }
+
+  .case-study-preview {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(10, 14, 23, 0.4);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.45s ease,
+      visibility 0s linear 0.45s;
+  }
+
+  .case-study-preview.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .case-study-preview img {
+    display: block;
+    width: min(36rem, 100%);
+    max-height: min(70vh, 36rem);
+    object-fit: contain;
+    padding: 0.5rem;
+    background: #dfe2e3;
+    border: 2px solid #2a52cc;
+    border-radius: 4px;
+    box-shadow: 0 24px 70px rgba(10, 14, 23, 0.45);
+    opacity: 0;
+    transform: scale(0.88);
+    transition:
+      opacity 0.4s ease,
+      transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .case-study-preview.is-visible img {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  :global(.dark) .case-study-preview img {
+    background: #12161f;
+    border-color: #5a8eff;
+  }
+
+  /* github private note */
+  .case-study-github-note {
+    display: inline-flex;
+    align-items: center;
+    height: 2.75rem;
+    padding: 0 0.85rem;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #20469f;
+    border: 1px solid rgba(42, 82, 204, 0.4);
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  :global(.dark) .case-study-github-note {
+    color: #8aacdf;
+    border-color: rgba(106, 158, 255, 0.35);
+  }
+
+  /* status badge */
+  .case-study-status {
+    display: inline-flex;
+    align-items: center;
+    height: 2.75rem;
+    padding: 0 0.85rem;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #20469f;
+    background: rgba(42, 82, 204, 0.07);
+    border: 1px solid rgba(42, 82, 204, 0.3);
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  :global(.dark) .case-study-status {
+    color: #6a9eff;
+    background: rgba(90, 142, 255, 0.08);
+    border-color: rgba(106, 158, 255, 0.3);
   }
 
   .project-link::before {
@@ -990,8 +1602,7 @@ const {
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.9rem;
-    padding-top: 0.9rem;
-    border-top: 1px solid rgba(214, 230, 255, 0.15);
+    padding-top: 0;
     opacity: 0;
     max-height: 0;
     overflow: hidden;
@@ -1021,6 +1632,10 @@ const {
   }
 
   html:not(.dark) .slice-tags {
+    border-top: none;
+  }
+
+  html:not(.dark) .slice-links {
     border-top-color: rgba(52, 59, 69, 0.18);
   }
 
@@ -1043,13 +1658,17 @@ const {
     pointer-events: none;
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.1s ease, visibility 0s linear 0.1s;
+    transition:
+      opacity 0.1s ease,
+      visibility 0s linear 0.1s;
   }
 
   .slice.is-active .slice-vertical-label {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.1s ease, visibility 0s linear 0.1s;
+    transition:
+      opacity 0.1s ease,
+      visibility 0s linear 0.1s;
   }
 
   .slice-vertical-name {
@@ -1075,7 +1694,7 @@ const {
     line-height: 1.65;
     color: rgba(214, 230, 255, 0.75);
     margin: 0.6rem 0 0;
-    max-width: 100%;
+    max-width: 66%;
     overflow-wrap: break-word;
     opacity: 0;
     transform: translateY(6px);
@@ -1086,6 +1705,40 @@ const {
 
   html:not(.dark) .slice-summary {
     color: rgba(52, 59, 69, 0.78);
+  }
+
+  html:not(.dark) .slice:has(.slice-bg.has-image) .slice-number,
+  html:not(.dark) .slice:has(.slice-bg.has-image) .slice-vertical-name,
+  html:not(.dark) .slice:has(.slice-bg.has-image) .slice-eyebrow,
+  html:not(.dark) .slice:has(.slice-bg.has-image) .slice-title,
+  html:not(.dark) .slice:has(.slice-bg.has-image) .slice-summary,
+  html:not(.dark) .slice:has(.slice-bg.has-image) .tag,
+  html:not(.dark) .slice:has(.slice-bg.has-image) .project-link {
+    color: #ffffff;
+  }
+
+  html:not(.dark) .slice:has(.slice-bg.has-image) .slice-number,
+  html:not(.dark) .slice:has(.slice-bg.has-image) .project-link {
+    background: rgba(10, 14, 23, 0.72);
+    border-color: rgba(255, 255, 255, 0.42);
+  }
+
+  html:not(.dark) .slice:has(.pattern-folio) .slice-number {
+    color: #ffffff;
+    background: rgba(10, 14, 23, 0.72);
+    border-color: rgba(255, 255, 255, 0.42);
+  }
+
+  html:not(.dark) .slice:has(.slice-bg.has-image) .slice-tags {
+    border-top-color: rgba(255, 255, 255, 0.28);
+  }
+
+  html:not(.dark) .slice:has(.slice-bg.has-image) .tag {
+    border-color: rgba(255, 255, 255, 0.38);
+  }
+
+  html:not(.dark) .slice:has(.slice-bg.has-image) .project-link-icon {
+    filter: brightness(0) invert(1);
   }
 
   .slice.is-active .slice-summary {
@@ -1126,7 +1779,18 @@ const {
     }
     .slice-content {
       white-space: normal;
-      right: 6.5rem;
+      right: 1.1rem;
+    }
+    .slice-vertical-label {
+      inset: 0;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 1rem 1.1rem;
+    }
+    .slice-vertical-name {
+      writing-mode: horizontal-tb;
+      text-orientation: mixed;
+      transform: none;
     }
   }
 
@@ -1155,16 +1819,21 @@ const {
       const isCoarsePointer = window.matchMedia(
         "(hover: none), (pointer: coarse)",
       ).matches;
+      let hoverTimer;
 
       function activate(target) {
+        window.clearTimeout(hoverTimer);
         slices.forEach((slice) => {
           const active = slice === target;
           slice.classList.toggle("is-active", active);
-          slice.setAttribute("aria-expanded", active ? "true" : "false");
+          slice
+            .querySelector(".slice-activator")
+            ?.setAttribute("aria-expanded", active ? "true" : "false");
         });
       }
 
       slices.forEach((slice) => {
+        const activator = slice.querySelector(".slice-activator");
         slice.addEventListener("click", () => activate(slice));
 
         slice.querySelectorAll(".project-link").forEach((link) => {
@@ -1172,20 +1841,26 @@ const {
         });
 
         if (!isCoarsePointer) {
-          slice.addEventListener("mouseenter", () => activate(slice));
+          slice.addEventListener("mouseenter", () => {
+            window.clearTimeout(hoverTimer);
+            hoverTimer = window.setTimeout(() => activate(slice), 90);
+          });
+          slice.addEventListener("mouseleave", () => {
+            window.clearTimeout(hoverTimer);
+          });
         }
 
-        slice.addEventListener("keydown", (e) => {
+        activator?.addEventListener("keydown", (e) => {
           const idx = slices.indexOf(slice);
           if (e.key === "ArrowRight" || e.key === "ArrowDown") {
             e.preventDefault();
             const next = slices[Math.min(idx + 1, slices.length - 1)];
-            next.focus();
+            next.querySelector(".slice-activator")?.focus();
             activate(next);
           } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
             e.preventDefault();
             const prev = slices[Math.max(idx - 1, 0)];
-            prev.focus();
+            prev.querySelector(".slice-activator")?.focus();
             activate(prev);
           } else if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
@@ -1206,9 +1881,16 @@ const {
       const title = document.getElementById("caseStudyTitle");
       const eyebrow = document.getElementById("caseStudyEyebrow");
       const summary = document.getElementById("caseStudySummary");
+      const body = document.getElementById("caseStudyBody");
+      const gallery = document.getElementById("caseStudyGallery");
+      const preview = document.getElementById("caseStudyPreview");
+      const previewImage = document.getElementById("caseStudyPreviewImage");
       const tags = document.getElementById("caseStudyTags");
       const github = document.getElementById("caseStudyGithub");
+      const githubNote = document.getElementById("caseStudyGithubNote");
       const website = document.getElementById("caseStudyWebsite");
+      const website2 = document.getElementById("caseStudyWebsite2");
+      const statusBadge = document.getElementById("caseStudyStatus");
       let trigger = null;
 
       function setModalLink(link, url) {
@@ -1226,9 +1908,82 @@ const {
             trigger = button;
             title.textContent = button.dataset.title;
             eyebrow.textContent = button.dataset.eyebrow;
-            summary.textContent = button.dataset.summary;
-            tags.replaceChildren();
 
+            // rich sections
+            const sections = JSON.parse(
+              button.dataset.caseStudySections || "[]",
+            );
+            if (sections.length > 0) {
+              body.replaceChildren();
+              sections.forEach(({ heading, body: text }) => {
+                const sec = document.createElement("div");
+                sec.className = "cs-section";
+                const h = document.createElement("h4");
+                h.className = "cs-section-heading";
+                h.textContent = heading;
+                sec.append(h);
+                String(text)
+                  .split(/\n{2,}/)
+                  .forEach((paragraph) => {
+                    const p = document.createElement("p");
+                    p.className = "cs-section-body";
+                    paragraph.split("\n").forEach((line, index) => {
+                      if (index > 0) p.append(document.createElement("br"));
+                      if (/[✓+→]/.test(line)) {
+                        const strong = document.createElement("strong");
+                        strong.textContent = line;
+                        p.append(strong);
+                      } else {
+                        p.append(line);
+                      }
+                    });
+                    sec.append(p);
+                  });
+                body.append(sec);
+              });
+              body.hidden = false;
+              summary.hidden = true;
+            } else {
+              summary.textContent = button.dataset.summary;
+              summary.hidden = false;
+              body.hidden = true;
+            }
+
+            // gallery
+            const screenshots = JSON.parse(button.dataset.screenshots || "[]");
+            if (screenshots.length > 0) {
+              gallery.replaceChildren();
+              screenshots.forEach(({ src, alt }) => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.alt = alt || "";
+                img.className = "cs-screenshot";
+                img.loading = "lazy";
+                img.tabIndex = 0;
+                const showPreview = () => {
+                  previewImage.src = img.currentSrc || src;
+                  previewImage.alt = alt || "";
+                  preview.setAttribute("aria-hidden", "false");
+                  requestAnimationFrame(() => {
+                    preview.classList.add("is-visible");
+                  });
+                };
+                const hidePreview = () => {
+                  preview.classList.remove("is-visible");
+                  preview.setAttribute("aria-hidden", "true");
+                };
+                img.addEventListener("mouseenter", showPreview);
+                img.addEventListener("mouseleave", hidePreview);
+                img.addEventListener("focus", showPreview);
+                img.addEventListener("blur", hidePreview);
+                gallery.append(img);
+              });
+              gallery.hidden = false;
+            } else {
+              gallery.hidden = true;
+            }
+
+            tags.replaceChildren();
             JSON.parse(button.dataset.tags || "[]").forEach((tag) => {
               const item = document.createElement("span");
               item.className = "case-study-tag";
@@ -1236,8 +1991,30 @@ const {
               tags.append(item);
             });
 
-            setModalLink(github, button.dataset.githubUrl);
+            // github: icon link vs. private note
+            const note = button.dataset.githubNote || "";
+            if (note) {
+              github.hidden = true;
+              githubNote.textContent = note;
+              githubNote.hidden = false;
+            } else {
+              githubNote.hidden = true;
+              setModalLink(github, button.dataset.githubUrl);
+            }
+
             setModalLink(website, button.dataset.websiteUrl);
+            setModalLink(website2, button.dataset.websiteUrl2);
+            if (website2)
+              website2.title =
+                button.dataset.websiteUrl2Label || "Visit alternate site";
+
+            // status badge
+            const status = button.dataset.caseStudyStatus || "";
+            if (statusBadge) {
+              statusBadge.hidden = !status;
+              statusBadge.textContent = status ? `Status: ${status}` : "";
+            }
+
             modal.showModal();
             closeButton?.focus();
           });

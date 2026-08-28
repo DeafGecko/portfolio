@@ -13,58 +13,53 @@ const { heading = "Tech Stack" } = Astro.props;
 
 const ROW_1: TechItem[] = [
   { name: "React", slug: "react" },
-  { name: "Photoshop", slug: "adobephotoshop", icon: "/photoshop.svg" },
-  { name: "Cloudflare", slug: "cloudflare" },
-  { name: "API", slug: "openapiinitiative" },
   { name: "A11y", slug: "a11y", icon: "/a11y.svg" },
-  { name: "MongoDB", slug: "mongodb" },
-  { name: "GSAP", slug: "gsap" },
-  { name: "Sanity", slug: "sanity" },
-  { name: "Playwright", slug: "playwright", icon: "/playwright.svg" },
   { name: "TypeScript", slug: "typescript" },
   { name: "Vercel", slug: "vercel" },
-  { name: "Illustrator", slug: "adobeillustrator", icon: "/illustrator.svg" },
-  { name: "Redux", slug: "redux" },
-  { name: "Go", slug: "go" },
+  { name: "Tailwind CSS", slug: "tailwindcss" },
+  { name: "JavaScript", slug: "javascript" },
 ];
 
 const ROW_2: TechItem[] = [
   { name: "WCAG", slug: "wcag", icon: "/wcag.svg" },
   { name: "Node.js", slug: "nodedotjs" },
-  { name: "Procreate", slug: "procreate", icon: "/procreate.svg" },
   { name: "Git", slug: "git" },
   { name: "Vue", slug: "vuedotjs", icon: "/vue.svg" },
-  { name: "Jest", slug: "jest" },
   { name: "Astro", slug: "astro" },
   { name: "Adobe XD", slug: "adobexd", icon: "/adobe-xd.svg" },
   { name: "Supabase", slug: "supabase" },
-  { name: "Prisma", slug: "prisma" },
-  { name: "Tailwind CSS", slug: "tailwindcss" },
-  { name: "Railway", slug: "railway" },
-  { name: "Webflow", slug: "webflow" },
-  { name: "JSON", slug: "json" },
 ];
 
 const ROW_3: TechItem[] = [
   { name: "React Native", slug: "react" },
-  { name: "Netlify", slug: "netlify" },
   { name: "CSS3", slug: "css3", icon: "/css3.svg" },
   { name: "Expo", slug: "expo" },
-  { name: "React Testing Library", slug: "testinglibrary" },
   { name: "Next.js", slug: "nextdotjs" },
   { name: "Express", slug: "express" },
-  { name: "ESLint", slug: "eslint" },
   { name: "HTML5", slug: "html5" },
   { name: "Zustand", slug: "zustand", icon: "/zustand.svg" },
-  { name: "CSS", slug: "css" },
-  { name: "JavaScript", slug: "javascript" },
-  { name: "Premiere Pro", slug: "adobepremierepro", icon: "/premiere-pro.svg" },
 ];
 
+const shuffleStable = (items: TechItem[], seed: number) => {
+  const shuffled = [...items];
+  let state = seed;
+
+  for (let index = shuffled.length - 1; index > 0; index--) {
+    state = (state * 1664525 + 1013904223) >>> 0;
+    const swapIndex = state % (index + 1);
+    [shuffled[index], shuffled[swapIndex]] = [
+      shuffled[swapIndex],
+      shuffled[index],
+    ];
+  }
+
+  return shuffled;
+};
+
 const rows = [
-  { items: ROW_1, direction: "left" as const, speed: 42 },
-  { items: ROW_2, direction: "right" as const, speed: 38 },
-  { items: ROW_3, direction: "left" as const, speed: 40 },
+  { items: shuffleStable(ROW_1, 9), direction: "left" as const, speed: 42 },
+  { items: shuffleStable(ROW_2, 17), direction: "right" as const, speed: 38 },
+  { items: shuffleStable(ROW_3, 29), direction: "left" as const, speed: 40 },
 ];
 ---
 
@@ -146,10 +141,10 @@ const rows = [
           style={`--speed:${row.speed}s`}
         >
           <div class="marquee-track">
-            {[0, 1].map((dup) => (
+            {[0, 1, 2].map((dup) => (
               <div
                 class="marquee-set"
-                aria-hidden={dup === 1 ? "true" : undefined}
+                aria-hidden={dup > 0 ? "true" : undefined}
               >
                 {row.items.map((item) => (
                   <div class="tech-card">
@@ -282,7 +277,7 @@ const rows = [
   }
 
   :global(.dark) .backend-summary-label {
-    color: #6a9eff;
+    color: #9bc1ff;
   }
 
   :global(.dark) .backend-summary-label strong {
@@ -356,10 +351,6 @@ const rows = [
     animation-name: marquee-right;
   }
 
-  .marquee-row:hover .marquee-track {
-    animation-play-state: paused;
-  }
-
   .marquee-set {
     display: flex;
     align-items: center;
@@ -373,13 +364,13 @@ const rows = [
       transform: translateX(0);
     }
     to {
-      transform: translateX(-50%);
+      transform: translateX(-33.333333%);
     }
   }
 
   @keyframes marquee-right {
     from {
-      transform: translateX(-50%);
+      transform: translateX(-33.333333%);
     }
     to {
       transform: translateX(0);
@@ -407,8 +398,8 @@ const rows = [
     justify-content: center;
     gap: 0.65rem;
     flex-shrink: 0;
-    width: 116px;
-    height: 124px;
+    width: 104px;
+    height: 112px;
     background: #b4bbc0;
     border: 1px solid #929ba2;
     border-radius: 4px;
