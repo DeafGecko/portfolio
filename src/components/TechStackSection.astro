@@ -63,7 +63,7 @@ const rows = [
 ];
 ---
 
-<section class="techstack" id="techstack-section" aria-label="Technology stack">
+<section class="techstack" id="techstack-section" aria-labelledby="techstack-title">
   <svg class="icon-filter-defs" aria-hidden="true" focusable="false">
     <defs>
       <filter
@@ -112,7 +112,7 @@ const rows = [
   </svg>
 
   <div class="techstack-header">
-    <h2 class="techstack-title">{heading}</h2>
+    <h2 class="techstack-title" id="techstack-title">{heading}</h2>
     <div class="backend-summary">
       <div class="backend-summary-label">
         <span>Backend Architect</span>
@@ -135,7 +135,7 @@ const rows = [
 
   <div class="marquee-group">
     {
-      rows.map((row, ri) => (
+      rows.map((row) => (
         <div
           class={`marquee-row dir-${row.direction}`}
           style={`--speed:${row.speed}s`}

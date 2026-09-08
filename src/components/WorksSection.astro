@@ -357,22 +357,21 @@ const {
 } = Astro.props;
 ---
 
-<section class="works" id="works-section" aria-label="Selected work">
+<section class="works" id="works-section" aria-labelledby="works-title">
   <div class="works-header">
     <div class="works-heading-block">
-      <h2 class="works-title">{heading}</h2>
+      <h2 class="works-title" id="works-title">{heading}</h2>
     </div>
     <p class="works-hint">{hint}</p>
   </div>
 
-  <div class="works-accordion" id="worksAccordion" role="list">
+  <ul class="works-accordion" id="worksAccordion">
     {
       works.map((work, i) => (
-        <article
+        <li
           class="slice"
           class:list={[{ "is-active": i === 0 }]}
           data-index={i}
-          role="listitem"
         >
           <div
             class={`slice-bg pattern-${work.category}${work.image ? " has-image" : ""}`}
@@ -392,6 +391,11 @@ const {
             <span class="slice-vertical-name">
               {work.title.join(" ")} · {String(i + 1).padStart(2, "0")}
             </span>
+          </div>
+          <div class="slice-cue" aria-hidden="true">
+            <svg class="slice-cue-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
           </div>
           <div class="slice-content">
             <p class="slice-eyebrow">{work.eyebrow}</p>
@@ -519,10 +523,10 @@ const {
               )}
             </div>
           </div>
-        </article>
+        </li>
       ))
     }
-  </div>
+  </ul>
 
   <dialog
     class="case-study-modal"
@@ -702,6 +706,9 @@ const {
   }
 
   .works-accordion {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     align-items: stretch;
     width: 100%;
@@ -1649,6 +1656,57 @@ const {
     border-color: rgba(42, 82, 204, 0.32);
   }
 
+  /* interaction cue shown only on collapsed slices */
+  .slice-cue {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(42, 82, 204, 0.18);
+    border: 1px solid rgba(106, 158, 255, 0.35);
+    color: #6a9eff;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    animation: cue-pulse 2.2s ease-in-out infinite;
+  }
+
+  :global(.dark) .slice-cue {
+    background: rgba(90, 142, 255, 0.14);
+    border-color: rgba(106, 158, 255, 0.3);
+    color: #6a9eff;
+  }
+
+  html:not(.dark) .slice-cue {
+    background: rgba(42, 82, 204, 0.1);
+    border-color: rgba(42, 82, 204, 0.3);
+    color: #2a52cc;
+  }
+
+  .slice.is-active .slice-cue {
+    opacity: 0;
+    animation: none;
+  }
+
+  @keyframes cue-pulse {
+    0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+    50%       { opacity: 1;    transform: translate(-50%, -50%) scale(1.18); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slice-cue {
+      animation: none;
+      opacity: 0.6;
+    }
+  }
+
   /* vertical label shown only when collapsed */
   .slice-vertical-label {
     position: absolute;
@@ -1756,6 +1814,10 @@ const {
   }
 
   @media (max-width: 860px) {
+    .slice-cue {
+      display: none;
+    }
+
     .works {
       padding: calc(1.25rem + 10px) 1.4rem 4.5rem;
     }

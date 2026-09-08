@@ -479,6 +479,25 @@ const {
       height: 80vh;
       max-height: 600px;
     }
+
+    .coords {
+      bottom: 1.25rem;
+      left: 1.4rem;
+      font-size: 0.65rem;
+    }
+
+    .scroll-hint {
+      bottom: 1.25rem;
+      right: 1.4rem;
+      font-size: 0.65rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .coords,
+    .scroll-hint {
+      display: none;
+    }
   }
 
   @media (max-width: 500px) {
@@ -487,10 +506,6 @@ const {
     }
     :global(.hero-sub) {
       font-size: 0.95rem;
-    }
-    .coords,
-    .scroll-hint {
-      display: none;
     }
     /* on mobile: canvas is dim blurred background, content readable on top */
     #blueprintCanvas {
