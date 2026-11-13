@@ -23,7 +23,7 @@ const {
       company: "Deaf Pathway Global",
       location: "Brentwood, TN",
       summary:
-        "Leading media and creative direction for a Deaf-serving organization since 2016. Over time, the role grew into web development — building and maintaining websites, and collaborating with app developers on digital tools for the organization, including DPG Training Camp, a training platform currently in development as an installable, offline-capable app.",
+        "Leading media and creative direction for a Deaf-serving organization since 2016. Over time, the role grew into web development — building and maintaining websites, and collaborating with app developers on digital tools for the organization, including DPG Training Camp. Content updates currently require my manual work. I am developing a CMS so administrators can manage training content independently; that workflow is not yet complete.",
       achievement:
         "Took on web development beyond the original role, giving the organization an in-house resource for its digital tools instead of relying solely on outside developers.",
       skills: [
@@ -39,9 +39,9 @@ const {
       company: "Independent",
       location: "Remote",
       summary:
-        "Self-directed frontend engineering work, building full-stack web applications end to end — from design systems to production deployment. Projects span booking platforms, e-commerce, developer tools, and accessibility-focused apps, built with React, Astro, Next.js, and Cloudflare's edge network.",
+        "Self-directed frontend engineering work, building full-stack web applications end to end — from interface design to deployment. Projects span booking platforms, e-commerce, developer tools, and accessibility-focused apps, built with React, Astro, Next.js, and Cloudflare's edge network.",
       achievement:
-        "Shipped multiple full-stack apps solo, end to end — design system through deployment — sharpening a fast, systems-first way of working.",
+        "Designed, built, and deployed working web projects covering venue operations, writing, shopping, and visual communication. Each case study distinguishes current functionality from planned improvements.",
       skills: [
         "Component Architecture",
         "Design Systems",
@@ -65,7 +65,7 @@ const {
   <ol class="experience-list">
     {
       experiences.map((item, index) => (
-        <li class="experience-item" tabindex="0">
+        <li class="experience-item">
           <div class="experience-time">
             <span class="experience-phase">
               PHASE {String(index + 1).padStart(2, "0")}
@@ -84,7 +84,7 @@ const {
             <p class="experience-summary">{item.summary}</p>
             {item.achievement && (
               <p class="experience-achievement">
-                <span aria-hidden="true">RESULT / </span>
+                <span>CONTRIBUTION / </span>
                 {item.achievement}
               </p>
             )}
@@ -324,15 +324,15 @@ const {
 
   .experience-achievement {
     max-width: 65ch;
-    max-height: 0;
-    margin: 0;
-    overflow: hidden;
+    max-height: none;
+    margin: 0.8rem 0 0;
+    overflow: visible;
     color: #20469f;
     font-size: 0.88rem;
     font-weight: 600;
     line-height: 1.55;
-    opacity: 0;
-    transform: translateY(-4px);
+    opacity: 1;
+    transform: none;
     transition:
       max-height 0.35s ease,
       margin 0.35s ease,
@@ -351,7 +351,7 @@ const {
 
   .experience-item:hover .experience-achievement,
   .experience-item:focus-visible .experience-achievement {
-    max-height: 6rem;
+    max-height: none;
     margin-top: 0.8rem;
     opacity: 1;
     transform: translateY(0);
