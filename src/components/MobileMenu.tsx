@@ -23,7 +23,7 @@ const MobileMenu = () => {
 
   const navLinks = [
     { href: '#works-section', label: 'Work' },
-    { href: '#techstack-section', label: 'Stack' },
+    { href: '#techstack-section', label: 'Skills' },
     { href: '#experience-section', label: 'Experience' },
     { href: '#contact-section', label: 'Contact' },
   ];
