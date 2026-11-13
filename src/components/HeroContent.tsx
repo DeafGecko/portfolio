@@ -55,7 +55,7 @@ export default function HeroContent({
     >
       <motion.p className="hero-name" variants={reduced ? stillVisible : fadeUp}>
         <span className="hero-name-dot" aria-hidden="true" />
-        DWIGHT ROGERS · Product Engineer
+        DWIGHT ROGERS · Design & Development
       </motion.p>
 
       <motion.h1 className="hero-title" variants={reduced ? stillVisible : fadeUp}>

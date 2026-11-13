@@ -10,6 +10,7 @@ export interface WorkItem {
   eyebrow: string;
   title: string[];
   category: string;
+  featured?: boolean;
   summary?: string;
   tags?: string[];
   /** reserved for future case study page — not yet implemented */
@@ -38,15 +39,16 @@ export interface Props {
 
 const {
   heading = "SELECTED WORKS",
-  hint = "Hover or tap vertical slices to expand project architecture & technical specs.",
+  hint = "Explore working projects, design decisions, and what is still in development.",
   works = [
     {
       eyebrow: "VENUE OPERATIONS PLATFORM",
       title: ["THE FACTORY"],
       category: "factory",
+      featured: true,
       image: "/images/factory01.png",
       screenshots: [
-        { src: "/images/factory01.png", alt: "The Factory dashboard overview" },
+        { src: "/images/factory01.png", alt: "The Factory bills and payments overview" },
         { src: "/images/factory02.png", alt: "The Factory calendar view" },
       ],
       summary:
@@ -100,9 +102,27 @@ const {
       // ],
     },
     {
+      eyebrow: "EVENT PHOTO SHARING",
+      title: ["VANTGE"],
+      category: "vantge",
+      featured: true,
+      summary: "An event photo-sharing product for hosts and guests, with QR-code entry, photo approvals, and RSVP tools. Currently in beta.",
+      tags: ["Product Design", "Host & Guest Workflows", "Beta"],
+      websiteUrl: "https://vantge.app/",
+      githubUrl: "https://github.com/DeafGecko/vantge",
+      caseStudyStatus: "Beta",
+      caseStudySections: [
+        { heading: "Audience & Problem", body: "Vantge brings event photos into one place. Hosts need a way to organize contributions, while guests need a straightforward way to share photos." },
+        { heading: "Product Flow", body: "Create an event → Share a link or QR code → Guests upload → Host reviews → View the gallery.\n\nThe product includes host and guest experiences, photo approvals, and RSVP tools." },
+        { heading: "Design Direction", body: "Warm neutral surfaces, gold accents, serif headings, and event photography give Vantge a visual identity distinct from my developer tools and administrative projects." },
+        { heading: "Status & Next Steps", body: "Vantge is in beta. My next step is to document the host and guest workflows, test them with users, and record the changes that follow. User research results and production usage metrics are not yet part of this case study." },
+      ],
+    },
+    {
       eyebrow: "DESIGN TOKEN & CONTRAST ENGINE",
       title: ["CHROMATIQUE", "STUDIO"],
       category: "chromatique",
+      featured: true,
       image: "/images/chroma01.png",
       screenshots: [
         { src: "/images/chroma01.png", alt: "Chromatique Studio overview" },
@@ -140,10 +160,6 @@ const {
         },
         {
           heading: "Where It Is Now",
-          body: "This project helped me understand that accessibility can be part of the design process from the beginning.\n\nIt also gave me real practice using Vue instead of only learning it through tutorials.",
-        },
-        {
-          heading: "Where It Is Now",
           body: "The core tool is built.\n\n✓ Color testing\n✓ Contrast checking\n✓ Design tokens\n✓ Component previews\n✓ CSS export\n\nI am still testing and improving the experience before I consider it finished.",
         },
         {
@@ -159,7 +175,7 @@ const {
       image: "/images/Kanso01.png",
       screenshots: [
         { src: "/images/Kanso01.png", alt: "Kanso writing interface" },
-        { src: "/images/Kanso02.png", alt: "Kanso error view" },
+        { src: "/images/Kanso02.png", alt: "Kanso writing controls" },
       ],
       summary:
         "A distraction-free writing app inspired by Japanese simplicity — theme and font controls, word/paragraph limits, local file save.",
@@ -182,7 +198,7 @@ const {
         },
         {
           heading: "Tech I Used",
-          body: "I kept the stack simple because the app itself is meant to be simple.",
+          body: "React + Tailwind CSS. I kept the stack focused on the writing interface, its controls, and local file interactions.",
         },
         {
           heading: "Main Features",
@@ -268,7 +284,7 @@ const {
       ],
       summary:
         "A card-based communication app built for the Deaf and Hard of Hearing community — fast, visual, and accessible by design.",
-      tags: ["React", "PWA", "A11y"],
+      tags: ["React", "Visual Communication", "Accessibility"],
       githubUrl: "https://github.com/DeafGecko/clearcard",
       websiteUrl: "https://clearcard.09labs.dev",
       caseStudyStatus: "Live",
@@ -308,7 +324,7 @@ const {
       ],
     },
     {
-      eyebrow: "COMPONENT LIBRARY & DESIGN SYSTEM",
+      eyebrow: "SNIPPET LIBRARY · IN DEVELOPMENT",
       title: ["09 Labs"],
       category: "folio",
       image: "/images/09-labs-snippet.png",
@@ -317,23 +333,23 @@ const {
         { src: "/images/09-labs-snippet-02.png", alt: "09 Labs design system detail" },
       ],
       summary:
-        "An expressive minimalist component library and design system — connecting my design background with reusable frontend development",
-      tags: ["React", "TypeScript", "Storybook"],
+        "A frontend snippet library with theme and layout controls. A broader reusable component system is a future direction.",
+      tags: ["React", "TypeScript"],
       githubUrl: "https://github.com/DeafGecko/09-labs-snippet",
       websiteUrl: "https://09-labs-snippet-zeta.vercel.app",
       caseStudyStatus: "In development",
       caseStudySections: [
         {
           heading: "What I Built",
-          body: "09 labs is a modular component library and design system created to streamline front-end development across future projects. \n\nThe core philosophy is simple:\n\nDesign → Build → Reuse\n\nInstead of recreating navigation bars, modals, cards, and form controls from scratch for every new application, 09 Labs centralizes these components into a unified, clean, and interactive system.",
+          body: "09 Labs is a frontend snippet library in development. The screenshots show its browsing interface and theme variations.\n\nThe longer-term goal is to connect this work with reusable components and design tokens. A completed, documented design system is not yet part of this case study.",
         },
         {
           heading: "Design Direction",
-          body: "The project achieves a balance between clean minimalism and rich personality through:\n\nMinimal structure: Uncluttered layouts with responsive single-click drawers and intuitive grid/list view modes.\n\nStrong Typography: Optimized text hierarchy paired with code block formatting.\n\nCreative Details: Custom color themes (Light, Coffee, and Dark) featuring WCAG AA-compliant contrast ratios.\n\nPurposeful Motion: Smooth slide-over navigation drawers, command palettes (`Cmd+K`), and interactive modal states.",
+          body: "The project achieves a balance between clean minimalism and rich personality through:\n\nMinimal structure: Uncluttered layouts with responsive single-click drawers and intuitive grid/list view modes.\n\nStrong Typography: Optimized text hierarchy paired with code block formatting.\n\nCreative Details: Custom color themes (Light, Coffee, and Dark) with contrast verification still to document.\n\nPurposeful Motion: Smooth slide-over navigation drawers, command palettes (Cmd+K), and interactive modal states.",
         },
         {
           heading: "Why I Built It",
-          body: "As front-end requirements evolve, maintaining consistency across multiple applications becomes challenging. 09 Labs bridges design and engineering by standardizing:\n\n- Color and theme design tokens\n\n- Typography scales and responsive padding\n\nC- Reusable React components and modular layouts\n\nT- Full client-side CRUD capabilities (Create, Read, Update, Delete) via robust `localStorage` data structures.",
+          body: "As front-end requirements evolve, maintaining consistency across multiple applications becomes challenging. 09 Labs bridges design and engineering by standardizing:\n\n- Color and theme design tokens\n\n- Typography scales and responsive padding\n\n- Reusable React components and modular layouts\n\n- Full client-side CRUD capabilities (Create, Read, Update, Delete) via robust localStorage data structures.",
         },
         {
           heading: "What I Plan to Build",
@@ -341,7 +357,7 @@ const {
         },
         {
           heading: "What I'm Learning",
-          body: "09 Folio will help me practice:\n\nReusable React components\nDesign tokens\nComponent variants\nAccessibility\nResponsive design\nDocumentation\n\nIt also gives me a place to bring my design and development skills together.",
+          body: "09 Labs helps me practice:\n\nReusable React components\nDesign tokens\nComponent variants\nAccessibility\nResponsive design\nDocumentation\n\nIt also gives me a place to bring my design and development skills together.",
         },
         {
           heading: "Goal",
@@ -349,7 +365,7 @@ const {
         },
         {
           heading: "Status",
-          body: "**Pre-Launch / Portfolio Polish** (Active Phase)",
+          body: "In development — interface and documentation are being refined.",
         },
       ],
     },
@@ -367,10 +383,10 @@ const {
 
   <ul class="works-accordion" id="worksAccordion">
     {
-      works.map((work, i) => (
+      [...works].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))).map((work, i) => (
         <li
           class="slice"
-          class:list={[{ "is-active": i === 0 }]}
+          class:list={[{ "is-active": true }]}
           data-index={i}
         >
           <div
@@ -378,12 +394,6 @@ const {
             style={work.image ? `background-image:url(${work.image})` : ""}
           />
           <div class="slice-overlay" />
-          <button
-            class="slice-activator"
-            type="button"
-            aria-expanded={i === 0 ? "true" : "false"}
-            aria-label={`Show ${work.title.join(" ")} project details`}
-          />
           <div class="slice-topline">
             <span class="slice-number">{String(i + 1).padStart(2, "0")}</span>
           </div>
@@ -398,7 +408,7 @@ const {
             </svg>
           </div>
           <div class="slice-content">
-            <p class="slice-eyebrow">{work.eyebrow}</p>
+            <p class="slice-eyebrow">{work.featured ? "FEATURED · " : ""}{work.eyebrow}</p>
             <h3 class="slice-title">
               {work.title.map((line) => (
                 <>
@@ -1383,8 +1393,8 @@ const {
   /* screenshot gallery */
   .case-study-gallery {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
     margin-top: 1.75rem;
   }
 
@@ -1872,6 +1882,23 @@ const {
       transition-duration: 0.01ms !important;
     }
   }
+
+  /* Every project stays readable without hover or JavaScript. */
+  .works .works-accordion { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: auto; gap: 1.5rem; padding: 0; border: 0; background: transparent; }
+  .works .slice, .works .slice.is-active { height: auto; min-width: 0; cursor: default; background: #202b3c; }
+  .works .slice-bg, .works .slice.is-active .slice-bg { position: relative; inset: auto; width: 100%; height: 15rem; opacity: 1; filter: none; transform: none; background-size: cover; background-position: top center; }
+  .works .slice-overlay, .works .slice-vertical-label, .works .slice-cue, .works .slice-topline { display: none; }
+  .works .slice-content, .works .slice.is-active .slice-content { position: relative; inset: auto; padding: 1.5rem; opacity: 1; visibility: visible; pointer-events: auto; }
+  .works .slice-title, .works .slice.is-active .slice-title { font-size: 1.65rem; color: #eef4ff; }
+  .works .slice-summary, .works .slice.is-active .slice-summary { max-width: none; color: #d0dcef; opacity: 1; transform: none; }
+  .works .slice-eyebrow, .works .slice.is-active .slice-eyebrow { color: #a8c8ff; }
+  .works .slice-tags, .works .slice.is-active .slice-tags { max-height: none; overflow: visible; }
+  .works .slice-tags, .works .slice.is-active .slice-tags, .works .slice-links, .works .slice.is-active .slice-links { opacity: 1; transform: none; pointer-events: auto; }
+  .works .slice .tag { color: #d0dcef; }
+  .works .slice .project-link { color: #eef4ff; }
+  .works .slice .project-link-icon { filter: brightness(0) invert(1); }
+  .works .pattern-vantge { background: radial-gradient(circle at 70% 30%, #c4ad65, transparent 50%), linear-gradient(135deg, #f4f0e5, #817143); }
+  @media(max-width: 720px) { .works .works-accordion { grid-template-columns: 1fr; } }
 </style>
 
 <script is:inline>
@@ -1880,67 +1907,6 @@ const {
       const accordion = document.getElementById("worksAccordion");
       if (!accordion || accordion.dataset.wired === "true") return;
       accordion.dataset.wired = "true";
-
-      const slices = Array.from(accordion.querySelectorAll(".slice"));
-      const isCoarsePointer = window.matchMedia(
-        "(hover: none), (pointer: coarse)",
-      ).matches;
-      let hoverTimer;
-
-      function activate(target) {
-        window.clearTimeout(hoverTimer);
-        slices.forEach((slice) => {
-          const active = slice === target;
-          slice.classList.toggle("is-active", active);
-          slice
-            .querySelector(".slice-activator")
-            ?.setAttribute("aria-expanded", active ? "true" : "false");
-        });
-      }
-
-      slices.forEach((slice) => {
-        const activator = slice.querySelector(".slice-activator");
-        slice.addEventListener("click", () => activate(slice));
-
-        slice.querySelectorAll(".project-link").forEach((link) => {
-          link.addEventListener("click", (event) => event.stopPropagation());
-        });
-
-        if (!isCoarsePointer) {
-          slice.addEventListener("mouseenter", () => {
-            window.clearTimeout(hoverTimer);
-            hoverTimer = window.setTimeout(() => activate(slice), 90);
-          });
-          slice.addEventListener("mouseleave", () => {
-            window.clearTimeout(hoverTimer);
-          });
-        }
-
-        activator?.addEventListener("keydown", (e) => {
-          const idx = slices.indexOf(slice);
-          if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-            e.preventDefault();
-            const next = slices[Math.min(idx + 1, slices.length - 1)];
-            next.querySelector(".slice-activator")?.focus();
-            activate(next);
-          } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-            e.preventDefault();
-            const prev = slices[Math.max(idx - 1, 0)];
-            prev.querySelector(".slice-activator")?.focus();
-            activate(prev);
-          } else if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            activate(slice);
-          }
-        });
-      });
-
-      accordion.addEventListener("mouseleave", () => {
-        if (!isCoarsePointer) {
-          const first = slices[0];
-          if (first) activate(first);
-        }
-      });
 
       const modal = document.getElementById("caseStudyModal");
       const closeButton = modal?.querySelector("[data-case-study-close]");
