@@ -9,7 +9,7 @@ const SECTION_SELECTORS = [
 ];
 
 const REVEAL_ITEMS =
-  ":scope > header, :scope > .works-header, :scope > .works-accordion, :scope > .techstack-header, :scope > .marquee-group, :scope > .experience-list, :scope > .contact-layout";
+  ":scope > header, :scope > .works-header, :scope > .works-accordion, :scope > .techstack-header, :scope > .skills-grid, :scope > .experience-list, :scope > .contact-layout";
 
 export default function PortfolioMotion() {
   useEffect(() => {
