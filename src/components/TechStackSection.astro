@@ -1,6 +1,63 @@
 ---
-export interface Props { heading?: string; }
+export interface TechItem {
+  name: string;
+  slug: string;
+  icon?: string;
+}
+
+export interface Props {
+  heading?: string;
+}
+
 const { heading = "Skills & Tools" } = Astro.props;
+
+// Each row matches one grouped list below, so the animation and the list say the same thing.
+const ROWS: { label: string; direction: "left" | "right"; speed: number; items: TechItem[] }[] = [
+  {
+    label: "Design & frontend",
+    direction: "left",
+    speed: 42,
+    items: [
+      { name: "Adobe XD", slug: "adobexd", icon: "/adobe-xd.svg" },
+      { name: "HTML & CSS", slug: "html5" },
+      { name: "JavaScript", slug: "javascript" },
+      { name: "TypeScript", slug: "typescript" },
+      { name: "React", slug: "react" },
+      { name: "Next.js", slug: "nextdotjs" },
+      { name: "Astro", slug: "astro" },
+      { name: "Vue", slug: "vuedotjs", icon: "/vue.svg" },
+      { name: "Tailwind CSS", slug: "tailwindcss" },
+    ],
+  },
+  {
+    label: "Testing & accessibility",
+    direction: "right",
+    speed: 38,
+    items: [
+      { name: "Vitest", slug: "vitest" },
+      { name: "Playwright", slug: "playwright", icon: "/playwright.svg" },
+      { name: "axe", slug: "axe" },
+      { name: "Lighthouse", slug: "lighthouse" },
+      { name: "WCAG", slug: "wcag", icon: "/wcag.svg" },
+      { name: "Accessibility", slug: "a11y", icon: "/a11y.svg" },
+    ],
+  },
+  {
+    label: "Mobile & delivery",
+    direction: "left",
+    speed: 40,
+    items: [
+      { name: "Expo", slug: "expo" },
+      { name: "React Native", slug: "react" },
+      { name: "Cloudflare Workers", slug: "cloudflare" },
+      { name: "D1", slug: "cloudflare" },
+      { name: "Sanity", slug: "sanity" },
+      { name: "Git", slug: "git" },
+      { name: "Vercel", slug: "vercel" },
+    ],
+  },
+];
+
 const groups = [
   { title: "Design & interfaces", description: "I connect visual design with working interfaces.", skills: ["Interface design", "Responsive layouts", "User flows", "Design tokens", "Reusable components", "Adobe XD"] },
   { title: "Frontend", description: "Tools used across my web projects.", skills: ["HTML & CSS", "JavaScript", "TypeScript", "React", "Next.js", "Astro", "Vue", "Tailwind CSS"] },
@@ -9,30 +66,495 @@ const groups = [
 ];
 ---
 <section class="techstack" id="techstack-section" aria-labelledby="techstack-title">
-  <header class="techstack-header">
-    <h2 id="techstack-title">{heading}</h2>
-    <p>Design, frontend development, and testing—supported by the projects above.</p>
-  </header>
+  <svg class="icon-filter-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <filter
+        id="tech-icon-outline-light"
+        x="-25%"
+        y="-25%"
+        width="150%"
+        height="150%"
+        color-interpolation-filters="sRGB"
+      >
+        <feMorphology
+          in="SourceAlpha"
+          operator="dilate"
+          radius="1.25"
+          result="expanded"></feMorphology>
+        <feComposite
+          in="expanded"
+          in2="SourceAlpha"
+          operator="out"
+          result="outline"></feComposite>
+        <feFlood flood-color="#2a52cc" result="color"></feFlood>
+        <feComposite in="color" in2="outline" operator="in"></feComposite>
+      </filter>
+      <filter
+        id="tech-icon-outline-dark"
+        x="-25%"
+        y="-25%"
+        width="150%"
+        height="150%"
+        color-interpolation-filters="sRGB"
+      >
+        <feMorphology
+          in="SourceAlpha"
+          operator="dilate"
+          radius="1.25"
+          result="expanded"></feMorphology>
+        <feComposite
+          in="expanded"
+          in2="SourceAlpha"
+          operator="out"
+          result="outline"></feComposite>
+        <feFlood flood-color="#6a9eff" result="color"></feFlood>
+        <feComposite in="color" in2="outline" operator="in"></feComposite>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="techstack-header">
+    <h2 class="techstack-title" id="techstack-title">{heading}</h2>
+    <p class="techstack-intro">Design, frontend development, and testing—supported by the projects above.</p>
+  </div>
+
+  {ROWS.map((row) => (
+    <div class="marquee-block">
+      <p class="marquee-label">{row.label}</p>
+      <div class="marquee-group" aria-hidden="true">
+        <div class={`marquee-row dir-${row.direction}`} style={`--speed:${row.speed}s`}>
+          <div class="marquee-track">
+            {[0, 1, 2].map((dup) => (
+              <div class="marquee-set" aria-hidden={dup > 0 ? "true" : undefined}>
+                {row.items.map((item) => (
+                  <div class="tech-card">
+                    <span class="tech-icon">
+                      <img
+                        src={item.icon ?? `https://cdn.simpleicons.org/${item.slug}/ffffff`}
+                        alt=""
+                        loading="lazy"
+                        width="44"
+                        height="44"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                      />
+                      <span class="tech-fallback" aria-hidden="true">
+                        {item.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
+                      </span>
+                    </span>
+                    <span class="tech-label">{item.name}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+
   <div class="skills-grid">
-    {groups.map(group => <section class="skill-group">
-      <h3>{group.title}</h3>
-      <p>{group.description}</p>
-      <ul>{group.skills.map(skill => <li>{skill}</li>)}</ul>
-    </section>)}
+    {groups.map((group) => (
+      <section class="skill-group">
+        <h3 class="skill-title">{group.title}</h3>
+        <p class="skill-description">{group.description}</p>
+        <ul class="skill-list">
+          {group.skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+      </section>
+    ))}
   </div>
 </section>
+
 <style>
-  .techstack { padding: 3rem 6% 6rem; background: #dfe2e3; color: #343b45; }
-  :global(.dark) .techstack { background: #0a0e17; color: #eef4ff; }
-  h2 { margin: 0; font: 700 clamp(2.1rem, 4.4vw, 3.4rem)/1.05 "DM Sans", sans-serif; letter-spacing: -.02em; }
-  .techstack-header > p { max-width: 60ch; margin: 1.25rem 0 2rem; line-height: 1.7; }
-  .skills-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
-  .skill-group { padding: 1.5rem; border: 1px solid #929ba2; border-radius: 6px; }
-  :global(.dark) .skill-group { background: #12161f; border-color: #33445e; }
-  h3 { margin: 0; font: 600 1.2rem/1.4 "DM Sans", sans-serif; }
-  .skill-group p { line-height: 1.6; max-width: 55ch; }
-  ul { display: flex; flex-wrap: wrap; gap: .6rem; list-style: none; padding: 0; margin: 1rem 0 0; }
-  li { padding: .45rem .65rem; border: 1px solid #7a879a; border-radius: 4px; font: 500 .8rem/1.4 "Azeret Mono", monospace; }
-  :global(.dark) li { color: #c7dbff; border-color: #445a79; }
-  @media(max-width: 680px) { .techstack { padding: 2rem 1.4rem 4rem; } .skills-grid { grid-template-columns: 1fr; } }
+  * {
+    box-sizing: border-box;
+  }
+
+  .techstack {
+    width: 100%;
+    padding: calc(1.75rem + 10px) 0 9rem;
+    background: #dfe2e3;
+    transition: background 0.3s ease;
+    overflow: hidden;
+  }
+
+  :global(.dark) .techstack {
+    background: #0a0e17;
+  }
+
+  .techstack-header {
+    padding: 0 6%;
+    margin-bottom: 2.75rem;
+  }
+
+  :global(.dark) .techstack-kicker {
+    color: #6a9eff;
+  }
+
+  :global(.dark) .techstack-kicker .dot {
+    background: #6a9eff;
+  }
+
+  .techstack-title {
+    font-family: "DM Sans", sans-serif;
+    font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: #454c56;
+    margin: 0;
+  }
+
+  :global(.dark) .techstack-title {
+    color: #eef4ff;
+  }
+
+  .marquee-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding-inline: clamp(1.25rem, 6vw, 6rem);
+  }
+
+  .marquee-row {
+    --edge-fade: clamp(48px, 8vw, 120px);
+    position: relative;
+    width: 100%;
+    padding-block: 10px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 var(--edge-fade),
+      #000 calc(100% - var(--edge-fade)),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 var(--edge-fade),
+      #000 calc(100% - var(--edge-fade)),
+      transparent 100%
+    );
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: marquee-left var(--speed, 40s) linear infinite;
+  }
+
+  .dir-right .marquee-track {
+    animation-name: marquee-right;
+  }
+
+  .marquee-set {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-33.333333%);
+    }
+  }
+
+  @keyframes marquee-right {
+    from {
+      transform: translateX(-33.333333%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @property --card-border-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes card-border-travel {
+    to {
+      --card-border-angle: 360deg;
+    }
+  }
+
+  .tech-card {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    flex-shrink: 0;
+    width: 104px;
+    height: 112px;
+    background: #b4bbc0;
+    border: 1px solid #929ba2;
+    border-radius: 4px;
+    padding: 1rem 0.75rem 0.85rem;
+    white-space: nowrap;
+    text-align: center;
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease;
+  }
+
+  :global(.dark) .tech-card {
+    background: #12161f;
+    border-color: rgba(106, 158, 255, 0.14);
+  }
+
+  .icon-filter-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .tech-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    padding: 3px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--card-border-angle),
+      rgba(42, 82, 204, 0.28),
+      #2a52cc,
+      rgba(42, 82, 204, 0.28) 35%,
+      rgba(42, 82, 204, 0.28) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .tech-card:hover {
+    z-index: 2;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .tech-card:hover::before {
+    opacity: 1;
+    animation: card-border-travel 2.4s linear infinite;
+  }
+
+  .tech-icon {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tech-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform-origin: 50% 58%;
+    animation: icon-orbit 3.2s ease-in-out infinite alternate;
+    filter: brightness(0) saturate(100%) invert(21%) sepia(8%) saturate(650%)
+      hue-rotate(176deg) brightness(86%) contrast(92%);
+  }
+
+  :global(.dark) .tech-icon img {
+    filter: brightness(0) invert(1);
+    opacity: 0.78;
+  }
+
+  .tech-card:hover .tech-icon img {
+    filter: url("#tech-icon-outline-light");
+    opacity: 1;
+  }
+
+  :global(.dark) .tech-card:hover .tech-icon img {
+    filter: url("#tech-icon-outline-dark");
+  }
+
+  @keyframes icon-orbit {
+    from {
+      transform: rotate(-5deg) translateY(-2px);
+    }
+    to {
+      transform: rotate(5deg) translateY(2px);
+    }
+  }
+
+  .tech-fallback {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: rgba(106, 158, 255, 0.12);
+    border: 1px solid rgba(106, 158, 255, 0.25);
+    border-radius: 4px;
+  }
+
+  :global(.dark) .tech-fallback {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .tech-label {
+    display: flex;
+    min-height: 2.7rem;
+    align-items: center;
+    justify-content: center;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #343b45;
+    letter-spacing: 0.2px;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  :global(.dark) .tech-label {
+    color: #d6e6ff;
+  }
+
+  @media (max-width: 860px) {
+    .techstack {
+      padding: calc(1.25rem + 10px) 0 8rem;
+    }
+    .techstack-header {
+      padding: 0 1.4rem;
+    }
+    .tech-card {
+      width: 104px;
+      height: 116px;
+      padding: 0.85rem 0.6rem 0.75rem;
+    }
+    .tech-label {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+    .tech-icon img {
+      animation: none;
+    }
+    .tech-card:hover::before {
+      animation: none;
+    }
+    .marquee-row {
+      overflow-x: auto;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  }
+
+  .techstack-intro {
+    max-width: 60ch;
+    margin: 1.25rem 0 0;
+    line-height: 1.7;
+  }
+
+  .marquee-block + .marquee-block {
+    margin-top: 1.5rem;
+  }
+
+  .marquee-label {
+    margin: 0 0 0.6rem;
+    padding-inline: clamp(1.25rem, 6vw, 6rem);
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #2a52cc;
+  }
+
+  :global(.dark) .marquee-label {
+    color: #6a9eff;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 3rem;
+    padding-inline: clamp(1.25rem, 6vw, 6rem);
+  }
+
+  .skill-group {
+    padding: 1.5rem;
+    border: 1px solid #929ba2;
+    border-radius: 6px;
+  }
+
+  :global(.dark) .skill-group {
+    background: #12161f;
+    border-color: #33445e;
+  }
+
+  .skill-title {
+    margin: 0;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .skill-description {
+    max-width: 55ch;
+    margin: 0.4rem 0 0;
+    line-height: 1.6;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .skill-list li {
+    padding: 0.45rem 0.65rem;
+    border: 1px solid #7a879a;
+    border-radius: 4px;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  :global(.dark) .skill-list li {
+    color: #c7dbff;
+    border-color: #445a79;
+  }
+
+  @media (max-width: 680px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
