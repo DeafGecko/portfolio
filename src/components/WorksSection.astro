@@ -144,7 +144,7 @@ const {
         },
         {
           heading: "How I Built It",
-          body: "I started with the most important part:\nText color + Background color → Contrast score → Pass or Fail\n\nThen I added design tokens, previews, and CSS export.\n\nWhy Vue 3 + VueUse? \n\nMost of my projects use React, so I wanted to challenge myself with another framework.\n\nI built Chromatique Studio with Vue 3 to learn how Vue handles components, state, and reactivity.",
+          body: "I started with the most important part:\nText color + Background color → Contrast score → Pass or Fail\n\nThen I added design tokens, previews, and CSS export.\n\nWhy Vue 3 + VueUse?\n\nMost of my projects use React, so I wanted to challenge myself with another framework.\n\nI built Chromatique Studio with Vue 3 to learn how Vue handles components, state, and reactivity.",
         },
         {
           heading: "Tech I Used",
@@ -1886,7 +1886,7 @@ const {
   /* Every project stays readable without hover or JavaScript. */
   .works .works-accordion { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: auto; gap: 1.5rem; padding: 0; border: 0; background: transparent; }
   .works .slice, .works .slice.is-active { height: auto; min-width: 0; cursor: default; background: #202b3c; }
-  .works .slice-bg, .works .slice.is-active .slice-bg { position: relative; inset: auto; width: 100%; height: 15rem; opacity: 1; filter: none; transform: none; background-size: cover; background-position: top center; }
+  .works .slice-bg, .works .slice.is-active .slice-bg { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 16 / 10; opacity: 1; filter: none; transform: none; background-size: cover; background-position: top center; }
   .works .slice-overlay, .works .slice-vertical-label, .works .slice-cue, .works .slice-topline { display: none; }
   .works .slice-content, .works .slice.is-active .slice-content { position: relative; inset: auto; padding: 1.5rem; opacity: 1; visibility: visible; pointer-events: auto; }
   .works .slice-title, .works .slice.is-active .slice-title { font-size: 1.65rem; color: #eef4ff; }
