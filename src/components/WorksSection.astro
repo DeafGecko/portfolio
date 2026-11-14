@@ -42,10 +42,10 @@ const {
   hint = "Explore working projects, design decisions, and what is still in development.",
   works = [
     {
+      featured: true,
       eyebrow: "VENUE OPERATIONS PLATFORM",
       title: ["THE FACTORY"],
       category: "factory",
-      featured: true,
       image: "/images/factory01.png",
       screenshots: [
         { src: "/images/factory01.png", alt: "The Factory bills and payments overview" },
@@ -102,27 +102,109 @@ const {
       // ],
     },
     {
-      eyebrow: "EVENT PHOTO SHARING",
-      title: ["VANTGE"],
-      category: "vantge",
       featured: true,
-      summary: "An event photo-sharing product for hosts and guests, with QR-code entry, photo approvals, and RSVP tools. Currently in beta.",
-      tags: ["Product Design", "Host & Guest Workflows", "Beta"],
-      websiteUrl: "https://vantge.app/",
-      githubUrl: "https://github.com/DeafGecko/vantge",
-      caseStudyStatus: "Beta",
+      eyebrow: "VISUAL COMMUNICATION APP",
+      title: ["CLEARCARD"],
+      category: "clearcard",
+      image: "/images/clearcard01.png",
+      screenshots: [
+        {
+          src: "/images/clearcard01.png",
+          alt: "ClearCard application overview",
+        },
+      ],
+      summary:
+        "A card-based communication app built for the Deaf and Hard of Hearing community — fast, visual, and accessible by design.",
+      tags: ["React", "Visual Communication", "Accessibility"],
+      githubUrl: "https://github.com/DeafGecko/clearcard",
+      websiteUrl: "https://clearcard.09labs.dev",
+      caseStudyStatus: "Live",
       caseStudySections: [
-        { heading: "Audience & Problem", body: "Vantge brings event photos into one place. Hosts need a way to organize contributions, while guests need a straightforward way to share photos." },
-        { heading: "Product Flow", body: "Create an event → Share a link or QR code → Guests upload → Host reviews → View the gallery.\n\nThe product includes host and guest experiences, photo approvals, and RSVP tools." },
-        { heading: "Design Direction", body: "Warm neutral surfaces, gold accents, serif headings, and event photography give Vantge a visual identity distinct from my developer tools and administrative projects." },
-        { heading: "Status & Next Steps", body: "Vantge is in beta. My next step is to document the host and guest workflows, test them with users, and record the changes that follow. User research results and production usage metrics are not yet part of this case study." },
+        {
+          heading: "What I Built",
+          body: "ClearCard is a visual communication app for Deaf and Hard of Hearing people.\n\nThe idea is simple:\n\nChoose a card → Show the message → Communicate\n\nIt is designed for situations where someone needs to communicate quickly without depending on sound.",
+        },
+        {
+          heading: "Why I Built It",
+          body: "I wanted communication to be simple, visual, and quick.\n\nInstead of making people read through many menus, I wanted them to find what they need and show it.\n\nSee → Tap → Show.",
+        },
+        {
+          heading: "How I Built It",
+          body: "I focused on making the cards clear and easy to understand.\n\nWhile building it, I kept asking:\n“Can someone understand this quickly?”\n\nThat helped me think more about the user instead of just adding features.",
+        },
+        {
+          heading: "Tech I Used",
+          body: "React + Card-Based UI\n\nI kept the interface simple with large visual cards and clear text.",
+        },
+        {
+          heading: "Accessibility",
+          body: "Accessibility is the main purpose of this project.\n\nI focused on:\n\n✓ Visual communication\n✓ Clear text\n✓ Easy-to-understand cards\n✓ Large tap areas\n✓ No need for sound",
+        },
+        {
+          heading: "What I Learned",
+          body: "This project taught me that simple design can be difficult.\n\nAdding more features is easy.\n\nMaking something clear, fast, and easy to understand takes more thought.",
+        },
+        {
+          heading: "What's Next",
+          body: "I have two ideas I want to add:\n\nQuick Card — quickly type something that is not already available as a card.\n\nHistory — look back at messages used during a conversation.\n\nI also plan to improve the design and turn it into a PWA so it can feel more like an installed app.",
+        },
+        {
+          heading: "Status",
+          body: "Improvements planned.",
+        },
+      ],
+    },
+    {
+      featured: true,
+      eyebrow: "SNIPPET LIBRARY · IN DEVELOPMENT",
+      title: ["09 Labs"],
+      category: "folio",
+      image: "/images/09-labs-snippet.png",
+      screenshots: [
+        { src: "/images/09-labs-snippet-01.png", alt: "09 Labs component library overview" },
+        { src: "/images/09-labs-snippet-02.png", alt: "09 Labs design system detail" },
+      ],
+      summary:
+        "A frontend snippet library with theme and layout controls. A broader reusable component system is a future direction.",
+      tags: ["React", "TypeScript"],
+      githubUrl: "https://github.com/DeafGecko/09-labs-snippet",
+      websiteUrl: "https://09-labs-snippet-zeta.vercel.app",
+      caseStudyStatus: "In development",
+      caseStudySections: [
+        {
+          heading: "What I Built",
+          body: "09 Labs is a frontend snippet library in development. The screenshots show its browsing interface and theme variations.\n\nThe longer-term goal is to connect this work with reusable components and design tokens. A completed, documented design system is not yet part of this case study.",
+        },
+        {
+          heading: "Design Direction",
+          body: "The project achieves a balance between clean minimalism and rich personality through:\n\nMinimal structure: Uncluttered layouts with responsive single-click drawers and intuitive grid/list view modes.\n\nStrong Typography: Optimized text hierarchy paired with code block formatting.\n\nCreative Details: Custom color themes (Light, Coffee, and Dark) with contrast verification still to document.\n\nPurposeful Motion: Smooth slide-over navigation drawers, command palettes (Cmd+K), and interactive modal states.",
+        },
+        {
+          heading: "Why I Built It",
+          body: "As front-end requirements evolve, maintaining consistency across multiple applications becomes challenging. 09 Labs bridges design and engineering by standardizing:\n\n- Color and theme design tokens\n\n- Typography scales and responsive padding\n\n- Reusable React components and modular layouts\n\n- Full client-side CRUD capabilities (Create, Read, Update, Delete) via robust localStorage data structures.",
+        },
+        {
+          heading: "What I Plan to Build",
+          body: "Buttons → Inputs → Cards → Navigation → Modals → Layouts\n\nEach component will have reusable styles, states, and variants.",
+        },
+        {
+          heading: "What I'm Learning",
+          body: "09 Labs helps me practice:\n\nReusable React components\nDesign tokens\nComponent variants\nAccessibility\nResponsive design\nDocumentation\n\nIt also gives me a place to bring my design and development skills together.",
+        },
+        {
+          heading: "Goal",
+          body: "My goal is to build a small but useful system that I can actually use in my own projects.\n\nNot hundreds of components.\n\nJust components that are clear, reusable, expressive, and well built.",
+        },
+        {
+          heading: "Status",
+          body: "In development — interface and documentation are being refined.",
+        },
       ],
     },
     {
       eyebrow: "DESIGN TOKEN & CONTRAST ENGINE",
       title: ["CHROMATIQUE", "STUDIO"],
       category: "chromatique",
-      featured: true,
       image: "/images/chroma01.png",
       screenshots: [
         { src: "/images/chroma01.png", alt: "Chromatique Studio overview" },
@@ -161,6 +243,55 @@ const {
         {
           heading: "Where It Is Now",
           body: "The core tool is built.\n\n✓ Color testing\n✓ Contrast checking\n✓ Design tokens\n✓ Component previews\n✓ CSS export\n\nI am still testing and improving the experience before I consider it finished.",
+        },
+        {
+          heading: "Status",
+          body: "Functional and being polished.",
+        },
+      ],
+    },
+    {
+      eyebrow: "STOREFRONT & CHECKOUT",
+      title: ["SWISS E-COMMERCE"],
+      category: "swiss",
+      image: "/images/ecommerce01.png",
+      screenshots: [
+        { src: "/images/ecommerce01.png", alt: "Swiss E-Commerce wireframe" },
+        {
+          src: "/images/ecommerce02.png",
+          alt: "Swiss E-Commerce final design",
+        },
+      ],
+      summary:
+        "A responsive storefront with product filtering, cart, wishlist, and a mock checkout — built around Swiss design principles.",
+      tags: ["React", "Tailwind", "Vercel"],
+      githubUrl: "https://github.com/DeafGecko/swiss-ecommerce",
+      websiteUrl: "https://ecommerce.09labs.dev",
+      caseStudyStatus: "Live",
+      caseStudySections: [
+        {
+          heading: "What I Built",
+          body: `Swiss E-Commerce is a responsive online store built with a clean Swiss design style.\n\nThe shopping flow is:\n\nBrowse → Find Product → Add to Cart → Checkout\n\nIt also includes a wishlist and product filtering.`,
+        },
+        {
+          heading: "Why I Built It",
+          body: `I wanted to practice building a real e-commerce experience instead of only making a product page.\n\nE-commerce gave me practice with:\n\nLayout + Components + State + Forms + Responsive Design`,
+        },
+        {
+          heading: "How I Built It",
+          body: `I built this project in 3 phases.\n\nPhase 1 — Structure\n\nBuild the wireframe, grid, spacing, and layout.\n↓\nPhase 2 — Color\nAdd the colors and visual style.\n↓\nPhase 3 — Motion\n\nAdd animation, hover effects, and interactions.\n\nThis helped me focus on one problem at a time.`,
+        },
+        {
+          heading: "My Challenge",
+          body: `My biggest challenge was actually not jumping ahead.\n\nAs a designer, I naturally wanted to start adding colors and animation while I was still building Phase 1.\n\nI had to tell myself:\n\nStructure first → Style second → Motion last\n\nStaying with the wireframe helped me understand how the layout worked before making it look finished.`,
+        },
+        {
+          heading: "What I Learned",
+          body: "This project taught me that a strong design starts underneath the final look.\n\nGood structure → Good foundation → Better final design\n\nI also learned that following a clear process can make development easier because I am solving one type of problem at a time.",
+        },
+        {
+          heading: "Where It Is Now",
+          body: "The storefront is working and live.\n\nThe project gave me more practice with React state, responsive layouts, shopping flows, and building a UI step by step.",
         },
         {
           heading: "Status",
@@ -219,153 +350,6 @@ const {
         {
           heading: "Status",
           body: "Functional and being polished.",
-        },
-      ],
-    },
-    {
-      eyebrow: "STOREFRONT & CHECKOUT",
-      title: ["SWISS E-COMMERCE"],
-      category: "swiss",
-      image: "/images/ecommerce01.png",
-      screenshots: [
-        { src: "/images/ecommerce01.png", alt: "Swiss E-Commerce wireframe" },
-        {
-          src: "/images/ecommerce02.png",
-          alt: "Swiss E-Commerce final design",
-        },
-      ],
-      summary:
-        "A responsive storefront with product filtering, cart, wishlist, and a mock checkout — built around Swiss design principles.",
-      tags: ["React", "Tailwind", "Vercel"],
-      githubUrl: "https://github.com/DeafGecko/swiss-ecommerce",
-      websiteUrl: "https://ecommerce.09labs.dev",
-      caseStudyStatus: "Live",
-      caseStudySections: [
-        {
-          heading: "What I Built",
-          body: `Swiss E-Commerce is a responsive online store built with a clean Swiss design style.\n\nThe shopping flow is:\n\nBrowse → Find Product → Add to Cart → Checkout\n\nIt also includes a wishlist and product filtering.`,
-        },
-        {
-          heading: "Why I Built It",
-          body: `I wanted to practice building a real e-commerce experience instead of only making a product page.\n\nE-commerce gave me practice with:\n\nLayout + Components + State + Forms + Responsive Design`,
-        },
-        {
-          heading: "How I Built It",
-          body: `I built this project in 3 phases.\n\nPhase 1 — Structure\n\nBuild the wireframe, grid, spacing, and layout.\n↓\nPhase 2 — Color\nAdd the colors and visual style.\n↓\nPhase 3 — Motion\n\nAdd animation, hover effects, and interactions.\n\nThis helped me focus on one problem at a time.`,
-        },
-        {
-          heading: "My Challenge",
-          body: `My biggest challenge was actually not jumping ahead.\n\nAs a designer, I naturally wanted to start adding colors and animation while I was still building Phase 1.\n\nI had to tell myself:\n\nStructure first → Style second → Motion last\n\nStaying with the wireframe helped me understand how the layout worked before making it look finished.`,
-        },
-        {
-          heading: "What I Learned",
-          body: "This project taught me that a strong design starts underneath the final look.\n\nGood structure → Good foundation → Better final design\n\nI also learned that following a clear process can make development easier because I am solving one type of problem at a time.",
-        },
-        {
-          heading: "Where It Is Now",
-          body: "The storefront is working and live.\n\nThe project gave me more practice with React state, responsive layouts, shopping flows, and building a UI step by step.",
-        },
-        {
-          heading: "Status",
-          body: "Functional and being polished.",
-        },
-      ],
-    },
-    {
-      eyebrow: "VISUAL COMMUNICATION APP",
-      title: ["CLEARCARD"],
-      category: "clearcard",
-      image: "/images/clearcard01.png",
-      screenshots: [
-        {
-          src: "/images/clearcard01.png",
-          alt: "ClearCard application overview",
-        },
-      ],
-      summary:
-        "A card-based communication app built for the Deaf and Hard of Hearing community — fast, visual, and accessible by design.",
-      tags: ["React", "Visual Communication", "Accessibility"],
-      githubUrl: "https://github.com/DeafGecko/clearcard",
-      websiteUrl: "https://clearcard.09labs.dev",
-      caseStudyStatus: "Live",
-      caseStudySections: [
-        {
-          heading: "What I Built",
-          body: "ClearCard is a visual communication app for Deaf and Hard of Hearing people.\n\nThe idea is simple:\n\nChoose a card → Show the message → Communicate\n\nIt is designed for situations where someone needs to communicate quickly without depending on sound.",
-        },
-        {
-          heading: "Why I Built It",
-          body: "I wanted communication to be simple, visual, and quick.\n\nInstead of making people read through many menus, I wanted them to find what they need and show it.\n\nSee → Tap → Show.",
-        },
-        {
-          heading: "How I Built It",
-          body: "I focused on making the cards clear and easy to understand.\n\nWhile building it, I kept asking:\n“Can someone understand this quickly?”\n\nThat helped me think more about the user instead of just adding features.",
-        },
-        {
-          heading: "Tech I Used",
-          body: "React + Card-Based UI\n\nI kept the interface simple with large visual cards and clear text.",
-        },
-        {
-          heading: "Accessibility",
-          body: "Accessibility is the main purpose of this project.\n\nI focused on:\n\n✓ Visual communication\n✓ Clear text\n✓ Easy-to-understand cards\n✓ Large tap areas\n✓ No need for sound",
-        },
-        {
-          heading: "What I Learned",
-          body: "This project taught me that simple design can be difficult.\n\nAdding more features is easy.\n\nMaking something clear, fast, and easy to understand takes more thought.",
-        },
-        {
-          heading: "What's Next",
-          body: "I have two ideas I want to add:\n\nQuick Card — quickly type something that is not already available as a card.\n\nHistory — look back at messages used during a conversation.\n\nI also plan to improve the design and turn it into a PWA so it can feel more like an installed app.",
-        },
-        {
-          heading: "Status",
-          body: "Improvements planned.",
-        },
-      ],
-    },
-    {
-      eyebrow: "SNIPPET LIBRARY · IN DEVELOPMENT",
-      title: ["09 Labs"],
-      category: "folio",
-      image: "/images/09-labs-snippet.png",
-      screenshots: [
-        { src: "/images/09-labs-snippet-01.png", alt: "09 Labs component library overview" },
-        { src: "/images/09-labs-snippet-02.png", alt: "09 Labs design system detail" },
-      ],
-      summary:
-        "A frontend snippet library with theme and layout controls. A broader reusable component system is a future direction.",
-      tags: ["React", "TypeScript"],
-      githubUrl: "https://github.com/DeafGecko/09-labs-snippet",
-      websiteUrl: "https://09-labs-snippet-zeta.vercel.app",
-      caseStudyStatus: "In development",
-      caseStudySections: [
-        {
-          heading: "What I Built",
-          body: "09 Labs is a frontend snippet library in development. The screenshots show its browsing interface and theme variations.\n\nThe longer-term goal is to connect this work with reusable components and design tokens. A completed, documented design system is not yet part of this case study.",
-        },
-        {
-          heading: "Design Direction",
-          body: "The project achieves a balance between clean minimalism and rich personality through:\n\nMinimal structure: Uncluttered layouts with responsive single-click drawers and intuitive grid/list view modes.\n\nStrong Typography: Optimized text hierarchy paired with code block formatting.\n\nCreative Details: Custom color themes (Light, Coffee, and Dark) with contrast verification still to document.\n\nPurposeful Motion: Smooth slide-over navigation drawers, command palettes (Cmd+K), and interactive modal states.",
-        },
-        {
-          heading: "Why I Built It",
-          body: "As front-end requirements evolve, maintaining consistency across multiple applications becomes challenging. 09 Labs bridges design and engineering by standardizing:\n\n- Color and theme design tokens\n\n- Typography scales and responsive padding\n\n- Reusable React components and modular layouts\n\n- Full client-side CRUD capabilities (Create, Read, Update, Delete) via robust localStorage data structures.",
-        },
-        {
-          heading: "What I Plan to Build",
-          body: "Buttons → Inputs → Cards → Navigation → Modals → Layouts\n\nEach component will have reusable styles, states, and variants.",
-        },
-        {
-          heading: "What I'm Learning",
-          body: "09 Labs helps me practice:\n\nReusable React components\nDesign tokens\nComponent variants\nAccessibility\nResponsive design\nDocumentation\n\nIt also gives me a place to bring my design and development skills together.",
-        },
-        {
-          heading: "Goal",
-          body: "My goal is to build a small but useful system that I can actually use in my own projects.\n\nNot hundreds of components.\n\nJust components that are clear, reusable, expressive, and well built.",
-        },
-        {
-          heading: "Status",
-          body: "In development — interface and documentation are being refined.",
         },
       ],
     },
