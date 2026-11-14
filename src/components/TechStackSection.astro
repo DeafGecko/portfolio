@@ -12,10 +12,10 @@ export interface Props {
 const { heading = "Skills & Tools" } = Astro.props;
 
 const groups = [
-  { title: "Design & interfaces", description: "I connect visual design with working interfaces.", skills: ["Interface design", "Responsive layouts", "User flows", "Design tokens", "Reusable components", "Adobe XD"] },
-  { title: "Frontend", description: "Tools used across my web projects.", skills: ["HTML & CSS", "JavaScript", "TypeScript", "React", "Next.js", "Astro", "Vue", "Tailwind CSS"] },
-  { title: "Testing & accessibility", description: "Web testing experience; native mobile automation is my next learning focus.", skills: ["Vitest", "Playwright", "axe", "Lighthouse", "Contrast checking", "Mobile testing"] },
-  { title: "Mobile & delivery", description: "Building apps, connecting data, and deploying projects.", skills: ["Expo", "React Native", "Cloudflare Workers", "D1", "Sanity", "Git", "Vercel"] },
+  { title: "Design", description: "Interface design, responsive layouts and user flows, shown in the case studies.", skills: ["Interface design", "Responsive layouts", "User flows"] },
+  { title: "Access & design systems", description: "Accessibility checks, design tokens and reusable components. 09 Labs is still in development.", skills: ["Accessibility", "Contrast checking", "Design tokens", "Reusable components"] },
+  { title: "Frontend coding", description: "The languages and frameworks used to build the projects.", skills: ["HTML & CSS", "JavaScript", "TypeScript", "React", "Next.js", "Astro", "Vue", "Tailwind CSS"] },
+  { title: "Testing & delivery", description: "Version control, deployment and data services used in the projects.", skills: ["Git", "Vercel", "Cloudflare Workers", "D1", "Sanity"] },
 ];
 
 // Icons for each skill. Skills without a logo get a text tile.
@@ -23,9 +23,10 @@ const SKILL_ICONS: Record<string, { slug?: string; icon?: string }> = {
   "Interface design": { icon: "/skills/interface-design.svg" },
   "Responsive layouts": { icon: "/skills/responsive-layouts.svg" },
   "User flows": { icon: "/skills/user-flows.svg" },
+  "Accessibility": { icon: "/a11y.svg" },
+  "Contrast checking": { icon: "/skills/contrast-checking.svg" },
   "Design tokens": { icon: "/skills/design-tokens.svg" },
   "Reusable components": { icon: "/skills/reusable-components.svg" },
-  "Adobe XD": { slug: "adobexd", icon: "/adobe-xd.svg" },
   "HTML & CSS": { slug: "html5" },
   "JavaScript": { slug: "javascript" },
   "TypeScript": { slug: "typescript" },
@@ -34,19 +35,11 @@ const SKILL_ICONS: Record<string, { slug?: string; icon?: string }> = {
   "Astro": { slug: "astro" },
   "Vue": { slug: "vuedotjs", icon: "/vue.svg" },
   "Tailwind CSS": { slug: "tailwindcss" },
-  "Vitest": { slug: "vitest" },
-  "Playwright": { slug: "playwright", icon: "/playwright.svg" },
-  "axe": { icon: "/skills/automated-checks.svg" },
-  "Lighthouse": { slug: "lighthouse" },
-  "Contrast checking": { icon: "/skills/contrast-checking.svg" },
-  "Mobile testing": { icon: "/skills/mobile-testing.svg" },
-  "Expo": { slug: "expo" },
-  "React Native": { slug: "react" },
+  "Git": { slug: "git" },
+  "Vercel": { slug: "vercel" },
   "Cloudflare Workers": { slug: "cloudflare" },
   "D1": { icon: "/skills/database.svg" },
   "Sanity": { slug: "sanity" },
-  "Git": { slug: "git" },
-  "Vercel": { slug: "vercel" },
 };
 
 const ROWS: { label: string; direction: "left" | "right"; speed: number; items: TechItem[] }[] = [

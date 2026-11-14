@@ -5,7 +5,7 @@ export interface ExperienceItem {
   company: string;
   location?: string;
   summary: string;
-  achievement?: string;
+  points?: { label: string; text: string }[];
   skills?: string[];
 }
 
@@ -23,13 +23,33 @@ const {
       company: "Deaf Pathway Global",
       location: "Brentwood, TN",
       summary:
-        "Leading media and creative direction for a Deaf-serving organization since 2016. Over time, the role grew into web development — building and maintaining websites, and collaborating with app developers on digital tools for the organization, including DPG Training Camp. Content updates currently require my manual work. I am developing a CMS so administrators can manage training content independently; that workflow is not yet complete. DPG Translation: In development.",
-      achievement:
-        "Took on web development beyond the original role, giving the organization an in-house resource for its digital tools instead of relying solely on outside developers.",
+        "Media and creative direction for a Deaf-serving organization. Over time the role grew to include building and maintaining its websites.",
+      points: [
+        {
+          label: "Design",
+          text: "Creative direction for the organization's media and digital tools.",
+        },
+        {
+          label: "Website",
+          text: "I build and maintain the organization's websites. Content updates still need my manual work.",
+        },
+        {
+          label: "Developers",
+          text: "I work with app developers on the organization's digital tools, including DPG Training Camp.",
+        },
+        {
+          label: "Deaf users",
+          text: "I build tools for a Deaf-serving organization, with accessibility as a core focus.",
+        },
+        {
+          label: "In development",
+          text: "A CMS so administrators can manage training content on their own. DPG Translation is also in development.",
+        },
+      ],
       skills: [
-        "Media Direction",
-        "Web Development",
-        "Cross-functional Collaboration",
+        "Media direction",
+        "Web development",
+        "Working with developers",
         "Accessibility",
       ],
     },
@@ -39,14 +59,30 @@ const {
       company: "Independent",
       location: "Remote",
       summary:
-        "Self-directed frontend engineering work, building full-stack web applications end to end — from interface design to deployment. Projects span booking platforms, e-commerce, developer tools, and accessibility-focused apps, built with React, Astro, Next.js, and Cloudflare's edge network.",
-      achievement:
-        "Designed, built, and deployed working web projects covering venue operations, writing, shopping, and visual communication. Each case study distinguishes current functionality from planned improvements.",
+        "Self-directed design and frontend work. I design the interfaces and build the web apps myself, from layout to deployment.",
+      points: [
+        {
+          label: "Design",
+          text: "Interface design, responsive layouts and user flows, shown in the case studies for the booking platform, writing app, storefront and color tool.",
+        },
+        {
+          label: "Website",
+          text: "Built with React, Astro, Next.js, Vue and Tailwind CSS. Projects are deployed on Cloudflare and Vercel.",
+        },
+        {
+          label: "Developers",
+          text: "I work on these projects alone, so I handle the frontend, the backend and deployment myself. The Factory uses Cloudflare Workers, D1 and Sanity.",
+        },
+        {
+          label: "Deaf users",
+          text: "ShowCard is a visual communication app for Deaf and Hard of Hearing people, built around large cards and clear text.",
+        },
+      ],
       skills: [
-        "Component Architecture",
-        "Design Systems",
-        "Accessibility",
-        "Full-Stack Development",
+        "Interface design",
+        "Frontend development",
+        "Design tokens",
+        "Full-stack deployment",
       ],
     },
   ],
@@ -82,11 +118,15 @@ const {
               </p>
             </div>
             <p class="experience-summary">{item.summary}</p>
-            {item.achievement && (
-              <p class="experience-achievement">
-                <span>CONTRIBUTION / </span>
-                {item.achievement}
-              </p>
+            {item.points && (
+              <dl class="experience-points">
+                {item.points.map((point) => (
+                  <div>
+                    <dt>{point.label}</dt>
+                    <dd>{point.text}</dd>
+                  </div>
+                ))}
+              </dl>
             )}
             {item.skills && item.skills.length > 0 && (
               <ul class="experience-skills" aria-label={`${item.role} skills`}>
@@ -418,6 +458,42 @@ const {
     .experience-marker,
     .experience-achievement {
       transition: none;
+    }
+  }
+  .experience-points {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1.4rem 0 0;
+  }
+
+  .experience-points > div {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .experience-points dt {
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #2a52cc;
+  }
+
+  :global(.dark) .experience-points dt {
+    color: #6a9eff;
+  }
+
+  .experience-points dd {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 680px) {
+    .experience-points > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
     }
   }
 </style>
