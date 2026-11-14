@@ -14,7 +14,7 @@ const { heading = "Skills & Tools" } = Astro.props;
 const groups = [
   { title: "Design & interfaces", description: "I connect visual design with working interfaces.", skills: ["Interface design", "Responsive layouts", "User flows", "Design tokens", "Reusable components", "Adobe XD"] },
   { title: "Frontend", description: "Tools used across my web projects.", skills: ["HTML & CSS", "JavaScript", "TypeScript", "React", "Next.js", "Astro", "Vue", "Tailwind CSS"] },
-  { title: "Testing & accessibility", description: "Web testing experience; native mobile automation is my next learning focus.", skills: ["Vitest", "Playwright", "axe", "Lighthouse", "Contrast checking", "Manual iOS & Android testing"] },
+  { title: "Testing & accessibility", description: "Web testing experience; native mobile automation is my next learning focus.", skills: ["Vitest", "Playwright", "axe", "Lighthouse", "Contrast checking", "Mobile testing"] },
   { title: "Mobile & delivery", description: "Building apps, connecting data, and deploying projects.", skills: ["Expo", "React Native", "Cloudflare Workers", "D1", "Sanity", "Git", "Vercel"] },
 ];
 
@@ -39,7 +39,7 @@ const SKILL_ICONS: Record<string, { slug?: string; icon?: string }> = {
   "axe": { icon: "/skills/automated-checks.svg" },
   "Lighthouse": { slug: "lighthouse" },
   "Contrast checking": { icon: "/skills/contrast-checking.svg" },
-  "Manual iOS & Android testing": { icon: "/skills/mobile-testing.svg" },
+  "Mobile testing": { icon: "/skills/mobile-testing.svg" },
   "Expo": { slug: "expo" },
   "React Native": { slug: "react" },
   "Cloudflare Workers": { slug: "cloudflare" },
