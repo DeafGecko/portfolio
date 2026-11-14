@@ -1898,6 +1898,9 @@ const {
   .works .slice .tag { color: #d0dcef; }
   .works .slice .project-link { color: #eef4ff; }
   .works .slice .project-link-icon { filter: brightness(0) invert(1); }
+  /* cards keep dark bodies in both themes, so links stay dark with light text */
+  .works .slice .project-link, .works .slice .project-case-study, html:not(.dark) .works .slice .project-link { background: #0a0e17; color: #eef4ff; border-color: rgba(106, 158, 255, 0.35); }
+  .works .slice .project-link-icon, html:not(.dark) .works .slice .project-link-icon { filter: brightness(0) invert(1); }
   .works .pattern-vantge { background: radial-gradient(circle at 70% 30%, #c4ad65, transparent 50%), linear-gradient(135deg, #f4f0e5, #817143); }
   @media(max-width: 720px) { .works .works-accordion { grid-template-columns: 1fr; } }
 </style>

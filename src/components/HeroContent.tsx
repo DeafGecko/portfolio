@@ -61,12 +61,15 @@ export default function HeroContent({
       <motion.h1 className="hero-title" variants={reduced ? stillVisible : fadeUp}>
         {title}
         <br />
-        <span className="accent" aria-label={subtitle}>
-          {Array.from(subtitle).map((letter, index) => (
-            <span className="accent-letter" aria-hidden="true" key={`${letter}-${index}`}>
-              {letter === " " ? "\u00a0" : letter}
-            </span>
-          ))}
+        <span className="accent">
+          <span className="sr-only">{subtitle}</span>
+          <span aria-hidden="true">
+            {Array.from(subtitle).map((letter, index) => (
+              <span className="accent-letter" key={`${letter}-${index}`}>
+                {letter === " " ? "\u00a0" : letter}
+              </span>
+            ))}
+          </span>
         </span>
       </motion.h1>
 

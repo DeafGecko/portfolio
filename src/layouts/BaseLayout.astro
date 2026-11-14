@@ -4,9 +4,14 @@ import "../styles/global.css";
 
 export interface Props {
   title: string;
+  description?: string;
   hideHeader?: boolean; // ← new prop
 }
-const { title, hideHeader = false } = Astro.props;
+const {
+  title,
+  description = "Dwight Rogers builds clear, useful apps with design and code: booking tools, writing apps, shopping flows and accessible communication apps.",
+  hideHeader = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -14,7 +19,12 @@ const { title, hideHeader = false } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} · 09labs</title>
+    <title>{title} · 09 Folio</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} · 09 Folio`} />
+    <meta property="og:description" content={description} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
 
@@ -67,6 +77,47 @@ const { title, hideHeader = false } = Astro.props;
     class="bg-[#dfe2e3] dark:bg-[#0a0e17] text-[#4a5059] dark:text-[#eef4ff] font-sans antialiased"
   >
     <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Intro splash: logo, then the name types out, then the page fades in (once per session) -->
+    <div class="intro-splash" id="introSplash" aria-hidden="true">
+      <div class="intro-inner">
+        <img class="intro-logo" src="/brand/09-folio-logo.svg" alt="" width="220" height="220" />
+        <p class="intro-type">
+          <span class="intro-text" id="introText"></span><span class="intro-caret"></span>
+        </p>
+      </div>
+    </div>
+    <script is:inline>
+      (function () {
+        var el = document.getElementById("introSplash");
+        if (!el) return;
+        var seen = false;
+        try {
+          seen = sessionStorage.getItem("introSeen") === "1";
+          sessionStorage.setItem("introSeen", "1");
+        } catch (e) {}
+        if (seen || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          el.remove();
+          return;
+        }
+        var out = document.getElementById("introText");
+        var name = "09 Folio";
+        var i = 0;
+        function typeNext() {
+          if (i > name.length) return;
+          var num = name.slice(0, Math.min(i, 2));
+          var rest = i > 2 ? name.slice(2, i) : "";
+          out.innerHTML =
+            '<span class="intro-num">' + num + "</span>" +
+            (rest ? '<span class="intro-name">' + rest + "</span>" : "");
+          i++;
+          setTimeout(typeNext, 120);
+        }
+        setTimeout(typeNext, 1200);
+        setTimeout(function () { el.classList.add("is-done"); }, 3900);
+        setTimeout(function () { el.remove(); }, 4900);
+      })();
+    </script>
 
     <!-- aria-live region for screen readers -->
     <div id="announcer" aria-live="polite" class="sr-only"></div>
@@ -236,6 +287,136 @@ const { title, hideHeader = false } = Astro.props;
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto !important;
+    }
+  }
+</style>
+
+<style is:global>
+  .intro-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dfe2e3;
+    transition:
+      opacity 1s ease-in-out,
+      visibility 0s linear 1s;
+  }
+
+  .dark .intro-splash {
+    background: #0a0e17;
+  }
+
+  .intro-splash.is-done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .intro-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .intro-type {
+    display: flex;
+    align-items: center;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #343b45;
+    min-height: 1em;
+  }
+
+  .dark .intro-type {
+    color: #eef4ff;
+  }
+
+  /* same colors as the header wordmark */
+  .intro-num {
+    color: #2a52cc;
+  }
+
+  .dark .intro-num {
+    color: #5a8eff;
+  }
+
+  .intro-name {
+    color: #343b45;
+  }
+
+  .dark .intro-name {
+    color: #eef4ff;
+  }
+
+  .intro-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 0.12em;
+    background: #2a52cc;
+    animation: intro-blink 1s steps(1) infinite;
+  }
+
+  .dark .intro-caret {
+    background: #6a9eff;
+  }
+
+  @keyframes intro-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .intro-splash.is-done .intro-type {
+    animation: intro-out 1s ease-in-out both;
+  }
+
+.intro-logo {
+    width: clamp(140px, 24vw, 220px);
+    height: clamp(140px, 24vw, 220px);
+    animation: intro-in 2.2s ease-in-out both;
+  }
+
+  .intro-splash.is-done .intro-logo {
+    animation: intro-out 1s ease-in-out both;
+  }
+
+  @keyframes intro-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.04);
+      filter: blur(8px);
+    }
+  }
+
+  @keyframes intro-in {
+    from {
+      opacity: 0;
+      transform: scale(0.94);
+      filter: blur(8px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-logo {
+      animation: none;
     }
   }
 </style>
