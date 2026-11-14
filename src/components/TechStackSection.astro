@@ -11,49 +11,25 @@ export interface Props {
 
 const { heading = "Skills & Tools" } = Astro.props;
 
-// Each row matches one grouped list below, so the animation and the list say the same thing.
+// One row of top picks for presentation; the full list is in the grouped cards below.
 const ROWS: { label: string; direction: "left" | "right"; speed: number; items: TechItem[] }[] = [
   {
-    label: "Design & frontend",
+    label: "Top skills",
     direction: "left",
-    speed: 42,
+    speed: 48,
     items: [
-      { name: "Adobe XD", slug: "adobexd", icon: "/adobe-xd.svg" },
-      { name: "HTML & CSS", slug: "html5" },
-      { name: "JavaScript", slug: "javascript" },
-      { name: "TypeScript", slug: "typescript" },
       { name: "React", slug: "react" },
-      { name: "Next.js", slug: "nextdotjs" },
+      { name: "TypeScript", slug: "typescript" },
       { name: "Astro", slug: "astro" },
+      { name: "Next.js", slug: "nextdotjs" },
       { name: "Vue", slug: "vuedotjs", icon: "/vue.svg" },
       { name: "Tailwind CSS", slug: "tailwindcss" },
-    ],
-  },
-  {
-    label: "Testing & accessibility",
-    direction: "right",
-    speed: 38,
-    items: [
-      { name: "Vitest", slug: "vitest" },
+      { name: "Adobe XD", slug: "adobexd", icon: "/adobe-xd.svg" },
       { name: "Playwright", slug: "playwright", icon: "/playwright.svg" },
-      { name: "axe", slug: "axe" },
-      { name: "Lighthouse", slug: "lighthouse" },
+      { name: "Vitest", slug: "vitest" },
       { name: "WCAG", slug: "wcag", icon: "/wcag.svg" },
-      { name: "Accessibility", slug: "a11y", icon: "/a11y.svg" },
-    ],
-  },
-  {
-    label: "Mobile & delivery",
-    direction: "left",
-    speed: 40,
-    items: [
       { name: "Expo", slug: "expo" },
-      { name: "React Native", slug: "react" },
       { name: "Cloudflare Workers", slug: "cloudflare" },
-      { name: "D1", slug: "cloudflare" },
-      { name: "Sanity", slug: "sanity" },
-      { name: "Git", slug: "git" },
-      { name: "Vercel", slug: "vercel" },
     ],
   },
 ];
