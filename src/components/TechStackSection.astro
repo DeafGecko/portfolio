@@ -11,35 +11,57 @@ export interface Props {
 
 const { heading = "Skills & Tools" } = Astro.props;
 
-// One row of top picks for presentation; the full list is in the grouped cards below.
-const ROWS: { label: string; direction: "left" | "right"; speed: number; items: TechItem[] }[] = [
-  {
-    label: "Top skills",
-    direction: "left",
-    speed: 48,
-    items: [
-      { name: "React", slug: "react" },
-      { name: "TypeScript", slug: "typescript" },
-      { name: "Astro", slug: "astro" },
-      { name: "Next.js", slug: "nextdotjs" },
-      { name: "Vue", slug: "vuedotjs", icon: "/vue.svg" },
-      { name: "Tailwind CSS", slug: "tailwindcss" },
-      { name: "Adobe XD", slug: "adobexd", icon: "/adobe-xd.svg" },
-      { name: "Playwright", slug: "playwright", icon: "/playwright.svg" },
-      { name: "Vitest", slug: "vitest" },
-      { name: "WCAG", slug: "wcag", icon: "/wcag.svg" },
-      { name: "Expo", slug: "expo" },
-      { name: "Cloudflare Workers", slug: "cloudflare" },
-    ],
-  },
-];
-
 const groups = [
   { title: "Design & interfaces", description: "I connect visual design with working interfaces.", skills: ["Interface design", "Responsive layouts", "User flows", "Design tokens", "Reusable components", "Adobe XD"] },
   { title: "Frontend", description: "Tools used across my web projects.", skills: ["HTML & CSS", "JavaScript", "TypeScript", "React", "Next.js", "Astro", "Vue", "Tailwind CSS"] },
   { title: "Testing & accessibility", description: "Web testing experience; native mobile automation is my next learning focus.", skills: ["Vitest", "Playwright", "axe", "Lighthouse", "Contrast checking", "Manual iOS & Android testing"] },
   { title: "Mobile & delivery", description: "Building apps, connecting data, and deploying projects.", skills: ["Expo", "React Native", "Cloudflare Workers", "D1", "Sanity", "Git", "Vercel"] },
 ];
+
+// Icons for each skill. Skills without a logo get a text tile.
+const SKILL_ICONS: Record<string, { slug?: string; icon?: string }> = {
+  "Interface design": {},
+  "Responsive layouts": {},
+  "User flows": {},
+  "Design tokens": {},
+  "Reusable components": {},
+  "Adobe XD": { slug: "adobexd", icon: "/adobe-xd.svg" },
+  "HTML & CSS": { slug: "html5" },
+  "JavaScript": { slug: "javascript" },
+  "TypeScript": { slug: "typescript" },
+  "React": { slug: "react" },
+  "Next.js": { slug: "nextdotjs" },
+  "Astro": { slug: "astro" },
+  "Vue": { slug: "vuedotjs", icon: "/vue.svg" },
+  "Tailwind CSS": { slug: "tailwindcss" },
+  "Vitest": { slug: "vitest" },
+  "Playwright": { slug: "playwright", icon: "/playwright.svg" },
+  "axe": {},
+  "Lighthouse": { slug: "lighthouse" },
+  "Contrast checking": {},
+  "Manual iOS & Android testing": {},
+  "Expo": { slug: "expo" },
+  "React Native": { slug: "react" },
+  "Cloudflare Workers": { slug: "cloudflare" },
+  "D1": {},
+  "Sanity": { slug: "sanity" },
+  "Git": { slug: "git" },
+  "Vercel": { slug: "vercel" },
+};
+
+const ROWS: { label: string; direction: "left" | "right"; speed: number; items: TechItem[] }[] = [
+  {
+    label: "All skills",
+    direction: "left",
+    speed: 90,
+    items: groups.flatMap((group) => group.skills).map((name) => ({
+      name,
+      slug: SKILL_ICONS[name]?.slug ?? "",
+      icon: SKILL_ICONS[name]?.icon,
+    })),
+  },
+];
+
 ---
 <section class="techstack" id="techstack-section" aria-labelledby="techstack-title">
   <svg class="icon-filter-defs" aria-hidden="true" focusable="false">
@@ -94,6 +116,41 @@ const groups = [
     <p class="techstack-intro">Design, frontend development, and testing—supported by the projects above.</p>
   </div>
 
+  {ROWS.map((row) => (
+    <div class="marquee-block">
+      <p class="marquee-label">{row.label}</p>
+      <div class="marquee-group" aria-hidden="true">
+        <div class={`marquee-row dir-${row.direction}`} style={`--speed:${row.speed}s`}>
+          <div class="marquee-track">
+            {[0, 1, 2].map((dup) => (
+              <div class="marquee-set" aria-hidden={dup > 0 ? "true" : undefined}>
+                {row.items.map((item) => (
+                  <div class="tech-card">
+                    {(item.icon || item.slug) && (
+                      <span class="tech-icon">
+                        <img
+                          src={item.icon ?? `https://cdn.simpleicons.org/${item.slug}/ffffff`}
+                          alt=""
+                          loading="lazy"
+                          width="44"
+                          height="44"
+                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        />
+                        <span class="tech-fallback" aria-hidden="true">
+                          {item.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
+                        </span>
+                      </span>
+                    )}
+                    <span class="tech-label">{item.name}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
   <div class="skills-grid">
     {groups.map((group) => (
       <section class="skill-group">
@@ -106,39 +163,6 @@ const groups = [
     ))}
   </div>
 
-  {ROWS.map((row) => (
-    <div class="marquee-block">
-      <p class="marquee-label">{row.label}</p>
-      <div class="marquee-group" aria-hidden="true">
-        <div class={`marquee-row dir-${row.direction}`} style={`--speed:${row.speed}s`}>
-          <div class="marquee-track">
-            {[0, 1, 2].map((dup) => (
-              <div class="marquee-set" aria-hidden={dup > 0 ? "true" : undefined}>
-                {row.items.map((item) => (
-                  <div class="tech-card">
-                    <span class="tech-icon">
-                      <img
-                        src={item.icon ?? `https://cdn.simpleicons.org/${item.slug}/ffffff`}
-                        alt=""
-                        loading="lazy"
-                        width="44"
-                        height="44"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                      />
-                      <span class="tech-fallback" aria-hidden="true">
-                        {item.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
-                      </span>
-                    </span>
-                    <span class="tech-label">{item.name}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  ))}
 </section>
 
 <style>
