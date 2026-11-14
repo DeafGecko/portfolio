@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
+  site: 'https://09folio.com',
   integrations: [react()],
   output: 'server',       
   adapter: vercel(),      

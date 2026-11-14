@@ -9,60 +9,53 @@ export interface Props {
   heading?: string;
 }
 
-const { heading = "Tech Stack" } = Astro.props;
+const { heading = "Skills & Tools" } = Astro.props;
 
-const ROW_1: TechItem[] = [
-  { name: "React", slug: "react" },
-  { name: "A11y", slug: "a11y", icon: "/a11y.svg" },
-  { name: "TypeScript", slug: "typescript" },
-  { name: "Vercel", slug: "vercel" },
-  { name: "Tailwind CSS", slug: "tailwindcss" },
-  { name: "JavaScript", slug: "javascript" },
+const groups = [
+  { title: "Design", description: "Interface design, responsive layouts and user flows, shown in the case studies.", skills: ["Interface design", "Responsive layouts", "User flows"] },
+  { title: "Access & design systems", description: "Accessibility checks, design tokens and reusable components. 09 Labs is still in development.", skills: ["Accessibility", "Contrast checking", "Design tokens", "Reusable components"] },
+  { title: "Frontend coding", description: "The languages and frameworks used to build the projects.", skills: ["HTML & CSS", "JavaScript", "TypeScript", "React", "Next.js", "Astro", "Vue", "Tailwind CSS"] },
+  { title: "Testing & delivery", description: "Version control, deployment and data services used in the projects.", skills: ["Git", "Vercel", "Cloudflare Workers", "D1", "Sanity"] },
 ];
 
-const ROW_2: TechItem[] = [
-  { name: "WCAG", slug: "wcag", icon: "/wcag.svg" },
-  { name: "Node.js", slug: "nodedotjs" },
-  { name: "Git", slug: "git" },
-  { name: "Vue", slug: "vuedotjs", icon: "/vue.svg" },
-  { name: "Astro", slug: "astro" },
-  { name: "Adobe XD", slug: "adobexd", icon: "/adobe-xd.svg" },
-  { name: "Supabase", slug: "supabase" },
-];
-
-const ROW_3: TechItem[] = [
-  { name: "React Native", slug: "react" },
-  { name: "CSS3", slug: "css3", icon: "/css3.svg" },
-  { name: "Expo", slug: "expo" },
-  { name: "Next.js", slug: "nextdotjs" },
-  { name: "Express", slug: "express" },
-  { name: "HTML5", slug: "html5" },
-  { name: "Zustand", slug: "zustand", icon: "/zustand.svg" },
-];
-
-const shuffleStable = (items: TechItem[], seed: number) => {
-  const shuffled = [...items];
-  let state = seed;
-
-  for (let index = shuffled.length - 1; index > 0; index--) {
-    state = (state * 1664525 + 1013904223) >>> 0;
-    const swapIndex = state % (index + 1);
-    [shuffled[index], shuffled[swapIndex]] = [
-      shuffled[swapIndex],
-      shuffled[index],
-    ];
-  }
-
-  return shuffled;
+// Icons for each skill. Skills without a logo get a text tile.
+const SKILL_ICONS: Record<string, { slug?: string; icon?: string }> = {
+  "Interface design": { icon: "/skills/interface-design.svg" },
+  "Responsive layouts": { icon: "/skills/responsive-layouts.svg" },
+  "User flows": { icon: "/skills/user-flows.svg" },
+  "Accessibility": { icon: "/a11y.svg" },
+  "Contrast checking": { icon: "/skills/contrast-checking.svg" },
+  "Design tokens": { icon: "/skills/design-tokens.svg" },
+  "Reusable components": { icon: "/skills/reusable-components.svg" },
+  "HTML & CSS": { slug: "html5" },
+  "JavaScript": { slug: "javascript" },
+  "TypeScript": { slug: "typescript" },
+  "React": { slug: "react" },
+  "Next.js": { slug: "nextdotjs" },
+  "Astro": { slug: "astro" },
+  "Vue": { slug: "vuedotjs", icon: "/vue.svg" },
+  "Tailwind CSS": { slug: "tailwindcss" },
+  "Git": { slug: "git" },
+  "Vercel": { slug: "vercel" },
+  "Cloudflare Workers": { slug: "cloudflare" },
+  "D1": { icon: "/skills/database.svg" },
+  "Sanity": { slug: "sanity" },
 };
 
-const rows = [
-  { items: shuffleStable(ROW_1, 9), direction: "left" as const, speed: 42 },
-  { items: shuffleStable(ROW_2, 17), direction: "right" as const, speed: 38 },
-  { items: shuffleStable(ROW_3, 29), direction: "left" as const, speed: 40 },
+const ROWS: { label: string; direction: "left" | "right"; speed: number; items: TechItem[] }[] = [
+  {
+    label: "All skills",
+    direction: "left",
+    speed: 90,
+    items: groups.flatMap((group) => group.skills).map((name) => ({
+      name,
+      slug: SKILL_ICONS[name]?.slug ?? "",
+      icon: SKILL_ICONS[name]?.icon,
+    })),
+  },
 ];
----
 
+---
 <section class="techstack" id="techstack-section" aria-labelledby="techstack-title">
   <svg class="icon-filter-defs" aria-hidden="true" focusable="false">
     <defs>
@@ -113,62 +106,34 @@ const rows = [
 
   <div class="techstack-header">
     <h2 class="techstack-title" id="techstack-title">{heading}</h2>
-    <div class="backend-summary">
-      <div class="backend-summary-label">
-        <span>Backend Architect</span>
-        <strong>Node.js + Express</strong>
-      </div>
-      <div class="backend-summary-copy">
-        <p>
-          I build fast, reliable backends with <strong>Node.js</strong> and{" "}
-          <strong>Express</strong>. I use a blueprint approach, so every feature
-          has a clear place and purpose.
-        </p>
-        <p>
-          This keeps APIs easy to test, update, and grow. Clean routes and
-          middleware help the app support more users without becoming hard to
-          manage.
-        </p>
-      </div>
-    </div>
+    <p class="techstack-intro">Design, frontend development, and testing—supported by the projects above.</p>
   </div>
 
-  <div class="marquee-group">
-    {
-      rows.map((row) => (
-        <div
-          class={`marquee-row dir-${row.direction}`}
-          style={`--speed:${row.speed}s`}
-        >
+  {ROWS.map((row) => (
+    <div class="marquee-block">
+      <p class="marquee-label">{row.label}</p>
+      <div class="marquee-group" aria-hidden="true">
+        <div class={`marquee-row dir-${row.direction}`} style={`--speed:${row.speed}s`}>
           <div class="marquee-track">
             {[0, 1, 2].map((dup) => (
-              <div
-                class="marquee-set"
-                aria-hidden={dup > 0 ? "true" : undefined}
-              >
+              <div class="marquee-set" aria-hidden={dup > 0 ? "true" : undefined}>
                 {row.items.map((item) => (
                   <div class="tech-card">
-                    <span class="tech-icon">
-                      <img
-                        src={
-                          item.icon ??
-                          `https://cdn.simpleicons.org/${item.slug}/ffffff`
-                        }
-                        alt=""
-                        loading="lazy"
-                        width="44"
-                        height="44"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                      />
-                      <span class="tech-fallback" aria-hidden="true">
-                        {item.name
-                          .split(" ")
-                          .map((w) => w[0])
-                          .join("")
-                          .slice(0, 2)
-                          .toUpperCase()}
+                    {(item.icon || item.slug) && (
+                      <span class="tech-icon">
+                        <img
+                          src={item.icon ?? `https://cdn.simpleicons.org/${item.slug}/ffffff`}
+                          alt=""
+                          loading="lazy"
+                          width="44"
+                          height="44"
+                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        />
+                        <span class="tech-fallback" aria-hidden="true">
+                          {item.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
+                        </span>
                       </span>
-                    </span>
+                    )}
                     <span class="tech-label">{item.name}</span>
                   </div>
                 ))}
@@ -176,9 +141,21 @@ const rows = [
             ))}
           </div>
         </div>
-      ))
-    }
+      </div>
+    </div>
+  ))}
+  <div class="skills-grid">
+    {groups.map((group) => (
+      <section class="skill-group">
+        <h3 class="skill-title">{group.title}</h3>
+        <p class="skill-description">{group.description}</p>
+        <ul class="skill-list">
+          {group.skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+      </section>
+    ))}
   </div>
+
 </section>
 
 <style>
@@ -203,29 +180,8 @@ const rows = [
     margin-bottom: 2.75rem;
   }
 
-  .techstack-kicker {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: "Azeret Mono", monospace;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.6px;
-    color: #2a52cc;
-    text-transform: uppercase;
-    margin-bottom: 0.9rem;
-  }
-
   :global(.dark) .techstack-kicker {
     color: #6a9eff;
-  }
-
-  .techstack-kicker .dot {
-    width: 7px;
-    height: 7px;
-    background: #2a52cc;
-    display: inline-block;
-    flex-shrink: 0;
   }
 
   :global(.dark) .techstack-kicker .dot {
@@ -233,7 +189,7 @@ const rows = [
   }
 
   .techstack-title {
-    font-family: "DM Sans", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     font-size: clamp(2.1rem, 4.4vw, 3.4rem);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -244,71 +200,6 @@ const rows = [
 
   :global(.dark) .techstack-title {
     color: #eef4ff;
-  }
-
-  .backend-summary {
-    display: grid;
-    grid-template-columns: minmax(10rem, 0.32fr) minmax(0, 1fr);
-    gap: clamp(1.5rem, 5vw, 5rem);
-    max-width: 70rem;
-    margin-top: 2.5rem;
-    padding-top: 1.25rem;
-    border-top: 1px dashed rgba(42, 82, 204, 0.2);
-  }
-
-  :global(.dark) .backend-summary {
-    border-top-color: rgba(106, 158, 255, 0.18);
-  }
-
-  .backend-summary-label {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    color: #20469f;
-    font-family: "Azeret Mono", monospace;
-    font-size: 0.76rem;
-    line-height: 1.45;
-    text-transform: uppercase;
-  }
-
-  .backend-summary-label strong {
-    color: #454c56;
-    font-size: 0.9rem;
-  }
-
-  :global(.dark) .backend-summary-label {
-    color: #9bc1ff;
-  }
-
-  :global(.dark) .backend-summary-label strong {
-    color: #eef4ff;
-  }
-
-  .backend-summary-copy {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1rem, 3vw, 2.5rem);
-  }
-
-  .backend-summary-copy p {
-    margin: 0;
-    color: #4a5059;
-    font-size: 0.96rem;
-    font-weight: 500;
-    line-height: 1.7;
-  }
-
-  .backend-summary-copy strong {
-    color: #173f9f;
-    font-weight: 700;
-  }
-
-  :global(.dark) .backend-summary-copy p {
-    color: #b9c7da;
-  }
-
-  :global(.dark) .backend-summary-copy strong {
-    color: #8aacdf;
   }
 
   .marquee-group {
@@ -545,14 +436,6 @@ const rows = [
     .techstack-header {
       padding: 0 1.4rem;
     }
-    .backend-summary {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-    .backend-summary-copy {
-      grid-template-columns: 1fr;
-      gap: 0.9rem;
-    }
     .tech-card {
       width: 104px;
       height: 116px;
@@ -577,6 +460,94 @@ const rows = [
       overflow-x: auto;
       -webkit-mask-image: none;
       mask-image: none;
+    }
+  }
+
+  .techstack-intro {
+    max-width: 60ch;
+    margin: 1.25rem 0 0;
+    line-height: 1.7;
+  }
+
+  .marquee-block {
+    margin-top: 3rem;
+  }
+
+  .marquee-label {
+    margin: 0 0 0.6rem;
+    padding-inline: clamp(1.25rem, 6vw, 6rem);
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #2a52cc;
+  }
+
+  :global(.dark) .marquee-label {
+    color: #6a9eff;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 3rem;
+    padding-inline: clamp(1.25rem, 6vw, 6rem);
+  }
+
+  .skill-group {
+    padding: 1.5rem;
+    border: 1px solid #929ba2;
+    border-radius: 6px;
+  }
+
+  :global(.dark) .skill-group {
+    background: #12161f;
+    border-color: #33445e;
+  }
+
+  .skill-title {
+    margin: 0;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .skill-description {
+    max-width: 55ch;
+    margin: 0.4rem 0 0;
+    line-height: 1.6;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .skill-list li {
+    padding: 0.45rem 0.65rem;
+    border: 1px solid #7a879a;
+    border-radius: 4px;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  :global(.dark) .skill-list li {
+    color: #c7dbff;
+    border-color: #445a79;
+  }
+
+  @media (max-width: 680px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
