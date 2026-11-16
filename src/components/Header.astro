@@ -6,6 +6,9 @@ import MobileMenu from "./MobileMenu";
 // On the home page links stay short (#section). On other pages they go back to the home page.
 const homeBase = Astro.url.pathname === "/" ? "" : "/";
 import ContactButton from "./ContactButton";
+
+// On the home page links stay short (#section). On other pages they go back to the home page.
+const homeBase = Astro.url.pathname === "/" ? "" : "/";
 ---
 
 <header class="site-header sticky top-0 z-50" data-site-header>
@@ -46,7 +49,7 @@ import ContactButton from "./ContactButton";
 
         <!-- Contact button (large desktop only) -->
         <div class="hidden xl:block">
-          <ContactButton />
+          <ContactButton base={homeBase} />
         </div>
 
         <!-- Theme toggle (always visible) -->
