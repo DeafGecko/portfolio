@@ -46,49 +46,6 @@
       }
     ]
   },
-  "vantge": {
-    "title": "VANTGE",
-    "summary": "A web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.",
-    "status": "Live demo",
-    "tags": [
-      "Product Design",
-      "Host & Guest Workflows",
-      "Browser demo"
-    ],
-    "image": "/images/vantge-mockup.png",
-    "websiteUrl": "https://vantge.app/try",
-    "githubUrl": "https://github.com/DeafGecko/vantge",
-    "sections": [
-      {
-        "heading": "Summary",
-        "body": "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo."
-      },
-      {
-        "heading": "The problem",
-        "body": "Hosts use several tools for one event, and guests have to remember several links. I wanted one event with one link."
-      },
-      {
-        "heading": "What I built",
-        "body": "A live preview that updates as the host types or picks a color, font or background.\n\nA background photo for each screen size: portrait for phones, landscape for desktop.\n\nGuest pages that match the preview, with photo upload and a gallery.\n\nThe demo at /try uses sample data. Edits stay in the browser, and nothing reaches the live database."
-      },
-      {
-        "heading": "Key decisions",
-        "body": "The demo uses an in-browser stand-in for the database, so it is safe to share and easy to reset.\n\nThe preview stays beside the settings while you scroll.\n\nEach page loads only when it is opened. The home page bundle went from about 930KB to about 225KB."
-      },
-      {
-        "heading": "Testing",
-        "body": "I ran 6 unit tests with Vitest, and none failed.\n\nI ran Playwright with axe on the home and login pages. The scans found 15 low-contrast text problems, which I fixed.\n\nI checked 5 pages at 360, 390 and 430 pixels. None scrolled sideways."
-      },
-      {
-        "heading": "Results",
-        "body": "A visitor can go from the start page to a styled event dashboard in three steps.\n\nOn the live build, the home page scores 100 on accessibility, best practices and SEO. I have not measured real visitor numbers yet."
-      },
-      {
-        "heading": "Next steps",
-        "body": "The access code is Demo, at vantge.app/try.\n\nI want to cut the JavaScript still loaded on the demo page, and measure how long a new host takes to create an event with real users."
-      }
-    ]
-  },
   "showcard": {
     "title": "SHOWCARD",
     "summary": "A card app for Deaf and hard-of-hearing people. Save the messages you use most and show them in large text with one tap.",
@@ -226,6 +183,49 @@
       {
         "heading": "Next",
         "body": "The theme can flash the wrong color on load, because the saved theme is applied after the page mounts. Starter snippet edits only last for the session. Sidebar.tsx is about 755 lines and I would split it up."
+      }
+    ]
+  },
+  "vantage": {
+    "title": "VANTGE",
+    "summary": "A web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.",
+    "status": "Live demo",
+    "tags": [
+      "Product Design",
+      "Host & Guest Workflows",
+      "Browser demo"
+    ],
+    "image": "/images/vantge-mockup.png",
+    "websiteUrl": "https://vantge.app/try",
+    "githubUrl": "https://github.com/DeafGecko/vantge",
+    "sections": [
+      {
+        "heading": "Summary",
+        "body": "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo."
+      },
+      {
+        "heading": "The problem",
+        "body": "Hosts use several tools for one event, and guests have to remember several links. I wanted one event with one link."
+      },
+      {
+        "heading": "What I built",
+        "body": "A live preview that updates as the host types or picks a color, font or background.\n\nA background photo for each screen size: portrait for phones, landscape for desktop.\n\nGuest pages that match the preview, with photo upload and a gallery.\n\nThe demo at /try uses sample data. Edits stay in the browser, and nothing reaches the live database."
+      },
+      {
+        "heading": "Key decisions",
+        "body": "The demo uses an in-browser stand-in for the database, so it is safe to share and easy to reset.\n\nThe preview stays beside the settings while you scroll.\n\nEach page loads only when it is opened. The home page bundle went from about 930KB to about 225KB."
+      },
+      {
+        "heading": "Testing",
+        "body": "I ran 6 unit tests with Vitest, and none failed.\n\nI ran Playwright with axe on the home and login pages. The scans found 15 low-contrast text problems, which I fixed.\n\nI checked 5 pages at 360, 390 and 430 pixels. None scrolled sideways."
+      },
+      {
+        "heading": "Results",
+        "body": "A visitor can go from the start page to a styled event dashboard in three steps.\n\nOn the live build, the home page scores 100 on accessibility, best practices and SEO. I have not measured real visitor numbers yet."
+      },
+      {
+        "heading": "Next steps",
+        "body": "The access code is Demo, at vantge.app/try.\n\nI want to cut the JavaScript still loaded on the demo page, and measure how long a new host takes to create an event with real users."
       }
     ]
   }
