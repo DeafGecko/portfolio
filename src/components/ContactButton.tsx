@@ -1,6 +1,6 @@
 import { Mail } from 'lucide-react';
 
-export default function ContactButton() {
+export default function ContactButton({ base = '' }: { base?: string }) {
   return (
     <>
       <style>{`
@@ -60,7 +60,7 @@ export default function ContactButton() {
         }
       `}</style>
       <a
-        href="#contact-section"
+        href={`${base}#contact-section`}
         aria-label="Go to contact section"
         className="contact-btn relative inline-flex h-11 w-11 items-center justify-center rounded-sm text-gray-700 dark:text-gray-300 transition-colors"
       >
