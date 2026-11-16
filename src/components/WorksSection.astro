@@ -227,39 +227,51 @@ const {
         { src: "/images/09-labs-snippet-02.png", alt: "09 Labs design system detail" },
       ],
       summary:
-        "A frontend snippet library with theme and layout controls. A broader reusable component system is a future direction.",
-      tags: ["React", "TypeScript"],
+        "A snippet vault and small design system. Keep your code snippets in one place, group them, and switch between three color themes.",
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
       githubUrl: "https://github.com/DeafGecko/09-labs-snippet",
       websiteUrl: "https://09-labs-snippet-zeta.vercel.app",
       caseStudyStatus: "In development",
       caseStudySections: [
         {
-          heading: "What I Built",
-          body: "09 Labs is a frontend snippet library in development. The screenshots show its browsing interface and theme variations.\n\nThe longer-term goal is to connect this work with reusable components and design tokens. A completed, documented design system is not yet part of this case study.",
+          heading: "What it is",
+          body: "09 Labs is a snippet vault and a small design system. You keep your code snippets in one place, sort them into groups, and switch between three color themes.\n\nIt has 35 starter snippets across about 20 categories. Your own snippets are saved in your browser. There is no server.",
         },
         {
-          heading: "Design Direction",
-          body: "The project achieves a balance between clean minimalism and rich personality through:\n\nMinimal structure: Uncluttered layouts with responsive single-click drawers and intuitive grid/list view modes.\n\nStrong Typography: Optimized text hierarchy paired with code block formatting.\n\nCreative Details: Custom color themes (Light, Coffee, and Dark) with contrast verification still to document.\n\nPurposeful Motion: Smooth slide-over navigation drawers, command palettes (Cmd+K), and interactive modal states.",
+          heading: "Why I built it",
+          body: "I kept rebuilding the same navigation, modals, cards and form controls for every project. I wanted one set of parts I could reuse, and a place to keep the code snippets I use the most.",
         },
         {
-          heading: "Why I Built It",
-          body: "As front-end requirements evolve, maintaining consistency across multiple applications becomes challenging. 09 Labs bridges design and engineering by standardizing:\n\n- Color and theme design tokens\n\n- Typography scales and responsive padding\n\n- Reusable React components and modular layouts\n\n- Full client-side CRUD capabilities (Create, Read, Update, Delete) via robust localStorage data structures.",
+          heading: "Saving your snippets",
+          body: "You can create, edit and delete your own snippets. Your snippets are stored in the browser, separate from the starter set, so the starter snippets are never overwritten.\n\nThe profile menu works on a draft. If you press cancel, your saved profile does not change.\n\nIf the browser blocks storage or runs out of space, the app logs the error and keeps running instead of crashing.",
         },
         {
-          heading: "What I Plan to Build",
-          body: "Buttons → Inputs → Cards → Navigation → Modals → Layouts\n\nEach component will have reusable styles, states, and variants.",
+          heading: "Three themes",
+          body: "There are light, coffee and dark themes. Each theme is a set of CSS variables, and switching themes changes one attribute on the page.\n\nThe dark theme first failed contrast. White text on its pale indigo measured 1.99 to 1. I gave each theme its own text color for accent backgrounds to fix it.\n\nI checked 13 text and background pairs in each theme, 39 in total. All of them pass the 4.5 to 1 minimum.",
         },
         {
-          heading: "What I'm Learning",
-          body: "09 Labs helps me practice:\n\nReusable React components\nDesign tokens\nComponent variants\nAccessibility\nResponsive design\nDocumentation\n\nIt also gives me a place to bring my design and development skills together.",
+          heading: "Mobile navigation",
+          body: "On a laptop, the category list stays in a sidebar. On a phone, the same list opens in a drawer, and a row of category pills scrolls sideways at the top.\n\nBoth use the same list, so they never get out of step.",
         },
         {
-          heading: "Goal",
-          body: "My goal is to build a small but useful system that I can actually use in my own projects.\n\nNot hundreds of components.\n\nJust components that are clear, reusable, expressive, and well built.",
+          heading: "Search and Cmd+K",
+          body: "Search checks the title, description and tags. It also applies the category and the Favorites filter at the same time.\n\nCmd+K opens a command palette. On Windows and Linux, Ctrl+K does the same thing. The palette only mounts while it is open, so every time you open it, the search box is empty.",
         },
         {
-          heading: "Status",
-          body: "In development — interface and documentation are being refined.",
+          heading: "Accessibility",
+          body: "I fixed the dialogs so they announce themselves and trap focus correctly. Form labels are attached to their inputs, and the close buttons have names. The sandbox output is announced to screen readers as it changes. Card titles are headings, so the heading order makes sense under the page title.\n\nLighthouse accessibility went from 93 to 100 on the production build, in all three themes. The axe checks found no WCAG 2.0 or 2.1 A or AA problems on the home page in any theme.\n\nLighthouse only scores the default theme, so the axe run is what covers the other two.",
+        },
+        {
+          heading: "Sandbox security fix",
+          body: "The sandbox used to run user code directly in the page. That code could read the saved data and change the page. If the code threw an error, the console stayed changed for the rest of the session.\n\nNow the code runs in an iframe with no access to the page or its storage. The iframe sends its logs back with postMessage, and the page only accepts messages that come from that iframe. Each run uses a new iframe, so running the same code twice really runs it twice.",
+        },
+        {
+          heading: "Testing",
+          body: "I wrote 20 unit and component tests with Vitest. They pass.\n\nI wrote 5 browser tests with Playwright, and all of them pass. The sandbox test runs real code in a real browser and checks the output.\n\nI wrote 3 accessibility tests with axe. They pass.\n\nESLint reports no problems, TypeScript reports no errors, and the production build passes. Lighthouse scores 100 in all four categories, in each theme.",
+        },
+        {
+          heading: "What I would fix next",
+          body: "The theme can flash the wrong color on load, because the saved theme is applied after the page mounts. A small script in the head of the page would fix it.\n\nEdits to the starter snippets only last for the current session. Only your own snippets are saved.\n\nSidebar.tsx is about 755 lines. I would split it into category setup, list display and filter logic.\n\nSearch runs on every keystroke with no delay. That is fine for 35 snippets, but it would need a delay at a larger size.",
         },
       ],
     },
