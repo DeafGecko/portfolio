@@ -2,6 +2,9 @@
 import ThemeToggle from "./ThemeToggle";
 import NavMenu from "./NavMenu.astro"; // ← explicit .astro extension
 import MobileMenu from "./MobileMenu";
+
+// On the home page links stay short (#section). On other pages they go back to the home page.
+const homeBase = Astro.url.pathname === "/" ? "" : "/";
 import ContactButton from "./ContactButton";
 ---
 
@@ -13,7 +16,7 @@ import ContactButton from "./ContactButton";
       <!-- Left: Logo -->
       <div class="flex items-center justify-self-start">
         <a
-          href="#hero-section"
+          href={`${homeBase}#hero-section`}
           class="brand-link group"
         >
           <img
@@ -30,7 +33,7 @@ import ContactButton from "./ContactButton";
       </div>
 
       <!-- Center: Desktop navigation -->
-      <NavMenu />
+      <NavMenu base={homeBase} />
 
       <!-- Right: Hamburger + desktop contact + toggle -->
       <div
@@ -38,7 +41,7 @@ import ContactButton from "./ContactButton";
       >
         <!-- Mobile hamburger (hidden on desktop) -->
         <div class="md:hidden">
-          <MobileMenu client:load />
+          <MobileMenu client:load base={homeBase} />
         </div>
 
         <!-- Contact button (large desktop only) -->

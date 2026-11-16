@@ -1,10 +1,10 @@
 ---
-// Empty frontmatter to make it a valid Astro component
+const { base = "" } = Astro.props;
 ---
 
 <nav aria-label="Main navigation" class="hidden md:flex items-center space-x-8">
   <a
-    href="#works-section"
+    href={`${base}#works-section`}
     class="relative text-sm font-medium
                   text-[#4a5059] dark:text-gray-300
                   hover:text-[#2a52cc] dark:hover:text-[#6a9eff]
@@ -19,7 +19,7 @@
     Work
   </a>
   <a
-    href="#techstack-section"
+    href={`${base}#techstack-section`}
     class="relative text-sm font-medium
                   text-[#4a5059] dark:text-gray-300
                   hover:text-[#2a52cc] dark:hover:text-[#6a9eff]
@@ -34,7 +34,7 @@
     Skills
   </a>
   <a
-    href="#experience-section"
+    href={`${base}#experience-section`}
     class="relative text-sm font-medium
                   text-[#4a5059] dark:text-gray-300
                   hover:text-[#2a52cc] dark:hover:text-[#6a9eff]
@@ -49,7 +49,7 @@
     Experience
   </a>
   <a
-    href="#contact-section"
+    href={`${base}#contact-section`}
     class="relative text-sm font-medium
                   text-[#4a5059] dark:text-gray-300
                   hover:text-[#2a52cc] dark:hover:text-[#6a9eff]

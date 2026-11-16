@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const MobileMenu = () => {
+const MobileMenu = ({ base = '' }: { base?: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
@@ -22,10 +22,10 @@ const MobileMenu = () => {
   }, [isOpen]);
 
   const navLinks = [
-    { href: '#works-section', label: 'Work' },
-    { href: '#techstack-section', label: 'Skills' },
-    { href: '#experience-section', label: 'Experience' },
-    { href: '#contact-section', label: 'Contact' },
+    { href: base + '#works-section', label: 'Work' },
+    { href: base + '#techstack-section', label: 'Skills' },
+    { href: base + '#experience-section', label: 'Experience' },
+    { href: base + '#contact-section', label: 'Contact' },
   ];
 
   return (
