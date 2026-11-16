@@ -52,22 +52,14 @@ const {
       ],
       summary:
         "A demo booking and admin app for an event venue, built for my own practice. It covers bookings, payments and role-based access.",
-      tags: [
-        "Astro",
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "Cloudflare Workers",
-        "D1",
-        "Sanity",
-      ],
+      tags: ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare Workers", "D1", "Sanity"],
       githubUrl: "https://github.com/DeafGecko/venue-operations",
       websiteUrl: "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
       caseStudyStatus: "Demo",
       caseStudySections: [
         {
-          heading: "What it is",
-          body: "A demo app for an event venue. I built it for myself to practice and to test ideas. It is not used by a real venue.\n\nIt has four staff roles: admin, manager, developer and viewer.",
+          heading: "Who uses it",
+          body: "This is a demo app for an event venue. I built it for myself to practice and test ideas. It is not used by a real venue.\n\nIt has four staff roles: admin, manager, developer and viewer.",
         },
         {
           heading: "Why I built it",
@@ -75,30 +67,25 @@ const {
         },
         {
           heading: "What I built",
-          body: "A two-step booking form. It checks the name, email, phone number, date and guest count before it saves anything.\n\nA dashboard that shows money by month, money by event type and the next events.\n\nA calendar that shows whether each event is paid, partly paid or unpaid.\n\nRoles that limit what each person can change. A viewer cannot edit data, and the server enforces this, not only the screen.\n\nA public page with the dashboard and calendar in read-only form. Other pages need an access code.",
+          body: "A two-step booking form that checks the details before it saves.\n\nA dashboard with money by month, money by event type and upcoming events.\n\nA calendar that shows paid, partly paid or unpaid events.\n\nRoles that limit what each person can change. The server enforces this, not only the screen.\n\nA read-only public view. Other pages need an access code.",
         },
         {
           heading: "Choices I made",
-          body: "I used Astro because most pages only show data, and Astro keeps those pages small and fast. I used React only where a page needs interaction, like the forms, the calendar and the dialogs.\n\nCloudflare Workers runs the app. D1 is the database. Sanity stores the venue data.\n\nThe server builds each booking, so the form cannot change the price or the amount paid.\n\nIn testing, a fake cookie got into the admin area. I fixed it by signing sessions with HMAC. The tests sign cookies the same way the server checks them.",
+          body: "Astro, because most pages only show data. React, only where a page needs interaction.\n\nCloudflare Workers runs the app, D1 is the database, and Sanity stores the venue data.\n\nThe server builds each booking, so the form cannot change the price.",
         },
         {
           heading: "What I fixed after testing",
-          body: "Fake cookie bug: fixed with signed sessions.\n\nSign-in worked on my computer but failed on Cloudflare. Secrets were not readable at runtime. I turned on runtime environment access, and it worked.\n\nLesson: working locally does not mean it will work in production.\n\nThe Lighthouse SEO score is 1.0 for the booking page and 0.58 for the homepage. The homepage leads to an admin page, and I hide admin pages from search engines on purpose. I wrote the descriptions and the robots.txt and sitemap.xml files so they come from one source.",
+          body: "A fake cookie got into the admin area. I fixed it by signing sessions with HMAC.\n\nSign-in failed on Cloudflare because secrets were not readable at runtime. I turned on runtime access.\n\nI learned that working locally does not mean it will work in production.",
         },
         {
           heading: "Testing",
-          body: "I ran 19 unit tests with Vitest, and none failed.\n\nI ran browser tests with Playwright at desktop and phone sizes. The last full run had two failures. I fixed both and ran the tests again.",
+          body: "I ran 19 unit tests with Vitest, and none failed.\n\nI ran Playwright browser tests at desktop and phone sizes. The last full run had two failures. I fixed both and ran it again.",
         },
         {
           heading: "Still to do",
-          body: "Color contrast still fails on many pages. I am fixing this now.\n\nInvite and password-reset emails do not send yet. They need an email service key.\n\nI deploy by hand with Wrangler, because automatic deploys from GitHub are not reliable yet.",
+          body: "Color contrast still fails on many pages. Invite and reset emails need an email key. I deploy by hand with Wrangler.",
         },
       ],
-      // Add up to 2 screenshot images below when ready:
-      // screenshots: [
-      //   { src: "/images/factory-screen-1.png", alt: "The Factory dashboard view" },
-      //   { src: "/images/factory-screen-2.png", alt: "The Factory calendar view" },
-      // ],
     },
     {
       eyebrow: "EVENT PHOTO SHARING",
@@ -110,7 +97,7 @@ const {
       ],
       featured: true,
       summary:
-        "A web app for hosting an event. A host shares a photo gallery and an invitation with guests through one link or QR code, and runs everything from one dashboard. I designed and built it, including a browser-only demo.",
+        "A web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.",
       tags: ["Product Design", "Host & Guest Workflows", "Browser demo"],
       websiteUrl: "https://vantge.app/try",
       githubUrl: "https://github.com/DeafGecko/vantge",
@@ -118,39 +105,31 @@ const {
       caseStudySections: [
         {
           heading: "Summary",
-          body: "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting a party, wedding or other event. A host shares a photo gallery and an invitation with guests through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo that lets a visitor try the dashboard without signing up.",
+          body: "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo.",
         },
         {
           heading: "The problem",
-          body: "Hosts juggle several tools: one for guest photos, a separate place for food sign-up, and a QR code printed on a card. Guests have to remember several links. Hosts want to see a change the moment they make it, and they want the page to look like their event, not a template.\n\nVantge puts these in one event with one link. The host sets the look (name, event type, background photo, colors, title font), and the guest sees the result straight away.",
-        },
-        {
-          heading: "Goals",
-          body: "A host can create and style an event without help, on a phone or a laptop.\n\nThe live preview matches what guests see.\n\nA prospect can try the dashboard before signing up, without touching real data.\n\nThe layout works on a small laptop and on a large monitor.\n\nThe code passes automated accessibility, performance and layout checks.",
+          body: "Hosts use several tools for one event, and guests have to remember several links. I wanted one event with one link.",
         },
         {
           heading: "What I built",
-          body: "Host dashboard: a live preview that updates as the host types a name or picks a color, font or background, with mobile and desktop views. Each screen size gets its own background photo, portrait for phones and landscape for desktop, chosen from a gallery of default photos or uploads. The host can also set the title font and color palette, move the title with a slider, and upload a logo.\n\nThe host can open or close the gallery, set a per-guest photo limit, add an optional passcode, and control guest options such as downloads, sharing and photo review before publishing. A queue holds guest uploads for approval, and a QR code links to the guest page.\n\nGuest pages: an event page with the same look as the preview, plus a photo upload and gallery view.\n\nBrowser-only demo (/try): a start page where a visitor enters an access code and names their event, then opens the dashboard with sample data. Edits stay in that browser. Reset restores the sample, and nothing is sent to the live database. A guest mobile page matches the dashboard preview, with a phone QR code and a phone-sized window for checking the mobile layout.",
+          body: "A live preview that updates as the host types or picks a color, font or background.\n\nA background photo for each screen size: portrait for phones, landscape for desktop.\n\nGuest pages that match the preview, with photo upload and a gallery.\n\nThe demo at /try uses sample data. Edits stay in the browser, and nothing reaches the live database.",
         },
         {
           heading: "Key decisions",
-          body: "I kept the demo away from real data. It runs on an in-browser stand-in for the database, chosen by the page address on every call. Real event pages keep using the live database. This made the demo safe to share publicly and easy to reset.\n\nThe settings column is taller than a laptop screen, so a plain sticky element cannot show its bottom. I wrote a small scroll hook that keeps the preview beside the settings while the page scrolls, then lets it slide down so the last card can be reached. It updates only on scroll and resize, so the page does not jump.\n\nDashboard content sits in a 1024-pixel centered frame, sized for a small laptop. The header and background run the full window width.\n\nA demo sign-in leaked into the real sign-in flow when a visitor left the demo through an in-app link. The exit links now do full page loads, which clears the demo session. Testing found this.\n\nEach page now loads only when it is opened. The home page's main bundle dropped from about 930KB to about 225KB.",
+          body: "The demo uses an in-browser stand-in for the database, so it is safe to share and easy to reset.\n\nThe preview stays beside the settings while you scroll.\n\nEach page loads only when it is opened. The home page bundle went from about 930KB to about 225KB.",
         },
         {
           heading: "Testing",
-          body: "Unit tests (Vitest): 2 test files and 6 tests, with no failures. They cover the dropdown and the date and time field.\n\nBrowser and accessibility tests (Playwright with axe): 2 checks, one for the home page and one for the login page, with no failures. They check for serious and critical accessibility problems after scrolling. Getting them to pass found 15 low-contrast text problems on the home page, which I fixed.\n\nLighthouse, mobile emulation, production build: the home page scores 88 to 96 for performance, 100 for accessibility, best practices and SEO. The demo event page scores 76 to 82 for performance and 100 for accessibility, best practices and SEO. Its largest paint went from about 8 seconds to about 4.8 seconds. The biggest gains came from loading pages on demand and hosting the sample photos with the site instead of an outside image service.\n\nLayout and smoke checks: a phone-width check on 5 pages at 360, 390 and 430 pixels passed in all 15 combinations, with no sideways scrolling. A demo smoke test covered the start page, the event dashboard, the gallery count and the guest page, with no page errors. I also checked the layout by hand at 1024, 1280, 1440, 1512, 1920 and 2560 pixels wide.\n\nCode quality: lint went from 64 problems to none with errors. The main fixes were removing unused code, moving data loading into cancelable effects, and moving one component out of a page so React does not rebuild it on every render. The smoke test caught one bug that lint missed, a removed name that was still in use. I restored it.",
+          body: "I ran 6 unit tests with Vitest, and none failed.\n\nI ran Playwright with axe on the home and login pages. The scans found 15 low-contrast text problems, which I fixed.\n\nI checked 5 pages at 360, 390 and 430 pixels. None scrolled sideways.",
         },
         {
           heading: "Results",
-          body: "A demo visitor can go from the start page to a styled event dashboard in three steps.\n\nThe demo event page scores 100 on the accessibility, best practices and SEO checks.\n\nChanges are on the main branch and deploy through Vercel.\n\nI have not measured real visitor numbers, conversion or host feedback, so I do not claim any here.",
-        },
-        {
-          heading: "Tech stack",
-          body: "React 19, React Router 7, Vite and Tailwind CSS 4. Supabase for the live database, sign-in and file storage. qrcode.react for QR codes and lucide-react for icons. Vitest, Playwright with axe and Lighthouse for testing. Deployed on Vercel.",
+          body: "A visitor can go from the start page to a styled event dashboard in three steps.\n\nOn the live build, the home page scores 100 on accessibility, best practices and SEO. I have not measured real visitor numbers yet.",
         },
         {
           heading: "Next steps",
-          body: "Try the demo at vantge.app/try with the access code Demo.\n\nReduce the remaining JavaScript on the demo page, and host the rest of the event-type photos with the site.\n\nMeasure how long it takes a new host to create a styled event, with real users.",
+          body: "The access code is Demo, at vantge.app/try.\n\nI want to cut the JavaScript still loaded on the demo page, and measure how long a new host takes to create an event with real users.",
         },
       ],
     },
@@ -167,7 +146,7 @@ const {
         },
       ],
       summary:
-        "A card app for Deaf and Hard-of-Hearing people. Save the messages you use most and show them in large text with one tap.",
+        "A card app for Deaf and hard-of-hearing people. Save the messages you use most and show them in large text with one tap.",
       tags: ["React", "TypeScript", "Vite", "Accessibility"],
       githubUrl: "https://github.com/DeafGecko/clearcard",
       websiteUrl: "https://showcard.09labs.dev",
@@ -175,11 +154,11 @@ const {
       caseStudySections: [
         {
           heading: "What it is",
-          body: "ShowCard is a card app for Deaf and Hard-of-Hearing people. You save the messages you use most, like a doctor visit or a coffee order. When you need to say something, you tap a card and the message shows up in large text for the other person to read.\n\nI designed it, built it and tested it on my own.",
+          body: "ShowCard is a card app for Deaf and hard-of-hearing people. You save the messages you use most, like a doctor visit or a coffee order. When you need to say something, you tap a card and the message shows in large text for the other person to read.\n\nI designed it, built it and tested it on my own.",
         },
         {
           heading: "The problem",
-          body: "Typing the same message over and over is slow. It is even harder during a medical visit or an emergency. Sometimes you just need to show a message fast, without speaking.\n\nShowCard lets you write a message once, save it as a card, and show it later with one tap.",
+          body: "Typing the same message over and over is slow, and harder during a medical visit or an emergency. Sometimes you just need to show a message fast, without speaking.",
         },
         {
           heading: "What I did",
@@ -187,31 +166,23 @@ const {
         },
         {
           heading: "What it does",
-          body: "You can make your own cards. You can show a card full screen. You can sort cards into groups. Emergency cards are easy to reach. There is a quick-write option for a message you only need once.\n\nPrivate cards are locked with a six-digit code. You can also use a one-time backup key if you forget the code.\n\nYou can change the text size, and pick light, dark or high-contrast colors in Settings. The change shows right away. It also works with touch, a mouse, a keyboard and a screen reader.",
-        },
-        {
-          heading: "Accessibility",
-          body: "I treated accessibility as part of the design from the start, not as something to add later. The buttons are large. The text is easy to read. Focus is easy to see. Icon buttons have clear names. You can use the whole app with a keyboard.\n\nI used Atkinson Hyperlegible for the text, because it is made to help people tell letters apart.",
+          body: "You make your own cards and show any card full screen. You can sort cards into groups, and emergency cards are easy to reach. There is a quick-write option for a one-time message.\n\nPrivate cards are locked with a six-digit code, with a one-time backup key if you forget it. You can change the text size and pick light, dark or high-contrast colors.",
         },
         {
           heading: "Privacy",
-          body: "Private cards are encrypted before they are saved. I do not store the six-digit code. I store a derived hash, and a random key protects the private data.\n\nThe key can be opened with the code or with the backup key. After too many wrong codes, the app locks for a short time.\n\nI should be honest about one limit. A six-digit code is short. If someone gets a copy of the browser data, they could try to guess it.",
-        },
-        {
-          heading: "How I built it",
-          body: "React and TypeScript, with Vite and Tailwind CSS. The data is stored in the browser, and encryption uses the Web Crypto API. For testing I used Vitest with Testing Library, and Playwright with axe.",
+          body: "Private cards are encrypted before they are saved. I don't store the six-digit code. I store a derived hash, and a random key protects the data. After too many wrong codes, the app locks for a short time.\n\nA six-digit code is short, so if someone gets a copy of the browser data, they could try to guess it. I want to be clear about that limit.",
         },
         {
           heading: "How I tested it",
-          body: "I tested it as a responsive web app. Playwright checked the features, the error messages, the phone-sized layouts, keyboard use and accessibility. Vitest covered the unit tests.\n\nI have not tested it with Expo or Xcode. It is a web app right now, not a native iPhone app, so I have not tried it on a real iPhone. That would be the next phase.",
+          body: "I tested it as a responsive web app. Playwright checked the features, the error messages, phone-sized layouts, keyboard use and accessibility. Vitest covered the unit tests.\n\nI have not tested it with Expo or Xcode. It is a web app, not a native iPhone app, so I have not tried it on a real iPhone yet.",
         },
         {
           heading: "What was hard",
-          body: "The hardest part was keeping private data safe without making sign-in confusing. I kept the code separate from the encryption key. That way, changing the code does not mean re-encrypting every private card.\n\nI also added the backup key. Forgetting the code should not mean losing the private cards.\n\nThe other hard part was making it work for touch, mouse, keyboard and screen readers. The automatic accessibility tests found real problems. But I still need to test it with real users and real phones.",
+          body: "Keeping private data safe without making sign-in confusing. I kept the code separate from the encryption key, so changing the code doesn't mean re-encrypting every private card.\n\nThe automatic accessibility tests found real problems, but I still need to test with real users and real phones.",
         },
         {
           heading: "What's next",
-          body: "Test it with Deaf and Hard-of-Hearing people. Test it with screen readers on a real iPhone and an Android phone. Make it work offline and installable. Decide whether to build a native app with Expo, or wrap this web app with Capacitor. Add secure backup and sync. Offer a longer passcode for private cards.",
+          body: "Test with Deaf and hard-of-hearing people, and with screen readers on a real iPhone and Android phone. Make it installable and work offline. Decide whether to build a native app with Expo or wrap this one with Capacitor.",
         },
       ],
     },
@@ -233,43 +204,35 @@ const {
       caseStudySections: [
         {
           heading: "What it is",
-          body: "09 Labs is a snippet vault and a small design system. You keep your code snippets in one place, sort them into groups, and switch between three color themes.\n\nIt has 35 starter snippets across about 20 categories. Your own snippets are saved in your browser. There is no server.",
+          body: "09 Labs is a snippet vault and a small design system. You keep code snippets in one place, group them, and switch between three color themes.\n\nIt starts with 35 snippets across about 20 categories. Your own snippets are saved in your browser, and there is no server.",
         },
         {
           heading: "Why I built it",
-          body: "I kept rebuilding the same navigation, modals, cards and form controls for every project. I wanted one set of parts I could reuse, and a place to keep the code snippets I use the most.",
+          body: "I kept rebuilding the same navigation, modals, cards and form controls for each project. I wanted one set of parts I could reuse, and a place for the snippets I use most.",
         },
         {
           heading: "Saving your snippets",
-          body: "You can create, edit and delete your own snippets. Your snippets are stored in the browser, separate from the starter set, so the starter snippets are never overwritten.\n\nThe profile menu works on a draft. If you press cancel, your saved profile does not change.\n\nIf the browser blocks storage or runs out of space, the app logs the error and keeps running instead of crashing.",
+          body: "You can create, edit and delete your own snippets. They are stored separately from the starter set, so the starter snippets are never overwritten.\n\nIf the browser blocks storage, the app logs the error and keeps running.",
         },
         {
-          heading: "Three themes",
-          body: "There are light, coffee and dark themes. Each theme is a set of CSS variables, and switching themes changes one attribute on the page.\n\nThe dark theme first failed contrast. White text on its pale indigo measured 1.99 to 1. I gave each theme its own text color for accent backgrounds to fix it.\n\nI checked 13 text and background pairs in each theme, 39 in total. None of them fall below the 4.5 to 1 minimum.",
+          heading: "Themes and mobile",
+          body: "The three themes are light, coffee and dark. Each one is a set of CSS variables. The dark theme first failed contrast, so I gave accent backgrounds their own text color.\n\nOn a laptop the categories stay in a sidebar. On a phone they open in a drawer, with a row of pills across the top.",
         },
         {
-          heading: "Mobile navigation",
-          body: "On a laptop, the category list stays in a sidebar. On a phone, the same list opens in a drawer, and a row of category pills scrolls sideways at the top.\n\nBoth use the same list, so they never get out of step.",
-        },
-        {
-          heading: "Search and Cmd+K",
-          body: "Search checks the title, description and tags. It also applies the category and the Favorites filter at the same time.\n\nCmd+K opens a command palette. On Windows and Linux, Ctrl+K does the same thing. The palette only mounts while it is open, so every time you open it, the search box is empty.",
-        },
-        {
-          heading: "Accessibility",
-          body: "I labeled the dialogs and the form fields, and the card titles are headings in order under the page title. I have not yet run a full accessibility audit on the public version, so I'm not claiming a score.",
+          heading: "Search",
+          body: "Search checks the title, description and tags, and it respects the category and Favorites filters. Cmd+K opens a command palette, and Ctrl+K does the same on Windows and Linux.",
         },
         {
           heading: "Sandbox",
-          body: "The sandbox runs the code you type with eval, directly in the page. That means the code can reach the page and the saved data. I know this is the next thing to fix. The plan is to run the code in an iframe with no access to the page's storage, and send its output back with postMessage.",
+          body: "The sandbox runs the code you type with eval, directly in the page. That means it can reach the page and the saved data. This is the next thing I need to fix. The plan is an iframe with no access to the page's storage.",
         },
         {
           heading: "Testing",
           body: "The public repo does not have automated tests yet. ESLint is set up, and the lint script runs on the whole project. I'm adding tests next, and I'll publish the numbers when they are in the repo.",
         },
         {
-          heading: "What I would fix next",
-          body: "The theme can flash the wrong color on load, because the saved theme is applied after the page mounts. A small script in the head of the page would fix it.\n\nEdits to the starter snippets only last for the current session. Only your own snippets are saved.\n\nSidebar.tsx is about 755 lines. I would split it into category setup, list display and filter logic.\n\nSearch runs on every keystroke with no delay. That is fine for 35 snippets, but it would need a delay at a larger size.",
+          heading: "Next",
+          body: "The theme can flash the wrong color on load, because the saved theme is applied after the page mounts. Starter snippet edits only last for the session. Sidebar.tsx is about 755 lines and I would split it up.",
         },
       ],
     },
@@ -290,39 +253,31 @@ const {
       caseStudySections: [
         {
           heading: "The problem",
-          body: "Picking a text color and a background color is easy to get wrong. A pair can look fine on my screen and still be hard to read for someone else.\n\nThe two common checks also disagree. WCAG contrast can pass some pale pairs that read badly. APCA is closer to how people actually see lightness, but most tools don't show it next to WCAG.",
+          body: "Picking a text color and a background color is easy to get wrong. A pair can look fine on my screen and still be hard to read for someone else.\n\nWCAG and APCA also disagree. WCAG can pass some pale pairs that read badly. APCA tracks how people see lightness, but most tools don't show it next to WCAG.",
         },
         {
           heading: "What I built",
-          body: "Chromatique Studio is a tool for testing two colors before you put them in the code. You enter a surface color and a text color, and it shows both checks side by side.\n\nThe preview uses the same two colors, so what you see is what they produce. The text is editable, so you can try your own copy. Cards, badges, buttons, inputs and toggles show up with the same colors.\n\nThere are color-blindness previews, a shade scale, saved pairs and an eyedropper where the browser supports it. You can export the colors as CSS variables, a Tailwind config or W3C design tokens.\n\nThe current pair goes in the URL, so a link opens the same colors. Saved palettes stay in the browser.",
+          body: "Chromatique Studio is a tool for testing two colors before they go into code. You enter a surface color and a text color, and it shows both checks side by side.\n\nThe preview uses the same two colors, and you can edit the text to try your own copy. There are color-blindness previews, a shade scale, saved pairs and exports to CSS, Tailwind and design tokens. The current pair goes in the URL, so a link opens the same colors.",
         },
         {
           heading: "Why I show both checks",
-          body: "I didn't want to pick a winner between WCAG and APCA. The useful part is seeing where they agree and where they split. If a pair passes one and fails the other, you should stop and look.",
-        },
-        {
-          heading: "Keyboard shortcuts",
-          body: "S saves, R resets, E turns preview editing on or off, / jumps to the hex box, and Escape leaves editing. The shortcuts are off while you type, and they ignore Ctrl, Cmd and Alt. The legend only shows up after you press a key, so mouse users never see it.",
+          body: "I didn't want to pick a winner. The useful part is where the two checks agree and where they split. If a pair passes one and fails the other, you should stop and look.",
         },
         {
           heading: "How I built it",
-          body: "It's Vue 3 with the Composition API. All the color state and the contrast math live in one composable, and the components only read from it. That let me test the math without opening the UI.\n\nThe state lives in the URL, and the saved palettes live in localStorage. Nothing needs a server.\n\nI used Inter for the section headings, and I hosted it with the site, so the page doesn't call a font service.",
-        },
-        {
-          heading: "The layout",
-          body: "The whole tool sits on one card. The name is at the top, the controls and the preview are in two columns, and the footer is at the bottom. On a laptop and an iPad, the card fits the screen with no scrolling. On a phone, the sections stack and you scroll.\n\nThe first version had the title in a separate bar, and a message told phone users to switch to a bigger screen. I removed both. The title is in the card now, and phones can use the stacked layout.\n\nBelow 1280 pixels, I made the spacing tighter. That was enough for an iPad in landscape to fit without scrolling. I checked the fit at 1440 by 900, 1024 by 768, 768 by 1024 and 390 by 844.",
+          body: "It's Vue 3 with the Composition API. The color state and the contrast math live in one composable, so I could test the math without opening the UI.\n\nI also laid the tool out on one card, so a laptop and an iPad fit the screen with no scrolling.",
         },
         {
           heading: "Testing",
-          body: "I ran 30 unit tests with Vitest, and none failed.\n\nI ran 16 browser tests with Playwright, including axe scans. They run on every preset, every color-blindness mode, edit mode and the export window. They check for WCAG 2.0 and 2.1 A and AA problems, and none failed.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
+          body: "I ran 30 unit tests with Vitest, and none failed. I ran 16 browser tests with Playwright, including axe scans on every preset and color-blindness mode, and none failed.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
         },
         {
           heading: "What went wrong",
-          body: "The tests were running against the wrong app. Playwright used port 4173, and another project was already using it. Playwright reused that server, so my tests ran against the other site. I gave Playwright its own port and turned off server reuse.\n\nMy APCA score for black on white came out at 114. The reference is 106. My unit test caught it. The fix was APCA's near-black clamp, its offset and its low-contrast cutoff.\n\nThe preview hint used 95 percent opacity. That blended the red down to about 4.34 to 1 on near-black, below AA. Removing the opacity fixed it.\n\nThe preview fades colors over 150 milliseconds. The accessibility scan ran in the middle of the fade and read blended colors. The test now waits for the final color before it scans.\n\nOn an iPad in landscape, the page scrolled by 11 pixels. The card was a little too tall for 1024 by 768. Tighter spacing fixed it.",
+          body: "Playwright was quietly testing another project, because both used the same port. Moving it to its own port fixed that.\n\nMy APCA score for black on white was 114, but the reference is 106. The unit test caught it.\n\nA hint at 95 percent opacity dropped the red below AA contrast. Removing the opacity fixed it.\n\nThe scans ran during a color fade and read blended colors. They now wait for the final color.",
         },
         {
           heading: "Next",
-          body: "I want to add a third color, an accent, with suggestions that already pass contrast. I also want component tests for the Vue components, not only for the math. I want to run the browser tests in more than one browser.\n\nAutomated checks miss things like reading order and what a color means, so I still need a manual pass with a screen reader.",
+          body: "I want an accent color with suggestions that already pass contrast, component tests for the Vue parts, and a manual screen-reader pass. Automated checks miss reading order and meaning.",
         },
       ],
     },
@@ -335,47 +290,15 @@ const {
         { src: "/images/monolith-mockup.png", alt: "Monolith storefront on a desktop monitor" },
       ],
       summary:
-        "A structured website built in a three-step process: layout, accent colors, and animation. It is a small online store for simple home and office goods, where you can browse, add to cart or wishlist, and check out without an account.",
+        "A small online store built in a three-step process: layout, accent colors, and animation.",
       tags: ["Next.js", "React", "Prisma", "Zustand", "Tailwind CSS"],
       githubUrl: "https://github.com/DeafGecko/swiss-ecommerce/tree/main/swiss-ecommerce",
       websiteUrl: "https://ecommerce.09labs.dev",
       caseStudyStatus: "Live",
       caseStudySections: [
         {
-          heading: "What it is",
-          body: "This is a small online store for simple home and office goods. The style is industrial and minimal.\n\nYou can switch between three looks from the header: grayscale, color and animated. Your choice stays when you come back.",
-        },
-        {
           heading: "How I built it, in three steps",
-          body: "I built Monolith in three steps: the layout first, then the accent colors, then the animation.\n\nFirst I only built the layout, in grayscale. I wanted the structure to work before anything looked finished. That meant the grid, the spacing and the order of the sections.\n\nThen I added the accent color. The grayscale version was the base, so the color was a layer on top. It was not a way to fix a layout that wasn't working yet.\n\nLast, I added the animation. I left it for the end so it would not hide problems in the layout or the colors.\n\nThe hardest part for me was not jumping ahead. As a designer, I wanted to add color and motion early. Working in order made the layout easier to fix. The three looks you can switch between in the header come from these three steps: grayscale, color and animated.",
-        },
-        {
-          heading: "What I wanted",
-          body: "I wanted a visitor to be able to browse by category, add things to a cart and a wishlist, and check out without making an account.\n\nI also wanted a checkout flow that makes an order and keeps an order history, and a contact form that sends an email.",
-        },
-        {
-          heading: "How it fits together",
-          body: "I built it with Next.js and React. The product pages read from a Postgres database through Prisma. The cart and the wishlist live in the browser, so they stay when you reload.\n\nWhen you check out, the cart goes to an API route. The route checks the items, adds 8 percent tax and returns a session and a redirect. The success page then saves the order in the browser and clears the cart. The contact form sends its email through Gmail.",
-        },
-        {
-          heading: "What is not real yet",
-          body: "The checkout is a mock. It does not call a payment company, even though the database has a field for one.\n\nOrders are saved in the browser, not in the database. The cart and wishlist do not sync to the database either.\n\nI made these choices to keep the first version small. I know they are the first things I would change.",
-        },
-        {
-          heading: "Testing",
-          body: "I did not have a test setup at first. I added Vitest, with Testing Library for the React parts, and tested the stores, the API routes and the components that handle the cart, the wishlist, the theme and the success page.\n\nThere are 60 tests in 9 files, and none fail. The TypeScript check is clean.\n\nI did not run a full production build for this pass, because the build queries the database while it renders pages.",
-        },
-        {
-          heading: "Bugs the tests found",
-          body: "The header crashed when the category request failed. The server sent back an error object, and the header tried to loop over it. Now it only uses the response when it is a list.\n\nThe checkout accepted bad cart items. A zero or negative quantity, or a price stored as text, went straight into the total. Now every item is checked, and bad input gets a 400 error.\n\nA visit to the success page with no cart still saved a $0 order. Now an order is only saved when there is something in the cart.\n\nOrder numbers could come out shorter than the format I wrote down. I switched to a random ID, so they always have the right length.\n\nThe contact email subject showed HTML codes, so a name like Tom and Jerry came through as Tom amp Jerry. Also, a name with a line break could add extra mail headers. The subject now uses the plain name, with line breaks removed.\n\nItems saved from the product grid had no image on the wishlist page. Now the grid saves the image too.\n\nThe contact form could lose a letter when you type fast, because it uses an old copy of the form data. It now uses the latest value.",
-        },
-        {
-          heading: "What I learned",
-          body: "The tests that mattered most were on the API routes and the stores, because those hold the rules the screens depend on.\n\nMost of the bugs were at the edges: bad input from the browser, failed network calls, and saved data that did not match what the screen expected.\n\nData saved in the browser needs checks for empty and broken values, because any visit can write to it.",
-        },
-        {
-          heading: "Next",
-          body: "The biggest changes I want to make are moving the checkout checks and the pricing to the server, saving orders in the database, and getting lint working again.",
+          body: "I built Monolith in three steps: the layout first, then the accent colors, then the animation.\n\nFirst I built the layout in grayscale. I wanted the grid, the spacing and the section order to work before anything looked finished.\n\nThen I added the accent color on top of that base. I did not use color to fix a layout that wasn't working yet.\n\nLast, I added the animation, so it would not hide problems in the layout or the colors.\n\nThe hardest part was not jumping ahead. As a designer, I wanted to add color and motion early. The three looks in the header come from these steps: grayscale, color and animated.",
         },
       ],
     },
@@ -396,39 +319,31 @@ const {
       caseStudySections: [
         {
           heading: "What it is",
-          body: "Kanso is a writing app for people who want to focus. There is no dashboard and no big toolbar. There is just a page and the few tools you need to write.\n\nIt is React and TypeScript, and it has no backend. Your work stays in the browser.",
+          body: "Kanso is a writing app for focus. There is no dashboard and no big toolbar, just a page and the few tools you need to write. It is React and TypeScript, with no backend, so your work stays in the browser.",
         },
         {
           heading: "The problem I fixed first",
-          body: "The sidebar had two controls for opening and closing it. The button in the header opened it. But once it was open, the close button moved inside the sidebar. The button jumped from the top of the page into the panel, so it was hard to find and close.\n\nI wanted one button in the header that works in both states.",
+          body: "The sidebar had two close controls. The header button opened it, but once it was open, the close button moved inside the panel, so it was hard to find. I wanted one button in the header that works in both states.",
         },
         {
           heading: "What I changed",
-          body: "The header button now opens and closes the sidebar. Its label and icon change with the state. I removed the second close button from inside the sidebar.\n\nI added a pen logo next to the KANSO name. It matches the theme, and it is solid black in light mode. When you hover over it, it plays a short ballpoint click. I made the sound in the browser, so there is no audio file to load. A short delay stops the sound from repeating when you move across the logo and the name.\n\nI also replaced the favicon with the same pen, on a black square.",
-        },
-        {
-          heading: "Contrast",
-          body: "The accessibility scan flagged the small labels in the sidebar. I raised their opacity from 40 or 50 percent to 70 percent. The first change missed three label styles, so I needed three rounds before the scan passed.",
+          body: "The header button now opens and closes the sidebar, and its label and icon change with the state. I removed the second close button.\n\nI added a pen logo beside the KANSO name. It plays a short click when you hover, generated in the browser so there is no audio file. I also replaced the favicon with the same pen.\n\nThe accessibility scan flagged the small sidebar labels, so I raised their opacity from 40 or 50 percent to 70 percent. It took three rounds, because the first change missed some label styles.",
         },
         {
           heading: "Tests",
-          body: "I used Vitest for unit tests on the header button. I used Playwright for browser tests on desktop and phone sizes. Each browser run also runs an axe accessibility scan, with the sidebar open and closed.\n\nThe tests read whether the sidebar is open before they click, so they pass whether the saved setting opens it or closes it.",
+          body: "I used Vitest for unit tests on the header button, and Playwright for browser tests on desktop and phone sizes. Each browser run also runs an axe scan, with the sidebar open and closed. The tests work whether the saved setting opens or closes the sidebar.",
         },
         {
           heading: "The build that was failing",
-          body: "The production build was failing before I started. The Vite chunk setting was written as an object, and this version of Vite does not accept that. Vercel runs the same build, so the deploy would have failed too. I changed it to a function that keeps the same three chunks.",
-        },
-        {
-          heading: "How I shipped it",
-          body: "Each change went on its own branch. Then I merged each one into main as a squash merge, so the history stays easy to read and each deploy has one clear commit.",
+          body: "The production build was failing before I started. A Vite setting was written in a form this version rejects, and Vercel would have failed the same way. I changed it, and the build passes.",
         },
         {
           heading: "Results",
-          body: "Vitest: 2 of 2 tests ran with no failures. Playwright: 6 of 6 ran with no failures, including the axe scans. The lint check is clean, the production build passes, and the live site scores 100 in all four Lighthouse categories.\n\nI ran Lighthouse on the dev server too. It scored lower there, because the dev server does not bundle the code. The live site is the number that matters.",
+          body: "Vitest passes 2 of 2 tests and Playwright passes 6 of 6, including the axe scans. Lint is clean, and the live site scores 100 in all four Lighthouse categories. The dev server scores lower, because it doesn't bundle the code.",
         },
         {
           heading: "What I learned",
-          body: "I should run the same build command the host runs before I merge. The Vercel build failed on a config error that only showed up once I ran the build myself.\n\nMeasure the live site, not the dev server. The dev numbers looked worse in every category.\n\nWhen you fix a color, search for the color itself, not just one class name. I missed some label styles that used the same color.\n\nCheck small icons at their real size. The pen looked clear at 44 pixels, but the details disappeared at 32.",
+          body: "Run the same build command the host runs before merging. Measure the live site, not the dev server. When you change a color, search for the color itself, not one class name. And check small icons at their real size, since the pen's details disappeared at 32 pixels.",
         },
       ],
     },
