@@ -49,7 +49,6 @@ const {
       image: "/images/factory-dashboard-laptop.png",
       screenshots: [
         { src: "/images/factory-dashboard-laptop.png", alt: "The Factory dashboard shown on a laptop" },
-        { src: "/images/factory02.png", alt: "The Factory calendar view" },
       ],
       summary:
         "A demo booking and admin app for an event venue, built for my own practice. It covers bookings, payments and role-based access.",
@@ -72,7 +71,7 @@ const {
         },
         {
           heading: "Why I built it",
-          body: "Some venue software is too hard to use. I wanted something simpler, with one place to see events, make a booking, check the calendar and find a client.\n\nI also wanted a real project to learn Astro and practice full-stack work.",
+          body: "Some venue software is too hard to use. I wanted something simpler, with one place to see events, make bookings, check the calendar and find clients.\n\nI also wanted a real project to learn Astro and practice full-stack work.",
         },
         {
           heading: "What I built",
@@ -88,7 +87,7 @@ const {
         },
         {
           heading: "Testing",
-          body: "I wrote 19 unit tests with Vitest. They all pass.\n\nI ran browser tests with Playwright at desktop and phone sizes. The last full run had two failures. I fixed both and ran the tests again.",
+          body: "I ran 19 unit tests with Vitest, and none failed.\n\nI ran browser tests with Playwright at desktop and phone sizes. The last full run had two failures. I fixed both and ran the tests again.",
         },
         {
           heading: "Still to do",
@@ -123,7 +122,7 @@ const {
         },
         {
           heading: "The problem",
-          body: "Hosts juggle several tools: one for guest photos, one for RSVPs, a separate place for food sign-up, and a QR code printed on a card. Guests have to remember several links. Hosts want to see a change the moment they make it, and they want the page to look like their event, not a template.\n\nVantge puts these in one event with one link. The host sets the look (name, event type, background photo, colors, title font), and the guest sees the result straight away.",
+          body: "Hosts juggle several tools: one for guest photos, a separate place for food sign-up, and a QR code printed on a card. Guests have to remember several links. Hosts want to see a change the moment they make it, and they want the page to look like their event, not a template.\n\nVantge puts these in one event with one link. The host sets the look (name, event type, background photo, colors, title font), and the guest sees the result straight away.",
         },
         {
           heading: "Goals",
@@ -131,7 +130,7 @@ const {
         },
         {
           heading: "What I built",
-          body: "Host dashboard: a live preview that updates as the host types a name or picks a color, font or background, with mobile and desktop views. Each screen size gets its own background photo, portrait for phones and landscape for desktop, chosen from a gallery of default photos or uploaded. The host can also set the title font and color palette, move the title with a slider, and upload a logo.\n\nThe host can open or close the gallery, set a per-guest photo limit, add an optional passcode, and control guest options such as downloads, sharing and photo review before publishing. A queue holds guest uploads for approval, and a QR code links to the guest page.\n\nGuest pages: an event page with the same look as the preview, plus a photo upload and gallery view.\n\nBrowser-only demo (/try): a start page where a visitor enters an access code and names their event, then opens the dashboard with sample data. Edits stay in that browser. Reset restores the sample, and nothing is sent to the live database. A guest mobile page matches the dashboard preview, with a phone QR code and a phone-sized window for checking the mobile layout.\n\nRSVP: the RSVP dashboard, guest RSVP page and RSVP manager are finished, but they are moved to a sandbox folder while I rework them. They stay out of the live app and the build, so visitors are not affected.",
+          body: "Host dashboard: a live preview that updates as the host types a name or picks a color, font or background, with mobile and desktop views. Each screen size gets its own background photo, portrait for phones and landscape for desktop, chosen from a gallery of default photos or uploads. The host can also set the title font and color palette, move the title with a slider, and upload a logo.\n\nThe host can open or close the gallery, set a per-guest photo limit, add an optional passcode, and control guest options such as downloads, sharing and photo review before publishing. A queue holds guest uploads for approval, and a QR code links to the guest page.\n\nGuest pages: an event page with the same look as the preview, plus a photo upload and gallery view.\n\nBrowser-only demo (/try): a start page where a visitor enters an access code and names their event, then opens the dashboard with sample data. Edits stay in that browser. Reset restores the sample, and nothing is sent to the live database. A guest mobile page matches the dashboard preview, with a phone QR code and a phone-sized window for checking the mobile layout.",
         },
         {
           heading: "Key decisions",
@@ -139,11 +138,11 @@ const {
         },
         {
           heading: "Testing",
-          body: "Unit tests (Vitest): 2 test files and 6 tests, all passing. They cover the dropdown and the date and time field.\n\nBrowser and accessibility tests (Playwright with axe): 2 checks, one for the home page and one for the login page, both passing. They check for serious and critical accessibility problems after scrolling. Getting them to pass found 15 low-contrast text problems on the home page, which I fixed.\n\nLighthouse, mobile emulation, production build: the home page scores 88 to 96 for performance, 100 for accessibility, best practices and SEO. The demo event page scores 76 to 82 for performance and 100 for accessibility, best practices and SEO. Its largest paint went from about 8 seconds to about 4.8 seconds. The biggest gains came from loading pages on demand and hosting the sample photos with the site instead of an outside image service.\n\nLayout and smoke checks: a phone-width check on 5 pages at 360, 390 and 430 pixels passed in all 15 combinations, with no sideways scrolling. A demo smoke test covered the start page, the event dashboard, the gallery count and the guest page, with no page errors. I also checked the layout by hand at 1024, 1280, 1440, 1512, 1920 and 2560 pixels wide.\n\nCode quality: lint went from 64 problems to none with errors. The main fixes were removing unused code, moving data loading into cancelable effects, and moving one component out of a page so React does not rebuild it on every render. The smoke test caught one bug that lint missed, a removed name that was still in use. I restored it.",
+          body: "Unit tests (Vitest): 2 test files and 6 tests, with no failures. They cover the dropdown and the date and time field.\n\nBrowser and accessibility tests (Playwright with axe): 2 checks, one for the home page and one for the login page, with no failures. They check for serious and critical accessibility problems after scrolling. Getting them to pass found 15 low-contrast text problems on the home page, which I fixed.\n\nLighthouse, mobile emulation, production build: the home page scores 88 to 96 for performance, 100 for accessibility, best practices and SEO. The demo event page scores 76 to 82 for performance and 100 for accessibility, best practices and SEO. Its largest paint went from about 8 seconds to about 4.8 seconds. The biggest gains came from loading pages on demand and hosting the sample photos with the site instead of an outside image service.\n\nLayout and smoke checks: a phone-width check on 5 pages at 360, 390 and 430 pixels passed in all 15 combinations, with no sideways scrolling. A demo smoke test covered the start page, the event dashboard, the gallery count and the guest page, with no page errors. I also checked the layout by hand at 1024, 1280, 1440, 1512, 1920 and 2560 pixels wide.\n\nCode quality: lint went from 64 problems to none with errors. The main fixes were removing unused code, moving data loading into cancelable effects, and moving one component out of a page so React does not rebuild it on every render. The smoke test caught one bug that lint missed, a removed name that was still in use. I restored it.",
         },
         {
           heading: "Results",
-          body: "A demo visitor can go from the start page to a styled event dashboard in three steps.\n\nThe demo event page passes the accessibility, best practices and SEO checks at 100.\n\nChanges are on the main branch and deploy through Vercel.\n\nThe RSVP code is clean in its sandbox, but it is not yet back in the live app.\n\nI have not measured real visitor numbers, conversion or host feedback, so I do not claim any here.",
+          body: "A demo visitor can go from the start page to a styled event dashboard in three steps.\n\nThe demo event page scores 100 on the accessibility, best practices and SEO checks.\n\nChanges are on the main branch and deploy through Vercel.\n\nI have not measured real visitor numbers, conversion or host feedback, so I do not claim any here.",
         },
         {
           heading: "Tech stack",
@@ -151,7 +150,7 @@ const {
         },
         {
           heading: "Next steps",
-          body: "Try the demo at vantge.app/try with the access code Demo.\n\nBring the RSVP pages back into the app, with a shared sandbox backend so a phone and a laptop see the same changes in the demo.\n\nReduce the remaining JavaScript on the demo page, and host the rest of the event-type photos with the site.\n\nMeasure how long it takes a new host to create a styled event, with real users.",
+          body: "Try the demo at vantge.app/try with the access code Demo.\n\nReduce the remaining JavaScript on the demo page, and host the rest of the event-type photos with the site.\n\nMeasure how long it takes a new host to create a styled event, with real users.",
         },
       ],
     },
@@ -168,7 +167,7 @@ const {
         },
       ],
       summary:
-        "A card app for Deaf and hard-of-hearing people. Save the messages you use most and show them in large text with one tap.",
+        "A card app for Deaf and Hard-of-Hearing people. Save the messages you use most and show them in large text with one tap.",
       tags: ["React", "TypeScript", "Vite", "Accessibility"],
       githubUrl: "https://github.com/DeafGecko/clearcard",
       websiteUrl: "https://showcard.09labs.dev",
@@ -176,7 +175,7 @@ const {
       caseStudySections: [
         {
           heading: "What it is",
-          body: "ShowCard is a card app for Deaf and hard-of-hearing people. You save the messages you use most, like a doctor visit or a coffee order. When you need to say something, you tap a card and the message shows up in large text for the other person to read.\n\nI designed it, built it and tested it on my own.",
+          body: "ShowCard is a card app for Deaf and Hard-of-Hearing people. You save the messages you use most, like a doctor visit or a coffee order. When you need to say something, you tap a card and the message shows up in large text for the other person to read.\n\nI designed it, built it and tested it on my own.",
         },
         {
           heading: "The problem",
@@ -184,7 +183,7 @@ const {
         },
         {
           heading: "What I did",
-          body: "I did the whole product. That included the design, the interface, the accessibility work, the private-card security, the tests and the documentation.",
+          body: "I created the whole product, including the product and interaction design, the responsive interface, accessibility improvements, private-card security and encryption, automated unit and browser tests, and the documentation.",
         },
         {
           heading: "What it does",
@@ -212,7 +211,7 @@ const {
         },
         {
           heading: "What's next",
-          body: "Test it with Deaf and hard-of-hearing people. Test it with screen readers on a real iPhone and an Android phone. Make it work offline and installable. Decide whether to build a native app with Expo, or wrap this web app with Capacitor. Add secure backup and sync. Offer a longer passcode for private cards.",
+          body: "Test it with Deaf and Hard-of-Hearing people. Test it with screen readers on a real iPhone and an Android phone. Make it work offline and installable. Decide whether to build a native app with Expo, or wrap this web app with Capacitor. Add secure backup and sync. Offer a longer passcode for private cards.",
         },
       ],
     },
@@ -246,7 +245,7 @@ const {
         },
         {
           heading: "Three themes",
-          body: "There are light, coffee and dark themes. Each theme is a set of CSS variables, and switching themes changes one attribute on the page.\n\nThe dark theme first failed contrast. White text on its pale indigo measured 1.99 to 1. I gave each theme its own text color for accent backgrounds to fix it.\n\nI checked 13 text and background pairs in each theme, 39 in total. All of them pass the 4.5 to 1 minimum.",
+          body: "There are light, coffee and dark themes. Each theme is a set of CSS variables, and switching themes changes one attribute on the page.\n\nThe dark theme first failed contrast. White text on its pale indigo measured 1.99 to 1. I gave each theme its own text color for accent backgrounds to fix it.\n\nI checked 13 text and background pairs in each theme, 39 in total. None of them fall below the 4.5 to 1 minimum.",
         },
         {
           heading: "Mobile navigation",
@@ -258,15 +257,15 @@ const {
         },
         {
           heading: "Accessibility",
-          body: "I fixed the dialogs so they announce themselves and trap focus correctly. Form labels are attached to their inputs, and the close buttons have names. The sandbox output is announced to screen readers as it changes. Card titles are headings, so the heading order makes sense under the page title.\n\nLighthouse accessibility went from 93 to 100 on the production build, in all three themes. The axe checks found no WCAG 2.0 or 2.1 A or AA problems on the home page in any theme.\n\nLighthouse only scores the default theme, so the axe run is what covers the other two.",
+          body: "I labeled the dialogs and the form fields, and the card titles are headings in order under the page title. I have not yet run a full accessibility audit on the public version, so I'm not claiming a score.",
         },
         {
-          heading: "Sandbox security fix",
-          body: "The sandbox used to run user code directly in the page. That code could read the saved data and change the page. If the code threw an error, the console stayed changed for the rest of the session.\n\nNow the code runs in an iframe with no access to the page or its storage. The iframe sends its logs back with postMessage, and the page only accepts messages that come from that iframe. Each run uses a new iframe, so running the same code twice really runs it twice.",
+          heading: "Sandbox",
+          body: "The sandbox runs the code you type with eval, directly in the page. That means the code can reach the page and the saved data. I know this is the next thing to fix. The plan is to run the code in an iframe with no access to the page's storage, and send its output back with postMessage.",
         },
         {
           heading: "Testing",
-          body: "I wrote 20 unit and component tests with Vitest. They pass.\n\nI wrote 5 browser tests with Playwright, and all of them pass. The sandbox test runs real code in a real browser and checks the output.\n\nI wrote 3 accessibility tests with axe. They pass.\n\nESLint reports no problems, TypeScript reports no errors, and the production build passes. Lighthouse scores 100 in all four categories, in each theme.",
+          body: "The public repo does not have automated tests yet. ESLint is set up, and the lint script runs on the whole project. I'm adding tests next, and I'll publish the numbers when they are in the repo.",
         },
         {
           heading: "What I would fix next",
@@ -315,7 +314,7 @@ const {
         },
         {
           heading: "Testing",
-          body: "I wrote 30 unit tests with Vitest, and they all pass.\n\nI wrote 16 browser tests with Playwright, including axe scans. They run on every preset, every color-blindness mode, edit mode and the export window. They check for WCAG 2.0 and 2.1 A and AA problems. They all pass.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
+          body: "I ran 30 unit tests with Vitest, and none failed.\n\nI ran 16 browser tests with Playwright, including axe scans. They run on every preset, every color-blindness mode, edit mode and the export window. They check for WCAG 2.0 and 2.1 A and AA problems, and none failed.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
         },
         {
           heading: "What went wrong",
@@ -336,7 +335,7 @@ const {
         { src: "/images/monolith-mockup.png", alt: "Monolith storefront on a desktop monitor" },
       ],
       summary:
-        "A small online store for simple home and office goods. Browse, add to cart or wishlist, and check out without an account. It has three looks you can switch between.",
+        "A structured website built in a three-step process: layout, accent colors, and animation. It is a small online store for simple home and office goods, where you can browse, add to cart or wishlist, and check out without an account.",
       tags: ["Next.js", "React", "Prisma", "Zustand", "Tailwind CSS"],
       githubUrl: "https://github.com/DeafGecko/swiss-ecommerce/tree/main/swiss-ecommerce",
       websiteUrl: "https://ecommerce.09labs.dev",
@@ -345,6 +344,10 @@ const {
         {
           heading: "What it is",
           body: "This is a small online store for simple home and office goods. The style is industrial and minimal.\n\nYou can switch between three looks from the header: grayscale, color and animated. Your choice stays when you come back.",
+        },
+        {
+          heading: "How I built it, in three steps",
+          body: "I built Monolith in three steps: the layout first, then the accent colors, then the animation.\n\nFirst I only built the layout, in grayscale. I wanted the structure to work before anything looked finished. That meant the grid, the spacing and the order of the sections.\n\nThen I added the accent color. The grayscale version was the base, so the color was a layer on top. It was not a way to fix a layout that wasn't working yet.\n\nLast, I added the animation. I left it for the end so it would not hide problems in the layout or the colors.\n\nThe hardest part for me was not jumping ahead. As a designer, I wanted to add color and motion early. Working in order made the layout easier to fix. The three looks you can switch between in the header come from these three steps: grayscale, color and animated.",
         },
         {
           heading: "What I wanted",
@@ -360,11 +363,11 @@ const {
         },
         {
           heading: "Testing",
-          body: "I did not have a test setup at first. I added Vitest, with Testing Library for the React parts, and wrote tests for the stores, the API routes and the components that handle the cart, the wishlist, the theme and the success page.\n\nThere are 60 tests in 9 files, and they all pass. The TypeScript check is clean.\n\nI did not run a full production build for this pass, because the build queries the database while it renders pages.",
+          body: "I did not have a test setup at first. I added Vitest, with Testing Library for the React parts, and tested the stores, the API routes and the components that handle the cart, the wishlist, the theme and the success page.\n\nThere are 60 tests in 9 files, and none fail. The TypeScript check is clean.\n\nI did not run a full production build for this pass, because the build queries the database while it renders pages.",
         },
         {
           heading: "Bugs the tests found",
-          body: "The header crashed when the category request failed. The server sent back an error object, and the header tried to loop over it. Now it only uses the response when it is a list.\n\nThe checkout accepted bad cart items. A zero or negative quantity, or a price stored as text, went straight into the total. Now every item is checked, and bad input gets a 400 error.\n\nA visit to the success page with no cart still saved a $0 order. Now an order is only saved when there is something in the cart.\n\nOrder numbers could come out shorter than the format I wrote down. I switched to a random ID, so they always have the right length.\n\nThe contact email subject showed HTML codes, so a name like Tom and Jerry came through as Tom amp Jerry. Also, a name with a line break could add extra mail headers. The subject now uses the plain name, with line breaks removed.\n\nItems saved from the product grid had no image on the wishlist page. Now the grid saves the image too.\n\nThe contact form could lose a letter when you typed fast, because it used an old copy of the form data. It now uses the latest value.",
+          body: "The header crashed when the category request failed. The server sent back an error object, and the header tried to loop over it. Now it only uses the response when it is a list.\n\nThe checkout accepted bad cart items. A zero or negative quantity, or a price stored as text, went straight into the total. Now every item is checked, and bad input gets a 400 error.\n\nA visit to the success page with no cart still saved a $0 order. Now an order is only saved when there is something in the cart.\n\nOrder numbers could come out shorter than the format I wrote down. I switched to a random ID, so they always have the right length.\n\nThe contact email subject showed HTML codes, so a name like Tom and Jerry came through as Tom amp Jerry. Also, a name with a line break could add extra mail headers. The subject now uses the plain name, with line breaks removed.\n\nItems saved from the product grid had no image on the wishlist page. Now the grid saves the image too.\n\nThe contact form could lose a letter when you type fast, because it uses an old copy of the form data. It now uses the latest value.",
         },
         {
           heading: "What I learned",
@@ -421,7 +424,7 @@ const {
         },
         {
           heading: "Results",
-          body: "Vitest passes 2 of 2 tests. Playwright passes 6 of 6, with the axe scans included. The lint check is clean, the production build passes, and the live site scores 100 in all four Lighthouse categories.\n\nI ran Lighthouse on the dev server too. It scored lower there, because the dev server does not bundle the code. The live site is the number that matters.",
+          body: "Vitest: 2 of 2 tests ran with no failures. Playwright: 6 of 6 ran with no failures, including the axe scans. The lint check is clean, the production build passes, and the live site scores 100 in all four Lighthouse categories.\n\nI ran Lighthouse on the dev server too. It scored lower there, because the dev server does not bundle the code. The live site is the number that matters.",
         },
         {
           heading: "What I learned",
@@ -621,9 +624,6 @@ const {
       </div>
       <!-- screenshot gallery (populated by JS when screenshots present) -->
       <div class="case-study-gallery" id="caseStudyGallery" hidden></div>
-      <div class="case-study-preview" id="caseStudyPreview" aria-hidden="true">
-        <img id="caseStudyPreviewImage" alt="" />
-      </div>
       <!-- rich case study sections (populated by JS when caseStudySections present) -->
       <div class="case-study-body" id="caseStudyBody" hidden></div>
       <div class="case-study-actions">
@@ -1466,12 +1466,11 @@ const {
 
   :global(.cs-screenshot) {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     border-radius: 4px;
     border: 1px solid rgba(42, 82, 204, 0.18);
     display: block;
-    cursor: zoom-in;
     transition: border-color 0.2s ease;
   }
 
@@ -1482,57 +1481,6 @@ const {
 
   :global(.dark) :global(.cs-screenshot) {
     border-color: rgba(106, 158, 255, 0.2);
-  }
-
-  .case-study-preview {
-    position: fixed;
-    inset: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    background: rgba(10, 14, 23, 0.4);
-    backdrop-filter: blur(8px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition:
-      opacity 0.45s ease,
-      visibility 0s linear 0.45s;
-  }
-
-  .case-study-preview.is-visible {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
-  }
-
-  .case-study-preview img {
-    display: block;
-    width: min(36rem, 100%);
-    max-height: min(70vh, 36rem);
-    object-fit: contain;
-    padding: 0.5rem;
-    background: #dfe2e3;
-    border: 2px solid #2a52cc;
-    border-radius: 4px;
-    box-shadow: 0 24px 70px rgba(10, 14, 23, 0.45);
-    opacity: 0;
-    transform: scale(0.88);
-    transition:
-      opacity 0.4s ease,
-      transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .case-study-preview.is-visible img {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  :global(.dark) .case-study-preview img {
-    background: #12161f;
-    border-color: #5a8eff;
   }
 
   /* github private note */
@@ -1978,8 +1926,6 @@ const {
       const summary = document.getElementById("caseStudySummary");
       const body = document.getElementById("caseStudyBody");
       const gallery = document.getElementById("caseStudyGallery");
-      const preview = document.getElementById("caseStudyPreview");
-      const previewImage = document.getElementById("caseStudyPreviewImage");
       const tags = document.getElementById("caseStudyTags");
       const github = document.getElementById("caseStudyGithub");
       const githubNote = document.getElementById("caseStudyGithubNote");
@@ -2055,22 +2001,6 @@ const {
                 img.className = "cs-screenshot";
                 img.loading = "lazy";
                 img.tabIndex = 0;
-                const showPreview = () => {
-                  previewImage.src = img.currentSrc || src;
-                  previewImage.alt = alt || "";
-                  preview.setAttribute("aria-hidden", "false");
-                  requestAnimationFrame(() => {
-                    preview.classList.add("is-visible");
-                  });
-                };
-                const hidePreview = () => {
-                  preview.classList.remove("is-visible");
-                  preview.setAttribute("aria-hidden", "true");
-                };
-                img.addEventListener("mouseenter", showPreview);
-                img.addEventListener("mouseleave", hidePreview);
-                img.addEventListener("focus", showPreview);
-                img.addEventListener("blur", hidePreview);
                 gallery.append(img);
               });
               gallery.hidden = false;
