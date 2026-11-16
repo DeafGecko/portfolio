@@ -291,31 +291,39 @@ const {
       caseStudySections: [
         {
           heading: "The problem",
-          body: "Picking a text color and a background color is easy to get wrong. A pair can look fine on my screen and still be hard to read for someone else.\n\nThe two standard checks also disagree. WCAG contrast can pass some pale pairs that read poorly. APCA is closer to how people actually see lightness, but most tools do not show it next to WCAG.",
+          body: "Picking a text color and a background color is easy to get wrong. A pair can look fine on my screen and still be hard to read for someone else.\n\nThe two common checks also disagree. WCAG contrast can pass some pale pairs that read badly. APCA is closer to how people actually see lightness, but most tools don't show it next to WCAG.",
         },
         {
           heading: "What I built",
-          body: "Chromatique Studio is a tool for testing two colors before you put them in the code. You enter a surface color and a text color. The app shows both checks side by side.\n\nYou see a live preview with the text editable, so you can try real copy. You also see cards, badges, buttons, inputs and toggles using the same colors.\n\nIt includes color-blindness previews, a shade scale, saved pairs, and an eyedropper where the browser supports it. You can export the colors as CSS variables, a Tailwind config or W3C design tokens.\n\nThe current pair is saved in the URL, so a link opens the same colors. Saved palettes are kept in the browser.",
+          body: "Chromatique Studio is a tool for testing two colors before you put them in the code. You enter a surface color and a text color, and it shows both checks side by side.\n\nThe preview uses the same two colors, so what you see is what they produce. The text is editable, so you can try your own copy. Cards, badges, buttons, inputs and toggles show up with the same colors.\n\nThere are color-blindness previews, a shade scale, saved pairs and an eyedropper where the browser supports it. You can export the colors as CSS variables, a Tailwind config or W3C design tokens.\n\nThe current pair goes in the URL, so a link opens the same colors. Saved palettes stay in the browser.",
         },
         {
           heading: "Why I show both checks",
-          body: "I did not want to pick a winner between WCAG and APCA. Seeing where they agree and where they split is the useful part. A color pair that passes one and fails the other should make you stop and look.",
+          body: "I didn't want to pick a winner between WCAG and APCA. The useful part is seeing where they agree and where they split. If a pair passes one and fails the other, you should stop and look.",
+        },
+        {
+          heading: "Keyboard shortcuts",
+          body: "S saves, R resets, E turns preview editing on or off, / jumps to the hex box, and Escape leaves editing. The shortcuts are off while you type, and they ignore Ctrl, Cmd and Alt. The legend only shows up after you press a key, so mouse users never see it.",
         },
         {
           heading: "How I built it",
-          body: "It is Vue 3 with the Composition API. All the color state and the contrast math live in one composable. The components only read from it and never do the math themselves. That let me test the math without opening the UI.\n\nThe keyboard shortcuts are off while you are typing, and they ignore Ctrl, Cmd and Alt. The shortcut legend only shows up after you press a key, so mouse users never see it.",
+          body: "It's Vue 3 with the Composition API. All the color state and the contrast math live in one composable, and the components only read from it. That let me test the math without opening the UI.\n\nThe state lives in the URL, and the saved palettes live in localStorage. Nothing needs a server.\n\nI used Inter for the section headings, and I hosted it with the site, so the page doesn't call a font service.",
         },
         {
-          heading: "What went wrong",
-          body: "The tests were running against the wrong app. Playwright used port 4173, which another project was already using, so it quietly tested that project instead. I moved it to its own port and turned off server reuse.\n\nMy APCA score for black on white came out at 114. The reference is 106. My unit test caught it. The fix was APCA's near-black clamp, its offset and its low-contrast cutoff.\n\nA hint in the preview used 95 percent opacity. That blended the red down to about 4.34 to 1 on near-black, below AA. Removing the opacity fixed it.\n\nThe preview fades colors over 150 milliseconds. The accessibility scan ran in the middle of the fade and read blended colors. The test now waits for the final color before it scans.",
+          heading: "The layout",
+          body: "The whole tool sits on one card. The name is at the top, the controls and the preview are in two columns, and the footer is at the bottom. On a laptop and an iPad, the card fits the screen with no scrolling. On a phone, the sections stack and you scroll.\n\nThe first version had the title in a separate bar, and a message told phone users to switch to a bigger screen. I removed both. The title is in the card now, and phones can use the stacked layout.\n\nBelow 1280 pixels, I made the spacing tighter. That was enough for an iPad in landscape to fit without scrolling. I checked the fit at 1440 by 900, 1024 by 768, 768 by 1024 and 390 by 844.",
         },
         {
           heading: "Testing",
-          body: "I wrote 30 unit tests with Vitest. They all pass.\n\nI wrote 16 browser tests with Playwright, including axe scans. They run against every preset, every color-blindness mode, edit mode and the export window, and check WCAG 2.0 and 2.1 A and AA. They all pass.\n\nLighthouse on the production build scores 100 for performance, accessibility, best practices and SEO.",
+          body: "I wrote 30 unit tests with Vitest, and they all pass.\n\nI wrote 16 browser tests with Playwright, including axe scans. They run on every preset, every color-blindness mode, edit mode and the export window. They check for WCAG 2.0 and 2.1 A and AA problems. They all pass.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
+        },
+        {
+          heading: "What went wrong",
+          body: "The tests were running against the wrong app. Playwright used port 4173, and another project was already using it. Playwright reused that server, so my tests ran against the other site. I gave Playwright its own port and turned off server reuse.\n\nMy APCA score for black on white came out at 114. The reference is 106. My unit test caught it. The fix was APCA's near-black clamp, its offset and its low-contrast cutoff.\n\nThe preview hint used 95 percent opacity. That blended the red down to about 4.34 to 1 on near-black, below AA. Removing the opacity fixed it.\n\nThe preview fades colors over 150 milliseconds. The accessibility scan ran in the middle of the fade and read blended colors. The test now waits for the final color before it scans.\n\nOn an iPad in landscape, the page scrolled by 11 pixels. The card was a little too tall for 1024 by 768. Tighter spacing fixed it.",
         },
         {
           heading: "Next",
-          body: "I want to add a third color, an accent, with suggestions that already pass contrast. I also want component tests for the Vue components, and not only for the math. I want to run the browser tests in more than one browser.\n\nAutomated checks miss things like reading order and what a color means. So I still need a manual pass with a screen reader.",
+          body: "I want to add a third color, an accent, with suggestions that already pass contrast. I also want component tests for the Vue components, not only for the math. I want to run the browser tests in more than one browser.\n\nAutomated checks miss things like reading order and what a color means, so I still need a manual pass with a screen reader.",
         },
       ],
     },
