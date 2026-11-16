@@ -159,7 +159,7 @@ const {
         },
       ],
       summary:
-        "A card app for Deaf and Hard-of-Hearing people. Save the messages you use most and show them in large text with one tap.",
+        "A card app for Deaf and hard-of-hearing people. Save the messages you use most and show them in large text with one tap.",
       tags: ["React", "TypeScript", "Vite", "Accessibility"],
       githubUrl: "https://github.com/DeafGecko/clearcard",
       websiteUrl: "https://showcard.09labs.dev",
@@ -167,11 +167,11 @@ const {
       caseStudySections: [
         {
           heading: "What it is",
-          body: "ShowCard is a card app for Deaf and Hard-of-Hearing people. You save the messages you use most, like a doctor visit or a coffee order. When you need to say something, you tap a card and the message shows up in large text for the other person to read.\n\nI designed it, built it and tested it on my own.",
+          body: "ShowCard is a card app for Deaf and hard-of-hearing people. You save the messages you use most, like a doctor visit or a coffee order. When you need to say something, you tap a card and the message shows in large text for the other person to read.\n\nI designed it, built it and tested it on my own.",
         },
         {
           heading: "The problem",
-          body: "Typing the same message over and over is slow. It is even harder during a medical visit or an emergency. Sometimes you just need to show a message fast, without speaking.\n\nShowCard lets you write a message once, save it as a card, and show it later with one tap.",
+          body: "Typing the same message over and over is slow, and harder during a medical visit or an emergency. Sometimes you just need to show a message fast, without speaking.",
         },
         {
           heading: "What I did",
@@ -179,31 +179,23 @@ const {
         },
         {
           heading: "What it does",
-          body: "You can make your own cards. You can show a card full screen. You can sort cards into groups. Emergency cards are easy to reach. There is a quick-write option for a message you only need once.\n\nPrivate cards are locked with a six-digit code. You can also use a one-time backup key if you forget the code.\n\nYou can change the text size, and pick light, dark or high-contrast colors in Settings. The change shows right away. It also works with touch, a mouse, a keyboard and a screen reader.",
-        },
-        {
-          heading: "Accessibility",
-          body: "I treated accessibility as part of the design from the start, not as something to add later. The buttons are large. The text is easy to read. Focus is easy to see. Icon buttons have clear names. You can use the whole app with a keyboard.\n\nI used Atkinson Hyperlegible for the text, because it is made to help people tell letters apart.",
+          body: "You make your own cards and show any card full screen. You can sort cards into groups, and emergency cards are easy to reach. There is a quick-write option for a one-time message.\n\nPrivate cards are locked with a six-digit code, with a one-time backup key if you forget it. You can change the text size and pick light, dark or high-contrast colors.",
         },
         {
           heading: "Privacy",
-          body: "Private cards are encrypted before they are saved. I do not store the six-digit code. I store a derived hash, and a random key protects the private data.\n\nThe key can be opened with the code or with the backup key. After too many wrong codes, the app locks for a short time.\n\nI should be honest about one limit. A six-digit code is short. If someone gets a copy of the browser data, they could try to guess it.",
-        },
-        {
-          heading: "How I built it",
-          body: "React and TypeScript, with Vite and Tailwind CSS. The data is stored in the browser, and encryption uses the Web Crypto API. For testing I used Vitest with Testing Library, and Playwright with axe.",
+          body: "Private cards are encrypted before they are saved. I don't store the six-digit code. I store a derived hash, and a random key protects the data. After too many wrong codes, the app locks for a short time.\n\nA six-digit code is short, so if someone gets a copy of the browser data, they could try to guess it. I want to be clear about that limit.",
         },
         {
           heading: "How I tested it",
-          body: "I tested it as a responsive web app. Playwright checked the features, the error messages, the phone-sized layouts, keyboard use and accessibility. Vitest covered the unit tests.\n\nI have not tested it with Expo or Xcode. It is a web app right now, not a native iPhone app, so I have not tried it on a real iPhone. That would be the next phase.",
+          body: "I tested it as a responsive web app. Playwright checked the features, the error messages, phone-sized layouts, keyboard use and accessibility. Vitest covered the unit tests.\n\nI have not tested it with Expo or Xcode. It is a web app, not a native iPhone app, so I have not tried it on a real iPhone yet.",
         },
         {
           heading: "What was hard",
-          body: "The hardest part was keeping private data safe without making sign-in confusing. I kept the code separate from the encryption key. That way, changing the code does not mean re-encrypting every private card.\n\nI also added the backup key. Forgetting the code should not mean losing the private cards.\n\nThe other hard part was making it work for touch, mouse, keyboard and screen readers. The automatic accessibility tests found real problems. But I still need to test it with real users and real phones.",
+          body: "Keeping private data safe without making sign-in confusing. I kept the code separate from the encryption key, so changing the code doesn't mean re-encrypting every private card.\n\nThe automatic accessibility tests found real problems, but I still need to test with real users and real phones.",
         },
         {
           heading: "What's next",
-          body: "Test it with Deaf and Hard-of-Hearing people. Test it with screen readers on a real iPhone and an Android phone. Make it work offline and installable. Decide whether to build a native app with Expo, or wrap this web app with Capacitor. Add secure backup and sync. Offer a longer passcode for private cards.",
+          body: "Test with Deaf and hard-of-hearing people, and with screen readers on a real iPhone and Android phone. Make it installable and work offline. Decide whether to build a native app with Expo or wrap this one with Capacitor.",
         },
       ],
     },
@@ -225,43 +217,35 @@ const {
       caseStudySections: [
         {
           heading: "What it is",
-          body: "09 Labs is a snippet vault and a small design system. You keep your code snippets in one place, sort them into groups, and switch between three color themes.\n\nIt has 35 starter snippets across about 20 categories. Your own snippets are saved in your browser. There is no server.",
+          body: "09 Labs is a snippet vault and a small design system. You keep code snippets in one place, group them, and switch between three color themes.\n\nIt starts with 35 snippets across about 20 categories. Your own snippets are saved in your browser, and there is no server.",
         },
         {
           heading: "Why I built it",
-          body: "I kept rebuilding the same navigation, modals, cards and form controls for every project. I wanted one set of parts I could reuse, and a place to keep the code snippets I use the most.",
+          body: "I kept rebuilding the same navigation, modals, cards and form controls for each project. I wanted one set of parts I could reuse, and a place for the snippets I use most.",
         },
         {
           heading: "Saving your snippets",
-          body: "You can create, edit and delete your own snippets. Your snippets are stored in the browser, separate from the starter set, so the starter snippets are never overwritten.\n\nThe profile menu works on a draft. If you press cancel, your saved profile does not change.\n\nIf the browser blocks storage or runs out of space, the app logs the error and keeps running instead of crashing.",
+          body: "You can create, edit and delete your own snippets. They are stored separately from the starter set, so the starter snippets are never overwritten.\n\nIf the browser blocks storage, the app logs the error and keeps running.",
         },
         {
-          heading: "Three themes",
-          body: "There are light, coffee and dark themes. Each theme is a set of CSS variables, and switching themes changes one attribute on the page.\n\nThe dark theme first failed contrast. White text on its pale indigo measured 1.99 to 1. I gave each theme its own text color for accent backgrounds to fix it.\n\nI checked 13 text and background pairs in each theme, 39 in total. None of them fall below the 4.5 to 1 minimum.",
+          heading: "Themes and mobile",
+          body: "The three themes are light, coffee and dark. Each one is a set of CSS variables. The dark theme first failed contrast, so I gave accent backgrounds their own text color.\n\nOn a laptop the categories stay in a sidebar. On a phone they open in a drawer, with a row of pills across the top.",
         },
         {
-          heading: "Mobile navigation",
-          body: "On a laptop, the category list stays in a sidebar. On a phone, the same list opens in a drawer, and a row of category pills scrolls sideways at the top.\n\nBoth use the same list, so they never get out of step.",
-        },
-        {
-          heading: "Search and Cmd+K",
-          body: "Search checks the title, description and tags. It also applies the category and the Favorites filter at the same time.\n\nCmd+K opens a command palette. On Windows and Linux, Ctrl+K does the same thing. The palette only mounts while it is open, so every time you open it, the search box is empty.",
-        },
-        {
-          heading: "Accessibility",
-          body: "I labeled the dialogs and the form fields, and the card titles are headings in order under the page title. I have not yet run a full accessibility audit on the public version, so I'm not claiming a score.",
+          heading: "Search",
+          body: "Search checks the title, description and tags, and it respects the category and Favorites filters. Cmd+K opens a command palette, and Ctrl+K does the same on Windows and Linux.",
         },
         {
           heading: "Sandbox",
-          body: "The sandbox runs the code you type with eval, directly in the page. That means the code can reach the page and the saved data. I know this is the next thing to fix. The plan is to run the code in an iframe with no access to the page's storage, and send its output back with postMessage.",
+          body: "The sandbox runs the code you type with eval, directly in the page. That means it can reach the page and the saved data. This is the next thing I need to fix. The plan is an iframe with no access to the page's storage.",
         },
         {
           heading: "Testing",
           body: "The public repo does not have automated tests yet. ESLint is set up, and the lint script runs on the whole project. I'm adding tests next, and I'll publish the numbers when they are in the repo.",
         },
         {
-          heading: "What I would fix next",
-          body: "The theme can flash the wrong color on load, because the saved theme is applied after the page mounts. A small script in the head of the page would fix it.\n\nEdits to the starter snippets only last for the current session. Only your own snippets are saved.\n\nSidebar.tsx is about 755 lines. I would split it into category setup, list display and filter logic.\n\nSearch runs on every keystroke with no delay. That is fine for 35 snippets, but it would need a delay at a larger size.",
+          heading: "Next",
+          body: "The theme can flash the wrong color on load, because the saved theme is applied after the page mounts. Starter snippet edits only last for the session. Sidebar.tsx is about 755 lines and I would split it up.",
         },
       ],
     },
@@ -372,39 +356,31 @@ const {
       caseStudySections: [
         {
           heading: "What it is",
-          body: "Kanso is a writing app for people who want to focus. There is no dashboard and no big toolbar. There is just a page and the few tools you need to write.\n\nIt is React and TypeScript, and it has no backend. Your work stays in the browser.",
+          body: "Kanso is a writing app for focus. There is no dashboard and no big toolbar, just a page and the few tools you need to write. It is React and TypeScript, with no backend, so your work stays in the browser.",
         },
         {
           heading: "The problem I fixed first",
-          body: "The sidebar had two controls for opening and closing it. The button in the header opened it. But once it was open, the close button moved inside the sidebar. The button jumped from the top of the page into the panel, so it was hard to find and close.\n\nI wanted one button in the header that works in both states.",
+          body: "The sidebar had two close controls. The header button opened it, but once it was open, the close button moved inside the panel, so it was hard to find. I wanted one button in the header that works in both states.",
         },
         {
           heading: "What I changed",
-          body: "The header button now opens and closes the sidebar. Its label and icon change with the state. I removed the second close button from inside the sidebar.\n\nI added a pen logo next to the KANSO name. It matches the theme, and it is solid black in light mode. When you hover over it, it plays a short ballpoint click. I made the sound in the browser, so there is no audio file to load. A short delay stops the sound from repeating when you move across the logo and the name.\n\nI also replaced the favicon with the same pen, on a black square.",
-        },
-        {
-          heading: "Contrast",
-          body: "The accessibility scan flagged the small labels in the sidebar. I raised their opacity from 40 or 50 percent to 70 percent. The first change missed three label styles, so I needed three rounds before the scan passed.",
+          body: "The header button now opens and closes the sidebar, and its label and icon change with the state. I removed the second close button.\n\nI added a pen logo beside the KANSO name. It plays a short click when you hover, generated in the browser so there is no audio file. I also replaced the favicon with the same pen.\n\nThe accessibility scan flagged the small sidebar labels, so I raised their opacity from 40 or 50 percent to 70 percent. It took three rounds, because the first change missed some label styles.",
         },
         {
           heading: "Tests",
-          body: "I used Vitest for unit tests on the header button. I used Playwright for browser tests on desktop and phone sizes. Each browser run also runs an axe accessibility scan, with the sidebar open and closed.\n\nThe tests read whether the sidebar is open before they click, so they pass whether the saved setting opens it or closes it.",
+          body: "I used Vitest for unit tests on the header button, and Playwright for browser tests on desktop and phone sizes. Each browser run also runs an axe scan, with the sidebar open and closed. The tests work whether the saved setting opens or closes the sidebar.",
         },
         {
           heading: "The build that was failing",
-          body: "The production build was failing before I started. The Vite chunk setting was written as an object, and this version of Vite does not accept that. Vercel runs the same build, so the deploy would have failed too. I changed it to a function that keeps the same three chunks.",
-        },
-        {
-          heading: "How I shipped it",
-          body: "Each change went on its own branch. Then I merged each one into main as a squash merge, so the history stays easy to read and each deploy has one clear commit.",
+          body: "The production build was failing before I started. A Vite setting was written in a form this version rejects, and Vercel would have failed the same way. I changed it, and the build passes.",
         },
         {
           heading: "Results",
-          body: "Vitest: 2 of 2 tests ran with no failures. Playwright: 6 of 6 ran with no failures, including the axe scans. The lint check is clean, the production build passes, and the live site scores 100 in all four Lighthouse categories.\n\nI ran Lighthouse on the dev server too. It scored lower there, because the dev server does not bundle the code. The live site is the number that matters.",
+          body: "Vitest passes 2 of 2 tests and Playwright passes 6 of 6, including the axe scans. Lint is clean, and the live site scores 100 in all four Lighthouse categories. The dev server scores lower, because it doesn't bundle the code.",
         },
         {
           heading: "What I learned",
-          body: "I should run the same build command the host runs before I merge. The Vercel build failed on a config error that only showed up once I ran the build myself.\n\nMeasure the live site, not the dev server. The dev numbers looked worse in every category.\n\nWhen you fix a color, search for the color itself, not just one class name. I missed some label styles that used the same color.\n\nCheck small icons at their real size. The pen looked clear at 44 pixels, but the details disappeared at 32.",
+          body: "Run the same build command the host runs before merging. Measure the live site, not the dev server. When you change a color, search for the color itself, not one class name. And check small icons at their real size, since the pen's details disappeared at 32 pixels.",
         },
       ],
     },
