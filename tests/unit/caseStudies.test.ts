@@ -20,7 +20,7 @@ describe("case study data", () => {
       expect(study.sections.length).toBeGreaterThan(0);
     });
 
-    it(`${slug} has no markdown marks or RSVP mentions in visible text`, () => {
+    it(`${slug} has no leftover markdown marks or RSVP text`, () => {
       const text = [study.summary, ...study.sections.flatMap((s) => [s.heading, s.body])].join("\n");
       expect(text).not.toMatch(/\*\*/);
       expect(text).not.toMatch(/`/);
