@@ -326,6 +326,16 @@ const {
             class={`slice-bg pattern-${work.category}${work.image ? " has-image" : ""}`}
             style={work.image ? `background-image:url(${work.image})` : ""}
           />
+          {work.websiteUrl && (
+            <a
+              class="slice-image-link"
+              href={work.websiteUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`View ${work.title.join(" ")} live`}
+              title="View live"
+            />
+          )}
           <div class="slice-overlay" />
           <div class="slice-topline">
             <span class="slice-number">{String(i + 1).padStart(2, "0")}</span>
@@ -1785,6 +1795,16 @@ const {
   .project-link[data-tip]:hover::after,
   .project-link[data-tip]:focus-visible::after {
     opacity: 1;
+  }
+  /* the card image opens the live project */
+  .slice-image-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    z-index: 1;
+    cursor: pointer;
   }
 </style>
 
