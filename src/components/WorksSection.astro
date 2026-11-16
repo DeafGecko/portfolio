@@ -187,56 +187,6 @@ const {
       ],
     },
     {
-      featured: true,
-      eyebrow: "SNIPPET LIBRARY · IN DEVELOPMENT",
-      title: ["09 Labs"],
-      category: "folio",
-      image: "/images/09labs-mockup.png",
-      screenshots: [
-        { src: "/images/09labs-mockup.png", alt: "09 Labs snippet library on a tablet" },
-      ],
-      summary:
-        "A snippet vault and small design system. Keep your code snippets in one place, group them, and switch between three color themes.",
-      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      githubUrl: "https://github.com/DeafGecko/09-labs-snippet",
-      websiteUrl: "https://09-labs-snippet-zeta.vercel.app",
-      caseStudyStatus: "In development",
-      caseStudySections: [
-        {
-          heading: "What it is",
-          body: "09 Labs is a snippet vault and a small design system. You keep code snippets in one place, group them, and switch between three color themes.\n\nIt starts with 35 snippets across about 20 categories. Your own snippets are saved in your browser, and there is no server.",
-        },
-        {
-          heading: "Why I built it",
-          body: "I kept rebuilding the same navigation, modals, cards and form controls for each project. I wanted one set of parts I could reuse, and a place for the snippets I use most.",
-        },
-        {
-          heading: "Saving your snippets",
-          body: "You can create, edit and delete your own snippets. They are stored separately from the starter set, so the starter snippets are never overwritten.\n\nIf the browser blocks storage, the app logs the error and keeps running.",
-        },
-        {
-          heading: "Themes and mobile",
-          body: "The three themes are light, coffee and dark. Each one is a set of CSS variables. The dark theme first failed contrast, so I gave accent backgrounds their own text color.\n\nOn a laptop the categories stay in a sidebar. On a phone they open in a drawer, with a row of pills across the top.",
-        },
-        {
-          heading: "Search",
-          body: "Search checks the title, description and tags, and it respects the category and Favorites filters. Cmd+K opens a command palette, and Ctrl+K does the same on Windows and Linux.",
-        },
-        {
-          heading: "Sandbox",
-          body: "The sandbox runs the code you type with eval, directly in the page. That means it can reach the page and the saved data. This is the next thing I need to fix. The plan is an iframe with no access to the page's storage.",
-        },
-        {
-          heading: "Testing",
-          body: "The public repo does not have automated tests yet. ESLint is set up, and the lint script runs on the whole project. I'm adding tests next, and I'll publish the numbers when they are in the repo.",
-        },
-        {
-          heading: "Next",
-          body: "The theme can flash the wrong color on load, because the saved theme is applied after the page mounts. Starter snippet edits only last for the session. Sidebar.tsx is about 755 lines and I would split it up.",
-        },
-      ],
-    },
-    {
       eyebrow: "DESIGN TOKEN & CONTRAST ENGINE",
       title: ["CHROMATIQUE"],
       category: "chromatique",

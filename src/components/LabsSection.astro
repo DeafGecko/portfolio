@@ -1,0 +1,108 @@
+---
+// Experiments that are still in progress. Kept out of the main Selected Works grid.
+const labs = [
+  {
+    title: "09 Labs",
+    eyebrow: "SNIPPET LIBRARY · IN DEVELOPMENT",
+    summary:
+      "A snippet vault and small design system. Save code snippets, group them, and switch between three themes. Still in development.",
+    caseStudy: "/work/09labs",
+    githubUrl: "https://github.com/DeafGecko/09-labs-snippet",
+    websiteUrl: "https://09-labs-snippet-zeta.vercel.app",
+  },
+];
+---
+
+<section class="labs" id="labs-section" aria-labelledby="labs-title">
+  <header class="labs-header">
+    <h2 class="labs-title" id="labs-title">Labs / Experiments</h2>
+    <p class="labs-intro">Work in progress that shows how I think about components and reuse.</p>
+  </header>
+
+  <ul class="labs-list">
+    {
+      labs.map((lab) => (
+        <li class="labs-card">
+          <p class="labs-eyebrow">{lab.eyebrow}</p>
+          <h3 class="labs-name">{lab.title}</h3>
+          <p class="labs-summary">{lab.summary}</p>
+          <div class="labs-links">
+            <a href={lab.caseStudy}>Read the case study</a>
+            <a href={lab.githubUrl} target="_blank" rel="noopener">View code on GitHub</a>
+            <a href={lab.websiteUrl} target="_blank" rel="noopener">Open live project</a>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .labs {
+    padding: 4rem 6% 5rem;
+    background: #dfe2e3;
+  }
+  :global(.dark) .labs {
+    background: #0a0e17;
+  }
+  .labs-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin: 0;
+  }
+  .labs-intro {
+    margin: 0.75rem 0 2rem;
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+  .labs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .labs-card {
+    padding: 1.5rem;
+    border: 1px solid #929ba2;
+    border-radius: 6px;
+    max-width: 44rem;
+  }
+  :global(.dark) .labs-card {
+    background: #12161f;
+    border-color: #33445e;
+  }
+  .labs-eyebrow {
+    margin: 0;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #2a52cc;
+  }
+  :global(.dark) .labs-eyebrow {
+    color: #6a9eff;
+  }
+  .labs-name {
+    margin: 0.4rem 0 0;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.4rem;
+  }
+  .labs-summary {
+    margin: 0.5rem 0 0;
+    line-height: 1.6;
+  }
+  .labs-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .labs-links a {
+    color: #2a52cc;
+    font-weight: 600;
+  }
+  :global(.dark) .labs-links a {
+    color: #6a9eff;
+  }
+</style>
