@@ -21,6 +21,7 @@ export interface WorkItem {
   websiteUrl?: string;
   websiteUrl2?: string;
   websiteUrl2Label?: string;
+  labUrl?: string;
   /** optional real screenshot — falls back to a generated pattern */
   image?: string;
   /** rich case study sections rendered inside the modal */
@@ -100,6 +101,7 @@ const {
         "A web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.",
       tags: ["Product Design", "Host & Guest Workflows", "Browser demo"],
       websiteUrl: "https://vantge.app/try",
+      labUrl: "https://app-quality-lab.dwirog.workers.dev",
       githubUrl: "https://github.com/DeafGecko/vantge",
       caseStudyStatus: "Live demo",
       caseStudySections: [
@@ -150,6 +152,7 @@ const {
       tags: ["React", "TypeScript", "Vite", "Accessibility"],
       githubUrl: "https://github.com/DeafGecko/clearcard",
       websiteUrl: "https://showcard.09labs.dev",
+      labUrl: "https://app-quality-lab.dwirog.workers.dev",
       caseStudyStatus: "Live",
       caseStudySections: [
         {
@@ -199,6 +202,7 @@ const {
       tags: ["Vue 3", "Vite", "Tailwind CSS", "VueUse"],
       githubUrl: "https://github.com/DeafGecko/chromatique-studio",
       websiteUrl: "https://chroma.09labs.dev",
+      labUrl: "https://app-quality-lab.dwirog.workers.dev",
       caseStudyStatus: "Live",
       caseStudySections: [
         {
@@ -265,6 +269,7 @@ const {
       tags: ["React", "TypeScript", "Vite", "Tailwind CSS"],
       githubUrl: "https://github.com/DeafGecko/kanso-2.0",
       websiteUrl: "https://kanso.09labs.dev",
+      labUrl: "https://app-quality-lab.dwirog.workers.dev",
       caseStudyStatus: "Live",
       caseStudySections: [
         {
@@ -329,11 +334,6 @@ const {
             <span class="slice-vertical-name">
               {work.title.join(" ")} · {String(i + 1).padStart(2, "0")}
             </span>
-          </div>
-          <div class="slice-cue" aria-hidden="true">
-            <svg class="slice-cue-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"/>
-            </svg>
           </div>
           <div class="slice-content">
             <p class="slice-eyebrow">{work.featured ? "FEATURED · " : ""}{work.eyebrow}</p>
@@ -425,6 +425,25 @@ const {
                     src="/website-icon.svg"
                     alt=""
                     aria-hidden="true"
+                  />
+                </a>
+              )}
+              {work.labUrl && (
+                <a
+                  class="project-link project-link-lab"
+                  href={work.labUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Open ${work.title.join(" ")} in App Quality Lab`}
+                  title="Open App Quality Lab"
+                >
+                  <img
+                    class="project-link-lab-icon"
+                    src="/brand/lab-icon.png"
+                    alt=""
+                    aria-hidden="true"
+                    width="28"
+                    height="28"
                   />
                 </a>
               )}
@@ -1435,6 +1454,12 @@ const {
     animation: work-border-travel 2.4s linear infinite;
   }
 
+  .project-link-lab-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 4px;
+  }
+
   .project-link-icon {
     width: 1.1rem;
     height: 1.1rem;
@@ -1537,57 +1562,6 @@ const {
     color: #173f9f;
     font-weight: 600;
     border-color: rgba(42, 82, 204, 0.32);
-  }
-
-  /* interaction cue shown only on collapsed slices */
-  .slice-cue {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: rgba(42, 82, 204, 0.18);
-    border: 1px solid rgba(106, 158, 255, 0.35);
-    color: #6a9eff;
-    opacity: 1;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-    animation: cue-pulse 2.2s ease-in-out infinite;
-  }
-
-  :global(.dark) .slice-cue {
-    background: rgba(90, 142, 255, 0.14);
-    border-color: rgba(106, 158, 255, 0.3);
-    color: #6a9eff;
-  }
-
-  html:not(.dark) .slice-cue {
-    background: rgba(42, 82, 204, 0.1);
-    border-color: rgba(42, 82, 204, 0.3);
-    color: #2a52cc;
-  }
-
-  .slice.is-active .slice-cue {
-    opacity: 0;
-    animation: none;
-  }
-
-  @keyframes cue-pulse {
-    0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
-    50%       { opacity: 1;    transform: translate(-50%, -50%) scale(1.18); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .slice-cue {
-      animation: none;
-      opacity: 0.6;
-    }
   }
 
   /* vertical label shown only when collapsed */
@@ -1697,10 +1671,6 @@ const {
   }
 
   @media (max-width: 860px) {
-    .slice-cue {
-      display: none;
-    }
-
     .works {
       padding: calc(1.25rem + 10px) 1.4rem 4.5rem;
     }
@@ -1775,6 +1745,20 @@ const {
   .works .slice .project-link-icon, html:not(.dark) .works .slice .project-link-icon { filter: brightness(0) invert(1); }
   .works .pattern-vantge { background: radial-gradient(circle at 70% 30%, #c4ad65, transparent 50%), linear-gradient(135deg, #f4f0e5, #817143); }
   @media(max-width: 720px) { .works .works-accordion { grid-template-columns: 1fr; } }
+  .project-link-lab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .project-link-lab-icon {
+    display: block;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin: auto;
+    border-radius: 4px;
+  }
 </style>
 
 <script is:inline>
