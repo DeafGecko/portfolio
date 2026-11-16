@@ -46,13 +46,13 @@ const {
       eyebrow: "VENUE OPERATIONS PLATFORM",
       title: ["THE FACTORY"],
       category: "factory",
-      image: "/images/factory01.png",
+      image: "/images/factory-dashboard-laptop.png",
       screenshots: [
-        { src: "/images/factory01.png", alt: "The Factory bills and payments overview" },
+        { src: "/images/factory-dashboard-laptop.png", alt: "The Factory dashboard shown on a laptop" },
         { src: "/images/factory02.png", alt: "The Factory calendar view" },
       ],
       summary:
-        "A full booking and admin platform for venues — calendar, dashboard, role-based access, and CMS-driven theming. Currently in active development.",
+        "A booking and admin app for an event venue. Staff can check events, make bookings and track payments. Each role sees only what it needs.",
       tags: [
         "Astro",
         "React",
@@ -64,35 +64,35 @@ const {
       ],
       githubNote: "Private — available on request",
       websiteUrl: "https://venue-operations-api.dwirog.workers.dev/demo",
-      caseStudyStatus: "In development",
+      caseStudyStatus: "Live",
       caseStudySections: [
         {
-          heading: "What I Built",
-          body: "The Factory is a full-stack app for managing a venue.\n\nI wanted one place where staff can:\n\nSee events → Make bookings → Check the calendar → Manage clients\n\nThe project is still in development, but the main system works.",
+          heading: "Who uses it",
+          body: "The staff at The Factory, an event venue in Franklin, TN, use it every day. Clients use the public booking form to ask for a date.\n\nThere are four staff roles: admin, manager, developer and viewer.",
         },
         {
-          heading: "Why I Built It",
-          body: "I looked at different venue software and some felt too complicated.\n\nI wanted to see if I could build something simpler and easier to use.\n\nI also wanted a real project where I could learn Astro and practice full-stack development.",
+          heading: "Why I built it",
+          body: "Some venue software is too hard to use. I wanted something simpler, with one place to see events, make a booking, check the calendar and find a client.\n\nI also wanted a real project to learn Astro and practice full-stack work.",
         },
         {
-          heading: "How I Built It",
-          body: "I started small:\n\nLogin → Calendar → Booking\n\nThen I added more features like the dashboard, clients, billing, and different user roles.\n\nI designed and built the project at the same time. When something did not feel right, I changed it and tested again.",
+          heading: "What I built",
+          body: "A two-step booking form. It checks the name, email, phone number, date and guest count before it saves anything.\n\nA dashboard that shows money by month, money by event type and the next events.\n\nA calendar that shows whether each event is paid, partly paid or unpaid.\n\nRoles that limit what each person can change. A viewer cannot edit data, and the server enforces this, not only the screen.\n\nA public page with the dashboard and calendar in read-only form. Other pages need an access code.\n\nI also moved the venue data to a new Sanity project and checked that the counts matched.",
         },
         {
-          heading: "Tech I Used",
-          body: "Astro + React + TypeScript + Tailwind CSS\n\nFor the backend and data, I used Cloudflare Workers, D1, and Sanity.\n\nI chose Astro because the app has many pages that mostly show data. React is used when the page needs more interaction.",
+          heading: "Choices I made",
+          body: "I used Astro because most pages only show data, and Astro keeps those pages small and fast. I used React only where a page needs interaction, like the forms, the calendar and the dialogs.\n\nCloudflare Workers runs the app. D1 is the database. Sanity stores the venue data.\n\nThe server builds each booking, so the form cannot change the price or the amount paid.\n\nIn testing, a fake cookie got into the admin area. I fixed it by signing sessions with HMAC. The tests sign cookies the same way the server checks them.",
         },
         {
-          heading: "What I Learned",
-          body: "The hardest part was getting everything to work correctly after deployment.\n\nSome things worked on my computer but failed on Cloudflare. I had to debug the code, learn how Cloudflare handles secrets, and fix a dependency problem.\n\nThat taught me something important:\n\nWorking locally does not always mean it will work in production.",
+          heading: "What I fixed after testing",
+          body: "Fake cookie bug: fixed with signed sessions.\n\nSign-in worked on my computer but failed on Cloudflare. Secrets were not readable at runtime. I turned on runtime environment access, and it worked.\n\nLesson: working locally does not mean it will work in production.\n\nThe Lighthouse SEO score is 1.0 for the booking page and 0.58 for the homepage. The homepage leads to an admin page, and I hide admin pages from search engines on purpose. I wrote the descriptions and the robots.txt and sitemap.xml files so they come from one source.",
         },
         {
-          heading: "Where It Is Now",
-          body: "The main app works.\n\n✓ Login\n✓ Dashboard\n✓ Calendar\n✓ Bookings\n✓ User roles\n\nNext, I want to improve the UI, test accessibility, and finish the remaining features.",
+          heading: "Testing",
+          body: "I wrote 19 unit tests with Vitest. They all pass.\n\nI ran browser tests with Playwright at desktop and phone sizes. The last full run had two failures. I fixed both and ran the tests again.",
         },
         {
-          heading: "Status",
-          body: "In development",
+          heading: "Still to do",
+          body: "Color contrast still fails on many pages. I am fixing this now.\n\nInvite and password-reset emails do not send yet. They need an email service key.\n\nI deploy by hand with Wrangler, because automatic deploys from GitHub are not reliable yet.",
         },
       ],
       // Add up to 2 screenshot images below when ready:
