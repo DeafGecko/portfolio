@@ -110,7 +110,7 @@ const {
       ],
       featured: true,
       summary:
-        "A web app for hosting an event. A host shares a photo gallery and an invitation with guests through one link or QR code, and runs everything from one dashboard. I designed and built it, including a browser-only demo.",
+        "A web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard. I built it, including a browser-only demo.",
       tags: ["Product Design", "Host & Guest Workflows", "Browser demo"],
       websiteUrl: "https://vantge.app/try",
       githubUrl: "https://github.com/DeafGecko/vantge",
@@ -118,39 +118,31 @@ const {
       caseStudySections: [
         {
           heading: "Summary",
-          body: "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting a party, wedding or other event. A host shares a photo gallery and an invitation with guests through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo that lets a visitor try the dashboard without signing up.",
+          body: "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting a party, a wedding or another event. A host shares a photo gallery and an invitation with guests through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo, so a visitor can try it without signing up.",
         },
         {
           heading: "The problem",
-          body: "Hosts juggle several tools: one for guest photos, a separate place for food sign-up, and a QR code printed on a card. Guests have to remember several links. Hosts want to see a change the moment they make it, and they want the page to look like their event, not a template.\n\nVantge puts these in one event with one link. The host sets the look (name, event type, background photo, colors, title font), and the guest sees the result straight away.",
-        },
-        {
-          heading: "Goals",
-          body: "A host can create and style an event without help, on a phone or a laptop.\n\nThe live preview matches what guests see.\n\nA prospect can try the dashboard before signing up, without touching real data.\n\nThe layout works on a small laptop and on a large monitor.\n\nThe code passes automated accessibility, performance and layout checks.",
+          body: "Hosts use several tools for one event: one for guest photos, a separate place for food sign-up, and a QR code printed on a card. Guests have to remember several links.\n\nI wanted one event with one link. The host sets the look, and the guest sees the result straight away.",
         },
         {
           heading: "What I built",
-          body: "Host dashboard: a live preview that updates as the host types a name or picks a color, font or background, with mobile and desktop views. Each screen size gets its own background photo, portrait for phones and landscape for desktop, chosen from a gallery of default photos or uploads. The host can also set the title font and color palette, move the title with a slider, and upload a logo.\n\nThe host can open or close the gallery, set a per-guest photo limit, add an optional passcode, and control guest options such as downloads, sharing and photo review before publishing. A queue holds guest uploads for approval, and a QR code links to the guest page.\n\nGuest pages: an event page with the same look as the preview, plus a photo upload and gallery view.\n\nBrowser-only demo (/try): a start page where a visitor enters an access code and names their event, then opens the dashboard with sample data. Edits stay in that browser. Reset restores the sample, and nothing is sent to the live database. A guest mobile page matches the dashboard preview, with a phone QR code and a phone-sized window for checking the mobile layout.",
+          body: "The host dashboard has a live preview. It updates as the host types a name or picks a color, font or background. Each screen size gets its own background photo.\n\nThe guest pages match the preview. Guests can upload photos and view the gallery.\n\nThe demo at /try uses sample data. Edits stay in that browser, and Reset brings back the sample. Nothing reaches the live database.",
         },
         {
           heading: "Key decisions",
-          body: "I kept the demo away from real data. It runs on an in-browser stand-in for the database, chosen by the page address on every call. Real event pages keep using the live database. This made the demo safe to share publicly and easy to reset.\n\nThe settings column is taller than a laptop screen, so a plain sticky element cannot show its bottom. I wrote a small scroll hook that keeps the preview beside the settings while the page scrolls, then lets it slide down so the last card can be reached. It updates only on scroll and resize, so the page does not jump.\n\nDashboard content sits in a 1024-pixel centered frame, sized for a small laptop. The header and background run the full window width.\n\nA demo sign-in leaked into the real sign-in flow when a visitor left the demo through an in-app link. The exit links now do full page loads, which clears the demo session. Testing found this.\n\nEach page now loads only when it is opened. The home page's main bundle dropped from about 930KB to about 225KB.",
+          body: "The demo uses an in-browser stand-in for the database. Real event pages still use the live database. That made the demo safe to share and easy to reset.\n\nThe preview stays beside the settings while you scroll. A demo sign-in once leaked into the real sign-in, so the exit links now do full page loads to clear the session.\n\nEach page loads only when it is opened. The home page's main bundle went from about 930KB to about 225KB.",
         },
         {
           heading: "Testing",
-          body: "Unit tests (Vitest): 2 test files and 6 tests, with no failures. They cover the dropdown and the date and time field.\n\nBrowser and accessibility tests (Playwright with axe): 2 checks, one for the home page and one for the login page, with no failures. They check for serious and critical accessibility problems after scrolling. Getting them to pass found 15 low-contrast text problems on the home page, which I fixed.\n\nLighthouse, mobile emulation, production build: the home page scores 88 to 96 for performance, 100 for accessibility, best practices and SEO. The demo event page scores 76 to 82 for performance and 100 for accessibility, best practices and SEO. Its largest paint went from about 8 seconds to about 4.8 seconds. The biggest gains came from loading pages on demand and hosting the sample photos with the site instead of an outside image service.\n\nLayout and smoke checks: a phone-width check on 5 pages at 360, 390 and 430 pixels passed in all 15 combinations, with no sideways scrolling. A demo smoke test covered the start page, the event dashboard, the gallery count and the guest page, with no page errors. I also checked the layout by hand at 1024, 1280, 1440, 1512, 1920 and 2560 pixels wide.\n\nCode quality: lint went from 64 problems to none with errors. The main fixes were removing unused code, moving data loading into cancelable effects, and moving one component out of a page so React does not rebuild it on every render. The smoke test caught one bug that lint missed, a removed name that was still in use. I restored it.",
+          body: "I ran 2 unit test files with 6 tests, using Vitest, and none failed.\n\nI ran Playwright with axe on the home page and the login page. The scans found 15 low-contrast text problems on the home page, which I fixed.\n\nI ran a phone-width check on 5 pages at 360, 390 and 430 pixels, and the pages did not scroll sideways.",
         },
         {
           heading: "Results",
-          body: "A demo visitor can go from the start page to a styled event dashboard in three steps.\n\nThe demo event page scores 100 on the accessibility, best practices and SEO checks.\n\nChanges are on the main branch and deploy through Vercel.\n\nI have not measured real visitor numbers, conversion or host feedback, so I do not claim any here.",
-        },
-        {
-          heading: "Tech stack",
-          body: "React 19, React Router 7, Vite and Tailwind CSS 4. Supabase for the live database, sign-in and file storage. qrcode.react for QR codes and lucide-react for icons. Vitest, Playwright with axe and Lighthouse for testing. Deployed on Vercel.",
+          body: "A visitor can go from the start page to a styled event dashboard in three steps.\n\nOn the live build, the home page scores 100 on accessibility, best practices and SEO. Performance is 88 to 96.\n\nI have not measured real visitor numbers or host feedback yet, so I make no claims about them.",
         },
         {
           heading: "Next steps",
-          body: "Try the demo at vantge.app/try with the access code Demo.\n\nReduce the remaining JavaScript on the demo page, and host the rest of the event-type photos with the site.\n\nMeasure how long it takes a new host to create a styled event, with real users.",
+          body: "I want to reduce the JavaScript still loaded on the demo page. I also want to measure how long a new host takes to create a styled event, with real users.",
         },
       ],
     },
