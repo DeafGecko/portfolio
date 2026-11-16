@@ -1,0 +1,232 @@
+{
+  "the-factory": {
+    "title": "THE FACTORY",
+    "summary": "A demo booking and admin app for an event venue, built for my own practice. It covers bookings, payments and role-based access.",
+    "status": "Demo",
+    "tags": [
+      "Astro",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Cloudflare Workers",
+      "D1",
+      "Sanity"
+    ],
+    "image": "/images/factory-dashboard-laptop.png",
+    "websiteUrl": "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
+    "githubUrl": "https://github.com/DeafGecko/venue-operations",
+    "sections": [
+      {
+        "heading": "Who uses it",
+        "body": "This is a demo app for an event venue. I built it for myself to practice and test ideas. It is not used by a real venue.\n\nIt has four staff roles: admin, manager, developer and viewer."
+      },
+      {
+        "heading": "Why I built it",
+        "body": "Some venue software is too hard to use. I wanted something simpler, with one place to see events, make bookings, check the calendar and find clients.\n\nI also wanted a real project to learn Astro and practice full-stack work."
+      },
+      {
+        "heading": "What I built",
+        "body": "A two-step booking form that checks the details before it saves.\n\nA dashboard with money by month, money by event type and upcoming events.\n\nA calendar that shows paid, partly paid or unpaid events.\n\nRoles that limit what each person can change. The server enforces this, not only the screen.\n\nA read-only public view. Other pages need an access code."
+      },
+      {
+        "heading": "Choices I made",
+        "body": "Astro, because most pages only show data. React, only where a page needs interaction.\n\nCloudflare Workers runs the app, D1 is the database, and Sanity stores the venue data.\n\nThe server builds each booking, so the form cannot change the price."
+      },
+      {
+        "heading": "What I fixed after testing",
+        "body": "A fake cookie got into the admin area. I fixed it by signing sessions with HMAC.\n\nSign-in failed on Cloudflare because secrets were not readable at runtime. I turned on runtime access.\n\nI learned that working locally does not mean it will work in production."
+      },
+      {
+        "heading": "Testing",
+        "body": "I ran 19 unit tests with Vitest, and none failed.\n\nI ran Playwright browser tests at desktop and phone sizes. The last full run had two failures. I fixed both and ran it again."
+      },
+      {
+        "heading": "Still to do",
+        "body": "Color contrast still fails on many pages. Invite and reset emails need an email key. I deploy by hand with Wrangler."
+      }
+    ]
+  },
+  "vantge": {
+    "title": "VANTGE",
+    "summary": "A web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.",
+    "status": "Live demo",
+    "tags": [
+      "Product Design",
+      "Host & Guest Workflows",
+      "Browser demo"
+    ],
+    "image": "/images/vantge-mockup.png",
+    "websiteUrl": "https://vantge.app/try",
+    "githubUrl": "https://github.com/DeafGecko/vantge",
+    "sections": [
+      {
+        "heading": "Summary",
+        "body": "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo."
+      },
+      {
+        "heading": "The problem",
+        "body": "Hosts use several tools for one event, and guests have to remember several links. I wanted one event with one link."
+      },
+      {
+        "heading": "What I built",
+        "body": "A live preview that updates as the host types or picks a color, font or background.\n\nA background photo for each screen size: portrait for phones, landscape for desktop.\n\nGuest pages that match the preview, with photo upload and a gallery.\n\nThe demo at /try uses sample data. Edits stay in the browser, and nothing reaches the live database."
+      },
+      {
+        "heading": "Key decisions",
+        "body": "The demo uses an in-browser stand-in for the database, so it is safe to share and easy to reset.\n\nThe preview stays beside the settings while you scroll.\n\nEach page loads only when it is opened. The home page bundle went from about 930KB to about 225KB."
+      },
+      {
+        "heading": "Testing",
+        "body": "I ran 6 unit tests with Vitest, and none failed.\n\nI ran Playwright with axe on the home and login pages. The scans found 15 low-contrast text problems, which I fixed.\n\nI checked 5 pages at 360, 390 and 430 pixels. None scrolled sideways."
+      },
+      {
+        "heading": "Results",
+        "body": "A visitor can go from the start page to a styled event dashboard in three steps.\n\nOn the live build, the home page scores 100 on accessibility, best practices and SEO. I have not measured real visitor numbers yet."
+      },
+      {
+        "heading": "Next steps",
+        "body": "The access code is Demo, at vantge.app/try.\n\nI want to cut the JavaScript still loaded on the demo page, and measure how long a new host takes to create an event with real users."
+      }
+    ]
+  },
+  "showcard": {
+    "title": "SHOWCARD",
+    "summary": "A card app for Deaf and hard-of-hearing people. Save the messages you use most and show them in large text with one tap.",
+    "status": "Live",
+    "tags": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Accessibility"
+    ],
+    "image": "/images/showcard-mockup.png",
+    "websiteUrl": "https://showcard.09labs.dev",
+    "githubUrl": "https://github.com/DeafGecko/clearcard",
+    "sections": [
+      {
+        "heading": "What it is",
+        "body": "ShowCard is a card app for Deaf and hard-of-hearing people. You save the messages you use most, like a doctor visit or a coffee order. When you need to say something, you tap a card and the message shows in large text for the other person to read.\n\nI designed it, built it and tested it on my own."
+      },
+      {
+        "heading": "The problem",
+        "body": "Typing the same message over and over is slow, and harder during a medical visit or an emergency. Sometimes you just need to show a message fast, without speaking."
+      },
+      {
+        "heading": "What I did",
+        "body": "I created the whole product, including the product and interaction design, the responsive interface, accessibility improvements, private-card security and encryption, automated unit and browser tests, and the documentation."
+      },
+      {
+        "heading": "What it does",
+        "body": "You make your own cards and show any card full screen. You can sort cards into groups, and emergency cards are easy to reach. There is a quick-write option for a one-time message.\n\nPrivate cards are locked with a six-digit code, with a one-time backup key if you forget it. You can change the text size and pick light, dark or high-contrast colors."
+      },
+      {
+        "heading": "Privacy",
+        "body": "Private cards are encrypted before they are saved. I don't store the six-digit code. I store a derived hash, and a random key protects the data. After too many wrong codes, the app locks for a short time.\n\nA six-digit code is short, so if someone gets a copy of the browser data, they could try to guess it. I want to be clear about that limit."
+      },
+      {
+        "heading": "How I tested it",
+        "body": "I tested it as a responsive web app. Playwright checked the features, the error messages, phone-sized layouts, keyboard use and accessibility. Vitest covered the unit tests.\n\nI have not tested it with Expo or Xcode. It is a web app, not a native iPhone app, so I have not tried it on a real iPhone yet."
+      },
+      {
+        "heading": "What was hard",
+        "body": "Keeping private data safe without making sign-in confusing. I kept the code separate from the encryption key, so changing the code doesn't mean re-encrypting every private card.\n\nThe automatic accessibility tests found real problems, but I still need to test with real users and real phones."
+      },
+      {
+        "heading": "What's next",
+        "body": "Test with Deaf and hard-of-hearing people, and with screen readers on a real iPhone and Android phone. Make it installable and work offline. Decide whether to build a native app with Expo or wrap this one with Capacitor."
+      }
+    ]
+  },
+  "chromatique": {
+    "title": "CHROMATIQUE",
+    "summary": "A tool for testing a text color and a background color before you use them in code. It shows WCAG and APCA contrast side by side, with a live preview and exports to CSS, Tailwind and design tokens.",
+    "status": "Live",
+    "tags": [
+      "Vue 3",
+      "Vite",
+      "Tailwind CSS",
+      "VueUse"
+    ],
+    "image": "/images/chromatique-mockup.png",
+    "websiteUrl": "https://chroma.09labs.dev",
+    "githubUrl": "https://github.com/DeafGecko/chromatique-studio",
+    "sections": [
+      {
+        "heading": "The problem",
+        "body": "Picking a text color and a background color is easy to get wrong. A pair can look fine on my screen and still be hard to read for someone else.\n\nWCAG and APCA also disagree. WCAG can pass some pale pairs that read badly. APCA tracks how people see lightness, but most tools don't show it next to WCAG."
+      },
+      {
+        "heading": "What I built",
+        "body": "Chromatique Studio is a tool for testing two colors before they go into code. You enter a surface color and a text color, and it shows both checks side by side.\n\nThe preview uses the same two colors, and you can edit the text to try your own copy. There are color-blindness previews, a shade scale, saved pairs and exports to CSS, Tailwind and design tokens. The current pair goes in the URL, so a link opens the same colors."
+      },
+      {
+        "heading": "Why I show both checks",
+        "body": "I didn't want to pick a winner. The useful part is where the two checks agree and where they split. If a pair passes one and fails the other, you should stop and look."
+      },
+      {
+        "heading": "How I built it",
+        "body": "It's Vue 3 with the Composition API. The color state and the contrast math live in one composable, so I could test the math without opening the UI.\n\nI also laid the tool out on one card, so a laptop and an iPad fit the screen with no scrolling."
+      },
+      {
+        "heading": "Testing",
+        "body": "I ran 30 unit tests with Vitest, and none failed. I ran 16 browser tests with Playwright, including axe scans on every preset and color-blindness mode, and none failed.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO."
+      },
+      {
+        "heading": "What went wrong",
+        "body": "Playwright was quietly testing another project, because both used the same port. Moving it to its own port fixed that.\n\nMy APCA score for black on white was 114, but the reference is 106. The unit test caught it.\n\nA hint at 95 percent opacity dropped the red below AA contrast. Removing the opacity fixed it.\n\nThe scans ran during a color fade and read blended colors. They now wait for the final color."
+      },
+      {
+        "heading": "Next",
+        "body": "I want an accent color with suggestions that already pass contrast, component tests for the Vue parts, and a manual screen-reader pass. Automated checks miss reading order and meaning."
+      }
+    ]
+  },
+  "09labs": {
+    "title": "09 Labs",
+    "summary": "A snippet vault and small design system. Keep your code snippets in one place, group them, and switch between three color themes.",
+    "status": "In development",
+    "tags": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS"
+    ],
+    "image": "/images/09labs-mockup.png",
+    "websiteUrl": "https://09-labs-snippet-zeta.vercel.app",
+    "githubUrl": "https://github.com/DeafGecko/09-labs-snippet",
+    "sections": [
+      {
+        "heading": "What it is",
+        "body": "09 Labs is a snippet vault and a small design system. You keep code snippets in one place, group them, and switch between three color themes.\n\nIt starts with 35 snippets across about 20 categories. Your own snippets are saved in your browser, and there is no server."
+      },
+      {
+        "heading": "Why I built it",
+        "body": "I kept rebuilding the same navigation, modals, cards and form controls for each project. I wanted one set of parts I could reuse, and a place for the snippets I use most."
+      },
+      {
+        "heading": "Saving your snippets",
+        "body": "You can create, edit and delete your own snippets. They are stored separately from the starter set, so the starter snippets are never overwritten.\n\nIf the browser blocks storage, the app logs the error and keeps running."
+      },
+      {
+        "heading": "Themes and mobile",
+        "body": "The three themes are light, coffee and dark. Each one is a set of CSS variables. The dark theme first failed contrast, so I gave accent backgrounds their own text color.\n\nOn a laptop the categories stay in a sidebar. On a phone they open in a drawer, with a row of pills across the top."
+      },
+      {
+        "heading": "Search",
+        "body": "Search checks the title, description and tags, and it respects the category and Favorites filters. Cmd+K opens a command palette, and Ctrl+K does the same on Windows and Linux."
+      },
+      {
+        "heading": "Sandbox",
+        "body": "The sandbox runs the code you type with eval, directly in the page. That means it can reach the page and the saved data. This is the next thing I need to fix. The plan is an iframe with no access to the page's storage."
+      },
+      {
+        "heading": "Testing",
+        "body": "The public repo does not have automated tests yet. ESLint is set up, and the lint script runs on the whole project. I'm adding tests next, and I'll publish the numbers when they are in the repo."
+      },
+      {
+        "heading": "Next",
+        "body": "The theme can flash the wrong color on load, because the saved theme is applied after the page mounts. Starter snippet edits only last for the session. Sidebar.tsx is about 755 lines and I would split it up."
+      }
+    ]
+  }
+}
