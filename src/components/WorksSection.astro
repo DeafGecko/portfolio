@@ -87,7 +87,7 @@ const {
         },
         {
           heading: "Testing",
-          body: "I ran 19 unit tests with Vitest. They all pass.\n\nI ran browser tests with Playwright at desktop and phone sizes. The last full run had two failures. I fixed both and ran the tests again.",
+          body: "I ran 19 unit tests with Vitest, and none failed.\n\nI ran browser tests with Playwright at desktop and phone sizes. The last full run had two failures. I fixed both and ran the tests again.",
         },
         {
           heading: "Still to do",
@@ -138,11 +138,11 @@ const {
         },
         {
           heading: "Testing",
-          body: "Unit tests (Vitest): 2 test files and 6 tests, all passing. They cover the dropdown and the date and time field.\n\nBrowser and accessibility tests (Playwright with axe): 2 checks, one for the home page and one for the login page, both passing. They check for serious and critical accessibility problems after scrolling. Getting them to pass found 15 low-contrast text problems on the home page, which I fixed.\n\nLighthouse, mobile emulation, production build: the home page scores 88 to 96 for performance, 100 for accessibility, best practices and SEO. The demo event page scores 76 to 82 for performance and 100 for accessibility, best practices and SEO. Its largest paint went from about 8 seconds to about 4.8 seconds. The biggest gains came from loading pages on demand and hosting the sample photos with the site instead of an outside image service.\n\nLayout and smoke checks: a phone-width check on 5 pages at 360, 390 and 430 pixels passed in all 15 combinations, with no sideways scrolling. A demo smoke test covered the start page, the event dashboard, the gallery count and the guest page, with no page errors. I also checked the layout by hand at 1024, 1280, 1440, 1512, 1920 and 2560 pixels wide.\n\nCode quality: lint went from 64 problems to none with errors. The main fixes were removing unused code, moving data loading into cancelable effects, and moving one component out of a page so React does not rebuild it on every render. The smoke test caught one bug that lint missed, a removed name that was still in use. I restored it.",
+          body: "Unit tests (Vitest): 2 test files and 6 tests, with no failures. They cover the dropdown and the date and time field.\n\nBrowser and accessibility tests (Playwright with axe): 2 checks, one for the home page and one for the login page, with no failures. They check for serious and critical accessibility problems after scrolling. Getting them to pass found 15 low-contrast text problems on the home page, which I fixed.\n\nLighthouse, mobile emulation, production build: the home page scores 88 to 96 for performance, 100 for accessibility, best practices and SEO. The demo event page scores 76 to 82 for performance and 100 for accessibility, best practices and SEO. Its largest paint went from about 8 seconds to about 4.8 seconds. The biggest gains came from loading pages on demand and hosting the sample photos with the site instead of an outside image service.\n\nLayout and smoke checks: a phone-width check on 5 pages at 360, 390 and 430 pixels passed in all 15 combinations, with no sideways scrolling. A demo smoke test covered the start page, the event dashboard, the gallery count and the guest page, with no page errors. I also checked the layout by hand at 1024, 1280, 1440, 1512, 1920 and 2560 pixels wide.\n\nCode quality: lint went from 64 problems to none with errors. The main fixes were removing unused code, moving data loading into cancelable effects, and moving one component out of a page so React does not rebuild it on every render. The smoke test caught one bug that lint missed, a removed name that was still in use. I restored it.",
         },
         {
           heading: "Results",
-          body: "A demo visitor can go from the start page to a styled event dashboard in three steps.\n\nThe demo event page passes the accessibility, best practices and SEO checks at 100.\n\nChanges are on the main branch and deploy through Vercel.\n\nI have not measured real visitor numbers, conversion or host feedback, so I do not claim any here.",
+          body: "A demo visitor can go from the start page to a styled event dashboard in three steps.\n\nThe demo event page scores 100 on the accessibility, best practices and SEO checks.\n\nChanges are on the main branch and deploy through Vercel.\n\nI have not measured real visitor numbers, conversion or host feedback, so I do not claim any here.",
         },
         {
           heading: "Tech stack",
@@ -245,7 +245,7 @@ const {
         },
         {
           heading: "Three themes",
-          body: "There are light, coffee and dark themes. Each theme is a set of CSS variables, and switching themes changes one attribute on the page.\n\nThe dark theme first failed contrast. White text on its pale indigo measured 1.99 to 1. I gave each theme its own text color for accent backgrounds to fix it.\n\nI checked 13 text and background pairs in each theme, 39 in total. All of them pass the 4.5 to 1 minimum.",
+          body: "There are light, coffee and dark themes. Each theme is a set of CSS variables, and switching themes changes one attribute on the page.\n\nThe dark theme first failed contrast. White text on its pale indigo measured 1.99 to 1. I gave each theme its own text color for accent backgrounds to fix it.\n\nI checked 13 text and background pairs in each theme, 39 in total. None of them fall below the 4.5 to 1 minimum.",
         },
         {
           heading: "Mobile navigation",
@@ -265,7 +265,7 @@ const {
         },
         {
           heading: "Testing",
-          body: "I ran 20 unit and component tests with Vitest. They pass.\n\nI ran 5 browser tests with Playwright, and all of them pass. The sandbox test runs real code in a real browser and checks the output.\n\nI ran 3 accessibility tests with axe. They pass.\n\nESLint reports no problems, TypeScript reports no errors, and the production build passes. Lighthouse scores 100 in all four categories, in each theme.",
+          body: "I ran 20 unit and component tests with Vitest, and none failed.\n\nI ran 5 browser tests with Playwright, and none failed. The sandbox test runs real code in a real browser and checks the output.\n\nI ran 3 accessibility tests with axe, and none failed.\n\nESLint reports no problems, TypeScript reports no errors, and the production build passes. Lighthouse scores 100 in all four categories, in each theme.",
         },
         {
           heading: "What I would fix next",
@@ -314,7 +314,7 @@ const {
         },
         {
           heading: "Testing",
-          body: "I ran 30 unit tests with Vitest, and they all pass.\n\nI ran 16 browser tests with Playwright, including axe scans. They run on every preset, every color-blindness mode, edit mode and the export window. They check for WCAG 2.0 and 2.1 A and AA problems. They all pass.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
+          body: "I ran 30 unit tests with Vitest, and none failed.\n\nI ran 16 browser tests with Playwright, including axe scans. They run on every preset, every color-blindness mode, edit mode and the export window. They check for WCAG 2.0 and 2.1 A and AA problems, and none failed.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
         },
         {
           heading: "What went wrong",
@@ -359,7 +359,7 @@ const {
         },
         {
           heading: "Testing",
-          body: "I did not have a test setup at first. I added Vitest, with Testing Library for the React parts, and wrote tests for the stores, the API routes and the components that handle the cart, the wishlist, the theme and the success page.\n\nThere are 60 tests in 9 files, and they all pass. The TypeScript check is clean.\n\nI did not run a full production build for this pass, because the build queries the database while it renders pages.",
+          body: "I did not have a test setup at first. I added Vitest, with Testing Library for the React parts, and wrote tests for the stores, the API routes and the components that handle the cart, the wishlist, the theme and the success page.\n\nThere are 60 tests in 9 files, and none fail. The TypeScript check is clean.\n\nI did not run a full production build for this pass, because the build queries the database while it renders pages.",
         },
         {
           heading: "Bugs the tests found",
@@ -420,7 +420,7 @@ const {
         },
         {
           heading: "Results",
-          body: "Vitest passes 2 of 2 tests. Playwright passes 6 of 6, with the axe scans included. The lint check is clean, the production build passes, and the live site scores 100 in all four Lighthouse categories.\n\nI ran Lighthouse on the dev server too. It scored lower there, because the dev server does not bundle the code. The live site is the number that matters.",
+          body: "Vitest: 2 of 2 tests ran with no failures. Playwright: 6 of 6 ran with no failures, including the axe scans. The lint check is clean, the production build passes, and the live site scores 100 in all four Lighthouse categories.\n\nI ran Lighthouse on the dev server too. It scored lower there, because the dev server does not bundle the code. The live site is the number that matters.",
         },
         {
           heading: "What I learned",
