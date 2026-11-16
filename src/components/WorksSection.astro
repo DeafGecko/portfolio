@@ -257,15 +257,15 @@ const {
         },
         {
           heading: "Accessibility",
-          body: "I fixed the dialogs so they announce themselves and trap focus correctly. Form labels are attached to their inputs, and the close buttons have names. The sandbox output is announced to screen readers as it changes. Card titles are headings, so the heading order makes sense under the page title.\n\nLighthouse accessibility went from 93 to 100 on the production build, in all three themes. The axe checks found no WCAG 2.0 or 2.1 A or AA problems on the home page in any theme.\n\nLighthouse only scores the default theme, so the axe run is what covers the other two.",
+          body: "I labeled the dialogs and the form fields, and the card titles are headings in order under the page title. I have not yet run a full accessibility audit on the public version, so I'm not claiming a score.",
         },
         {
-          heading: "Sandbox security fix",
-          body: "The sandbox used to run user code directly in the page. That code could read the saved data and change the page. If the code threw an error, the console stayed changed for the rest of the session.\n\nNow the code runs in an iframe with no access to the page or its storage. The iframe sends its logs back with postMessage, and the page only accepts messages that come from that iframe. Each run uses a new iframe, so running the same code twice really runs it twice.",
+          heading: "Sandbox",
+          body: "The sandbox runs the code you type with eval, directly in the page. That means the code can reach the page and the saved data. I know this is the next thing to fix. The plan is to run the code in an iframe with no access to the page's storage, and send its output back with postMessage.",
         },
         {
           heading: "Testing",
-          body: "I ran 20 unit and component tests with Vitest, and none failed.\n\nI ran 5 browser tests with Playwright, and none failed. The sandbox test runs real code in a real browser and checks the output.\n\nI ran 3 accessibility tests with axe, and none failed.\n\nESLint reports no problems, TypeScript reports no errors, and the production build passes. Lighthouse scores 100 in all four categories, in each theme.",
+          body: "The public repo does not have automated tests yet. ESLint is set up, and the lint script runs on the whole project. I'm adding tests next, and I'll publish the numbers when they are in the repo.",
         },
         {
           heading: "What I would fix next",
