@@ -52,22 +52,14 @@ const {
       ],
       summary:
         "A demo booking and admin app for an event venue, built for my own practice. It covers bookings, payments and role-based access.",
-      tags: [
-        "Astro",
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "Cloudflare Workers",
-        "D1",
-        "Sanity",
-      ],
+      tags: ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare Workers", "D1", "Sanity"],
       githubUrl: "https://github.com/DeafGecko/venue-operations",
       websiteUrl: "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
       caseStudyStatus: "Demo",
       caseStudySections: [
         {
-          heading: "What it is",
-          body: "A demo app for an event venue. I built it for myself to practice and to test ideas. It is not used by a real venue.\n\nIt has four staff roles: admin, manager, developer and viewer.",
+          heading: "Who uses it",
+          body: "This is a demo app for an event venue. I built it for myself to practice and test ideas. It is not used by a real venue.\n\nIt has four staff roles: admin, manager, developer and viewer.",
         },
         {
           heading: "Why I built it",
@@ -75,30 +67,25 @@ const {
         },
         {
           heading: "What I built",
-          body: "A two-step booking form. It checks the name, email, phone number, date and guest count before it saves anything.\n\nA dashboard that shows money by month, money by event type and the next events.\n\nA calendar that shows whether each event is paid, partly paid or unpaid.\n\nRoles that limit what each person can change. A viewer cannot edit data, and the server enforces this, not only the screen.\n\nA public page with the dashboard and calendar in read-only form. Other pages need an access code.",
+          body: "A two-step booking form that checks the details before it saves.\n\nA dashboard with money by month, money by event type and upcoming events.\n\nA calendar that shows paid, partly paid or unpaid events.\n\nRoles that limit what each person can change. The server enforces this, not only the screen.\n\nA read-only public view. Other pages need an access code.",
         },
         {
           heading: "Choices I made",
-          body: "I used Astro because most pages only show data, and Astro keeps those pages small and fast. I used React only where a page needs interaction, like the forms, the calendar and the dialogs.\n\nCloudflare Workers runs the app. D1 is the database. Sanity stores the venue data.\n\nThe server builds each booking, so the form cannot change the price or the amount paid.\n\nIn testing, a fake cookie got into the admin area. I fixed it by signing sessions with HMAC. The tests sign cookies the same way the server checks them.",
+          body: "Astro, because most pages only show data. React, only where a page needs interaction.\n\nCloudflare Workers runs the app, D1 is the database, and Sanity stores the venue data.\n\nThe server builds each booking, so the form cannot change the price.",
         },
         {
           heading: "What I fixed after testing",
-          body: "Fake cookie bug: fixed with signed sessions.\n\nSign-in worked on my computer but failed on Cloudflare. Secrets were not readable at runtime. I turned on runtime environment access, and it worked.\n\nLesson: working locally does not mean it will work in production.\n\nThe Lighthouse SEO score is 1.0 for the booking page and 0.58 for the homepage. The homepage leads to an admin page, and I hide admin pages from search engines on purpose. I wrote the descriptions and the robots.txt and sitemap.xml files so they come from one source.",
+          body: "A fake cookie got into the admin area. I fixed it by signing sessions with HMAC.\n\nSign-in failed on Cloudflare because secrets were not readable at runtime. I turned on runtime access.\n\nI learned that working locally does not mean it will work in production.",
         },
         {
           heading: "Testing",
-          body: "I ran 19 unit tests with Vitest, and none failed.\n\nI ran browser tests with Playwright at desktop and phone sizes. The last full run had two failures. I fixed both and ran the tests again.",
+          body: "I ran 19 unit tests with Vitest, and none failed.\n\nI ran Playwright browser tests at desktop and phone sizes. The last full run had two failures. I fixed both and ran it again.",
         },
         {
           heading: "Still to do",
-          body: "Color contrast still fails on many pages. I am fixing this now.\n\nInvite and password-reset emails do not send yet. They need an email service key.\n\nI deploy by hand with Wrangler, because automatic deploys from GitHub are not reliable yet.",
+          body: "Color contrast still fails on many pages. Invite and reset emails need an email key. I deploy by hand with Wrangler.",
         },
       ],
-      // Add up to 2 screenshot images below when ready:
-      // screenshots: [
-      //   { src: "/images/factory-screen-1.png", alt: "The Factory dashboard view" },
-      //   { src: "/images/factory-screen-2.png", alt: "The Factory calendar view" },
-      // ],
     },
     {
       eyebrow: "EVENT PHOTO SHARING",
@@ -110,7 +97,7 @@ const {
       ],
       featured: true,
       summary:
-        "A web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard. I built it, including a browser-only demo.",
+        "A web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.",
       tags: ["Product Design", "Host & Guest Workflows", "Browser demo"],
       websiteUrl: "https://vantge.app/try",
       githubUrl: "https://github.com/DeafGecko/vantge",
@@ -118,31 +105,31 @@ const {
       caseStudySections: [
         {
           heading: "Summary",
-          body: "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting a party, a wedding or another event. A host shares a photo gallery and an invitation with guests through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo, so a visitor can try it without signing up.",
+          body: "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo.",
         },
         {
           heading: "The problem",
-          body: "Hosts use several tools for one event: one for guest photos, a separate place for food sign-up, and a QR code printed on a card. Guests have to remember several links.\n\nI wanted one event with one link. The host sets the look, and the guest sees the result straight away.",
+          body: "Hosts use several tools for one event, and guests have to remember several links. I wanted one event with one link.",
         },
         {
           heading: "What I built",
-          body: "The host dashboard has a live preview. It updates as the host types a name or picks a color, font or background. Each screen size gets its own background photo.\n\nThe guest pages match the preview. Guests can upload photos and view the gallery.\n\nThe demo at /try uses sample data. Edits stay in that browser, and Reset brings back the sample. Nothing reaches the live database.",
+          body: "A live preview that updates as the host types or picks a color, font or background.\n\nA background photo for each screen size: portrait for phones, landscape for desktop.\n\nGuest pages that match the preview, with photo upload and a gallery.\n\nThe demo at /try uses sample data. Edits stay in the browser, and nothing reaches the live database.",
         },
         {
           heading: "Key decisions",
-          body: "The demo uses an in-browser stand-in for the database. Real event pages still use the live database. That made the demo safe to share and easy to reset.\n\nThe preview stays beside the settings while you scroll. A demo sign-in once leaked into the real sign-in, so the exit links now do full page loads to clear the session.\n\nEach page loads only when it is opened. The home page's main bundle went from about 930KB to about 225KB.",
+          body: "The demo uses an in-browser stand-in for the database, so it is safe to share and easy to reset.\n\nThe preview stays beside the settings while you scroll.\n\nEach page loads only when it is opened. The home page bundle went from about 930KB to about 225KB.",
         },
         {
           heading: "Testing",
-          body: "I ran 2 unit test files with 6 tests, using Vitest, and none failed.\n\nI ran Playwright with axe on the home page and the login page. The scans found 15 low-contrast text problems on the home page, which I fixed.\n\nI ran a phone-width check on 5 pages at 360, 390 and 430 pixels, and the pages did not scroll sideways.",
+          body: "I ran 6 unit tests with Vitest, and none failed.\n\nI ran Playwright with axe on the home and login pages. The scans found 15 low-contrast text problems, which I fixed.\n\nI checked 5 pages at 360, 390 and 430 pixels. None scrolled sideways.",
         },
         {
           heading: "Results",
-          body: "A visitor can go from the start page to a styled event dashboard in three steps.\n\nOn the live build, the home page scores 100 on accessibility, best practices and SEO. Performance is 88 to 96.\n\nI have not measured real visitor numbers or host feedback yet, so I make no claims about them.",
+          body: "A visitor can go from the start page to a styled event dashboard in three steps.\n\nOn the live build, the home page scores 100 on accessibility, best practices and SEO. I have not measured real visitor numbers yet.",
         },
         {
           heading: "Next steps",
-          body: "I want to reduce the JavaScript still loaded on the demo page. I also want to measure how long a new host takes to create a styled event, with real users.",
+          body: "The access code is Demo, at vantge.app/try.\n\nI want to cut the JavaScript still loaded on the demo page, and measure how long a new host takes to create an event with real users.",
         },
       ],
     },
