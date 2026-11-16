@@ -621,9 +621,6 @@ const {
       </div>
       <!-- screenshot gallery (populated by JS when screenshots present) -->
       <div class="case-study-gallery" id="caseStudyGallery" hidden></div>
-      <div class="case-study-preview" id="caseStudyPreview" aria-hidden="true">
-        <img id="caseStudyPreviewImage" alt="" />
-      </div>
       <!-- rich case study sections (populated by JS when caseStudySections present) -->
       <div class="case-study-body" id="caseStudyBody" hidden></div>
       <div class="case-study-actions">
@@ -1466,12 +1463,11 @@ const {
 
   :global(.cs-screenshot) {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     border-radius: 4px;
     border: 1px solid rgba(42, 82, 204, 0.18);
     display: block;
-    cursor: zoom-in;
     transition: border-color 0.2s ease;
   }
 
@@ -1482,57 +1478,6 @@ const {
 
   :global(.dark) :global(.cs-screenshot) {
     border-color: rgba(106, 158, 255, 0.2);
-  }
-
-  .case-study-preview {
-    position: fixed;
-    inset: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    background: rgba(10, 14, 23, 0.4);
-    backdrop-filter: blur(8px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition:
-      opacity 0.45s ease,
-      visibility 0s linear 0.45s;
-  }
-
-  .case-study-preview.is-visible {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
-  }
-
-  .case-study-preview img {
-    display: block;
-    width: min(36rem, 100%);
-    max-height: min(70vh, 36rem);
-    object-fit: contain;
-    padding: 0.5rem;
-    background: #dfe2e3;
-    border: 2px solid #2a52cc;
-    border-radius: 4px;
-    box-shadow: 0 24px 70px rgba(10, 14, 23, 0.45);
-    opacity: 0;
-    transform: scale(0.88);
-    transition:
-      opacity 0.4s ease,
-      transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .case-study-preview.is-visible img {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  :global(.dark) .case-study-preview img {
-    background: #12161f;
-    border-color: #5a8eff;
   }
 
   /* github private note */
@@ -1978,8 +1923,6 @@ const {
       const summary = document.getElementById("caseStudySummary");
       const body = document.getElementById("caseStudyBody");
       const gallery = document.getElementById("caseStudyGallery");
-      const preview = document.getElementById("caseStudyPreview");
-      const previewImage = document.getElementById("caseStudyPreviewImage");
       const tags = document.getElementById("caseStudyTags");
       const github = document.getElementById("caseStudyGithub");
       const githubNote = document.getElementById("caseStudyGithubNote");
@@ -2055,22 +1998,6 @@ const {
                 img.className = "cs-screenshot";
                 img.loading = "lazy";
                 img.tabIndex = 0;
-                const showPreview = () => {
-                  previewImage.src = img.currentSrc || src;
-                  previewImage.alt = alt || "";
-                  preview.setAttribute("aria-hidden", "false");
-                  requestAnimationFrame(() => {
-                    preview.classList.add("is-visible");
-                  });
-                };
-                const hidePreview = () => {
-                  preview.classList.remove("is-visible");
-                  preview.setAttribute("aria-hidden", "true");
-                };
-                img.addEventListener("mouseenter", showPreview);
-                img.addEventListener("mouseleave", hidePreview);
-                img.addEventListener("focus", showPreview);
-                img.addEventListener("blur", hidePreview);
                 gallery.append(img);
               });
               gallery.hidden = false;
