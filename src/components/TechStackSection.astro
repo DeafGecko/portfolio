@@ -14,8 +14,8 @@ const { heading = "Skills & Tools" } = Astro.props;
 const groups = [
   { title: "Design", description: "Interface design, responsive layouts and user flows, shown in the case studies.", skills: ["Interface design", "Responsive layouts", "User flows"] },
   { title: "Access & design systems", description: "Accessibility checks, design tokens and reusable components. 09 Labs is still in development.", skills: ["Accessibility", "Contrast checking", "Design tokens", "Reusable components"] },
-  { title: "Frontend coding", description: "The languages and frameworks used to build the projects.", skills: ["HTML & CSS", "JavaScript", "TypeScript", "React", "Next.js", "Astro", "Vue", "Tailwind CSS"] },
-  { title: "Testing & delivery", description: "Version control, deployment and data services used in the projects.", skills: ["Git", "Vercel", "Cloudflare Workers", "D1", "Sanity"] },
+  { title: "Frontend coding", description: "The languages and frameworks used to build the projects.", skills: ["HTML & CSS", "JavaScript", "TypeScript", "React", "Next.js", "Astro", "Vue", "Vite", "Tailwind CSS", "Zustand", "Prisma", "React Router"] },
+  { title: "Testing & delivery", description: "Testing, version control, deployment and data services used in the projects.", skills: ["Vitest", "Playwright", "axe", "Lighthouse", "Testing Library", "Git", "Vercel", "Cloudflare Workers", "D1", "Supabase", "Sanity"] },
 ];
 
 // Icons for each skill. Skills without a logo get a text tile.
@@ -35,6 +35,16 @@ const SKILL_ICONS: Record<string, { slug?: string; icon?: string }> = {
   "Astro": { slug: "astro" },
   "Vue": { slug: "vuedotjs", icon: "/vue.svg" },
   "Tailwind CSS": { slug: "tailwindcss" },
+  "Vite": { slug: "vite" },
+  "Zustand": { icon: "/zustand.svg" },
+  "Prisma": { slug: "prisma" },
+  "React Router": { slug: "reactrouter" },
+  "Vitest": { slug: "vitest" },
+  "Playwright": { icon: "/playwright.svg" },
+  "axe": { icon: "/skills/automated-checks.svg" },
+  "Lighthouse": { slug: "lighthouse" },
+  "Testing Library": { slug: "testinglibrary" },
+  "Supabase": { slug: "supabase" },
   "Git": { slug: "git" },
   "Vercel": { slug: "vercel" },
   "Cloudflare Workers": { slug: "cloudflare" },
@@ -106,7 +116,7 @@ const ROWS: { label: string; direction: "left" | "right"; speed: number; items: 
 
   <div class="techstack-header">
     <h2 class="techstack-title" id="techstack-title">{heading}</h2>
-    <p class="techstack-intro">Design, frontend development, and testing—supported by the projects above.</p>
+    <p class="techstack-intro">Design, frontend development, and testing, all supported by the projects above.</p>
   </div>
 
   {ROWS.map((row) => (
