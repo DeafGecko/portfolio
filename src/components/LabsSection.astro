@@ -27,9 +27,25 @@ const labs = [
           <h3 class="labs-name">{lab.title}</h3>
           <p class="labs-summary">{lab.summary}</p>
           <div class="labs-links">
-            <a href={lab.caseStudy}>Read the case study</a>
-            <a href={lab.githubUrl} target="_blank" rel="noopener">View code on GitHub</a>
-            <a href={lab.websiteUrl} target="_blank" rel="noopener">Open live project</a>
+            <a class="lab-btn lab-btn-text" href={lab.caseStudy}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <circle cx="17.5" cy="17.5" r="2.5"></circle>
+                <path d="M21 21l-1.2-1.2"></path>
+              </svg>
+              <span>Case Study</span>
+            </a>
+            <a class="lab-btn" href={lab.githubUrl} target="_blank" rel="noopener" aria-label="View on GitHub" title="View on GitHub">
+              <img src="/github.svg" alt="" width="18" height="18" aria-hidden="true" />
+            </a>
+            <a class="lab-btn" href={lab.websiteUrl} target="_blank" rel="noopener" aria-label="Open live project" title="Open live project">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M2 12h20"></path>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </a>
           </div>
         </li>
       ))
@@ -98,11 +114,35 @@ const labs = [
     gap: 1rem;
     margin-top: 1rem;
   }
-  .labs-links a {
-    color: #2a52cc;
+  .labs-links {
+    align-items: center;
+  }
+  .lab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    color: #eef4ff;
+    background: #0a0e17;
+    border: 1px solid rgba(106, 158, 255, 0.35);
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  .lab-btn-text {
+    width: auto;
+    padding: 0 1rem;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.95rem;
     font-weight: 600;
   }
-  :global(.dark) .labs-links a {
-    color: #6a9eff;
+  .lab-btn img {
+    filter: brightness(0) invert(1);
+  }
+  .lab-btn:hover,
+  .lab-btn:focus-visible {
+    border-color: #6a9eff;
   }
 </style>
