@@ -114,12 +114,19 @@ const vCardHref = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCard)}`;
         <textarea id="contact-message" name="message" rows="5" required
         ></textarea>
       </label>
-      <button class="send-button" type="submit">
+      <div class="honeypot" aria-hidden="true">
+        <label>
+          Website
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
+        </label>
+      </div>
+      <button class="send-button" type="submit" data-send-button>
         <Send size={18} strokeWidth={1.8} aria-hidden="true" />
-        Compose email
+        Send message
       </button>
+      <p class="form-status" role="status" aria-live="polite" data-form-status></p>
       <p class="form-note">
-        Opens your default email application. Nothing is stored.
+        Your message goes straight to my inbox. I reply to the email address you enter.
       </p>
     </form>
   </div>
@@ -431,6 +438,28 @@ const vCardHref = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCard)}`;
       overflow-wrap: anywhere;
     }
   }
+
+  .honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form-status {
+    min-height: 1.4em;
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+  }
+
+  .form-status[data-state="error"] {
+    color: #a12a2a;
+  }
+
+  .form-status[data-state="ok"] {
+    color: #1f6b3a;
+  }
 </style>
 
 <script is:inline>
@@ -440,19 +469,44 @@ const vCardHref = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCard)}`;
       if (!form || form.dataset.wired === "true") return;
       form.dataset.wired = "true";
 
-      form.addEventListener("submit", (event) => {
+      const statusEl = form.querySelector("[data-form-status]");
+      const sendButton = form.querySelector("[data-send-button]");
+
+      function showStatus(text, isError) {
+        if (!statusEl) return;
+        statusEl.textContent = text;
+        statusEl.dataset.state = isError ? "error" : "ok";
+      }
+
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
 
         const data = new FormData(form);
-        const recipient = form.dataset.recipient;
-        const subject = data.get("subject")?.toString() || "Project inquiry";
-        const message = data.get("message")?.toString() || "";
-        const senderName = data.get("name")?.toString() || "";
-        const senderEmail = data.get("email")?.toString() || "";
-        const body = `${message}\n\nFrom: ${senderName}\nEmail: ${senderEmail}`;
+        if (sendButton) sendButton.disabled = true;
+        showStatus("Sending...", false);
 
-        location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        try {
+          const response = await fetch("/api/contact", { method: "POST", body: data });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || !result.ok) {
+            throw new Error(result.error || "The message could not be sent.");
+          }
+          form.reset();
+          showStatus("Thanks, your message was sent.", false);
+        } catch (error) {
+          // Fallback: open the email app with the message filled in.
+          const recipient = form.dataset.recipient;
+          const subject = data.get("subject")?.toString() || "Project inquiry";
+          const message = data.get("message")?.toString() || "";
+          const senderName = data.get("name")?.toString() || "";
+          const senderEmail = data.get("email")?.toString() || "";
+          const body = `${message}\n\nFrom: ${senderName}\nEmail: ${senderEmail}`;
+          showStatus("Sending failed. Opening your email app instead.", true);
+          location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        } finally {
+          if (sendButton) sendButton.disabled = false;
+        }
       });
 
       const copyButton = document.querySelector("[data-copy-email]");
