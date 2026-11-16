@@ -282,39 +282,31 @@ const {
       caseStudySections: [
         {
           heading: "The problem",
-          body: "Picking a text color and a background color is easy to get wrong. A pair can look fine on my screen and still be hard to read for someone else.\n\nThe two common checks also disagree. WCAG contrast can pass some pale pairs that read badly. APCA is closer to how people actually see lightness, but most tools don't show it next to WCAG.",
+          body: "Picking a text color and a background color is easy to get wrong. A pair can look fine on my screen and still be hard to read for someone else.\n\nWCAG and APCA also disagree. WCAG can pass some pale pairs that read badly. APCA tracks how people see lightness, but most tools don't show it next to WCAG.",
         },
         {
           heading: "What I built",
-          body: "Chromatique Studio is a tool for testing two colors before you put them in the code. You enter a surface color and a text color, and it shows both checks side by side.\n\nThe preview uses the same two colors, so what you see is what they produce. The text is editable, so you can try your own copy. Cards, badges, buttons, inputs and toggles show up with the same colors.\n\nThere are color-blindness previews, a shade scale, saved pairs and an eyedropper where the browser supports it. You can export the colors as CSS variables, a Tailwind config or W3C design tokens.\n\nThe current pair goes in the URL, so a link opens the same colors. Saved palettes stay in the browser.",
+          body: "Chromatique Studio is a tool for testing two colors before they go into code. You enter a surface color and a text color, and it shows both checks side by side.\n\nThe preview uses the same two colors, and you can edit the text to try your own copy. There are color-blindness previews, a shade scale, saved pairs and exports to CSS, Tailwind and design tokens. The current pair goes in the URL, so a link opens the same colors.",
         },
         {
           heading: "Why I show both checks",
-          body: "I didn't want to pick a winner between WCAG and APCA. The useful part is seeing where they agree and where they split. If a pair passes one and fails the other, you should stop and look.",
-        },
-        {
-          heading: "Keyboard shortcuts",
-          body: "S saves, R resets, E turns preview editing on or off, / jumps to the hex box, and Escape leaves editing. The shortcuts are off while you type, and they ignore Ctrl, Cmd and Alt. The legend only shows up after you press a key, so mouse users never see it.",
+          body: "I didn't want to pick a winner. The useful part is where the two checks agree and where they split. If a pair passes one and fails the other, you should stop and look.",
         },
         {
           heading: "How I built it",
-          body: "It's Vue 3 with the Composition API. All the color state and the contrast math live in one composable, and the components only read from it. That let me test the math without opening the UI.\n\nThe state lives in the URL, and the saved palettes live in localStorage. Nothing needs a server.\n\nI used Inter for the section headings, and I hosted it with the site, so the page doesn't call a font service.",
-        },
-        {
-          heading: "The layout",
-          body: "The whole tool sits on one card. The name is at the top, the controls and the preview are in two columns, and the footer is at the bottom. On a laptop and an iPad, the card fits the screen with no scrolling. On a phone, the sections stack and you scroll.\n\nThe first version had the title in a separate bar, and a message told phone users to switch to a bigger screen. I removed both. The title is in the card now, and phones can use the stacked layout.\n\nBelow 1280 pixels, I made the spacing tighter. That was enough for an iPad in landscape to fit without scrolling. I checked the fit at 1440 by 900, 1024 by 768, 768 by 1024 and 390 by 844.",
+          body: "It's Vue 3 with the Composition API. The color state and the contrast math live in one composable, so I could test the math without opening the UI.\n\nI also laid the tool out on one card, so a laptop and an iPad fit the screen with no scrolling.",
         },
         {
           heading: "Testing",
-          body: "I ran 30 unit tests with Vitest, and none failed.\n\nI ran 16 browser tests with Playwright, including axe scans. They run on every preset, every color-blindness mode, edit mode and the export window. They check for WCAG 2.0 and 2.1 A and AA problems, and none failed.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
+          body: "I ran 30 unit tests with Vitest, and none failed. I ran 16 browser tests with Playwright, including axe scans on every preset and color-blindness mode, and none failed.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
         },
         {
           heading: "What went wrong",
-          body: "The tests were running against the wrong app. Playwright used port 4173, and another project was already using it. Playwright reused that server, so my tests ran against the other site. I gave Playwright its own port and turned off server reuse.\n\nMy APCA score for black on white came out at 114. The reference is 106. My unit test caught it. The fix was APCA's near-black clamp, its offset and its low-contrast cutoff.\n\nThe preview hint used 95 percent opacity. That blended the red down to about 4.34 to 1 on near-black, below AA. Removing the opacity fixed it.\n\nThe preview fades colors over 150 milliseconds. The accessibility scan ran in the middle of the fade and read blended colors. The test now waits for the final color before it scans.\n\nOn an iPad in landscape, the page scrolled by 11 pixels. The card was a little too tall for 1024 by 768. Tighter spacing fixed it.",
+          body: "Playwright was quietly testing another project, because both used the same port. Moving it to its own port fixed that.\n\nMy APCA score for black on white was 114, but the reference is 106. The unit test caught it.\n\nA hint at 95 percent opacity dropped the red below AA contrast. Removing the opacity fixed it.\n\nThe scans ran during a color fade and read blended colors. They now wait for the final color.",
         },
         {
           heading: "Next",
-          body: "I want to add a third color, an accent, with suggestions that already pass contrast. I also want component tests for the Vue components, not only for the math. I want to run the browser tests in more than one browser.\n\nAutomated checks miss things like reading order and what a color means, so I still need a manual pass with a screen reader.",
+          body: "I want an accent color with suggestions that already pass contrast, component tests for the Vue parts, and a manual screen-reader pass. Automated checks miss reading order and meaning.",
         },
       ],
     },
@@ -327,7 +319,7 @@ const {
         { src: "/images/monolith-mockup.png", alt: "Monolith storefront on a desktop monitor" },
       ],
       summary:
-        "A structured website built in a three-step process: layout, accent colors, and animation. It is a small online store for simple home and office goods, where you can browse, add to cart or wishlist, and check out without an account.",
+        "A structured website built in a three-step process: layout, accent colors, and animation. It is a small online store for simple home and office goods.",
       tags: ["Next.js", "React", "Prisma", "Zustand", "Tailwind CSS"],
       githubUrl: "https://github.com/DeafGecko/swiss-ecommerce/tree/main/swiss-ecommerce",
       websiteUrl: "https://ecommerce.09labs.dev",
@@ -335,39 +327,31 @@ const {
       caseStudySections: [
         {
           heading: "What it is",
-          body: "This is a small online store for simple home and office goods. The style is industrial and minimal.\n\nYou can switch between three looks from the header: grayscale, color and animated. Your choice stays when you come back.",
+          body: "Monolith is a small online store for simple home and office goods. You can browse by category, add items to a cart or wishlist, and check out without an account. There are three looks you can switch between in the header.",
         },
         {
           heading: "How I built it, in three steps",
-          body: "I built Monolith in three steps: the layout first, then the accent colors, then the animation.\n\nFirst I only built the layout, in grayscale. I wanted the structure to work before anything looked finished. That meant the grid, the spacing and the order of the sections.\n\nThen I added the accent color. The grayscale version was the base, so the color was a layer on top. It was not a way to fix a layout that wasn't working yet.\n\nLast, I added the animation. I left it for the end so it would not hide problems in the layout or the colors.\n\nThe hardest part for me was not jumping ahead. As a designer, I wanted to add color and motion early. Working in order made the layout easier to fix. The three looks you can switch between in the header come from these three steps: grayscale, color and animated.",
-        },
-        {
-          heading: "What I wanted",
-          body: "I wanted a visitor to be able to browse by category, add things to a cart and a wishlist, and check out without making an account.\n\nI also wanted a checkout flow that makes an order and keeps an order history, and a contact form that sends an email.",
-        },
-        {
-          heading: "How it fits together",
-          body: "I built it with Next.js and React. The product pages read from a Postgres database through Prisma. The cart and the wishlist live in the browser, so they stay when you reload.\n\nWhen you check out, the cart goes to an API route. The route checks the items, adds 8 percent tax and returns a session and a redirect. The success page then saves the order in the browser and clears the cart. The contact form sends its email through Gmail.",
+          body: "I built Monolith in three steps: the layout first, then the accent colors, then the animation.\n\nFirst I built the layout in grayscale. I wanted the grid, the spacing and the section order to work before anything looked finished.\n\nThen I added the accent color on top of that base. I did not use color to fix a layout that wasn't working yet.\n\nLast, I added the animation, so it wouldn't hide problems in the layout or the colors.\n\nThe hardest part was not jumping ahead. As a designer, I wanted to add color and motion early. The three looks in the header come from these steps: grayscale, color and animated.",
         },
         {
           heading: "What is not real yet",
-          body: "The checkout is a mock. It does not call a payment company, even though the database has a field for one.\n\nOrders are saved in the browser, not in the database. The cart and wishlist do not sync to the database either.\n\nI made these choices to keep the first version small. I know they are the first things I would change.",
+          body: "The checkout is a mock. It doesn't call a payment company, and orders are saved in the browser, not the database. I kept it that way on purpose for the first version.",
         },
         {
           heading: "Testing",
-          body: "I did not have a test setup at first. I added Vitest, with Testing Library for the React parts, and tested the stores, the API routes and the components that handle the cart, the wishlist, the theme and the success page.\n\nThere are 60 tests in 9 files, and none fail. The TypeScript check is clean.\n\nI did not run a full production build for this pass, because the build queries the database while it renders pages.",
+          body: "I ran 60 tests in 9 files, and none failed. The TypeScript check is clean. I did not run a full production build for this pass, because the build queries the database while it renders.",
         },
         {
-          heading: "Bugs the tests found",
-          body: "The header crashed when the category request failed. The server sent back an error object, and the header tried to loop over it. Now it only uses the response when it is a list.\n\nThe checkout accepted bad cart items. A zero or negative quantity, or a price stored as text, went straight into the total. Now every item is checked, and bad input gets a 400 error.\n\nA visit to the success page with no cart still saved a $0 order. Now an order is only saved when there is something in the cart.\n\nOrder numbers could come out shorter than the format I wrote down. I switched to a random ID, so they always have the right length.\n\nThe contact email subject showed HTML codes, so a name like Tom and Jerry came through as Tom amp Jerry. Also, a name with a line break could add extra mail headers. The subject now uses the plain name, with line breaks removed.\n\nItems saved from the product grid had no image on the wishlist page. Now the grid saves the image too.\n\nThe contact form could lose a letter when you type fast, because it uses an old copy of the form data. It now uses the latest value.",
+          heading: "What the tests found",
+          body: "The header crashed when the category request failed, so it now only uses a real list.\n\nThe checkout accepted a zero or negative quantity, so every cart item is checked now.\n\nA visit to the success page with an empty cart saved a $0 order. Now an order is saved only when the cart has items.\n\nThe contact email subject showed HTML codes and could take extra mail headers. It now uses the plain name, with line breaks removed.",
         },
         {
           heading: "What I learned",
-          body: "The tests that mattered most were on the API routes and the stores, because those hold the rules the screens depend on.\n\nMost of the bugs were at the edges: bad input from the browser, failed network calls, and saved data that did not match what the screen expected.\n\nData saved in the browser needs checks for empty and broken values, because any visit can write to it.",
+          body: "The tests that mattered most were on the API routes and the stores, because those hold the rules the screens depend on. Most bugs were at the edges: bad input, failed network calls, and saved data that didn't match what the screen expected.",
         },
         {
           heading: "Next",
-          body: "The biggest changes I want to make are moving the checkout checks and the pricing to the server, saving orders in the database, and getting lint working again.",
+          body: "Move the checks and pricing to the server, save orders in the database, and get lint working again.",
         },
       ],
     },
