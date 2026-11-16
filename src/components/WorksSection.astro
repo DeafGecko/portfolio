@@ -168,43 +168,51 @@ const {
         },
       ],
       summary:
-        "A card-based communication app built for the Deaf and Hard of Hearing community — fast, visual, and accessible by design.",
-      tags: ["React", "Visual Communication", "Accessibility"],
+        "A card app for Deaf and hard-of-hearing people. Save the messages you use most and show them in large text with one tap.",
+      tags: ["React", "TypeScript", "Vite", "Accessibility"],
       githubUrl: "https://github.com/DeafGecko/clearcard",
       websiteUrl: "https://showcard.09labs.dev",
       caseStudyStatus: "Live",
       caseStudySections: [
         {
-          heading: "What I Built",
-          body: "ShowCard is a visual communication app for Deaf and Hard of Hearing people.\n\nThe idea is simple:\n\nChoose a card → Show the message → Communicate\n\nIt is designed for situations where someone needs to communicate quickly without depending on sound.",
+          heading: "What it is",
+          body: "ShowCard is a card app for Deaf and hard-of-hearing people. You save the messages you use most, like a doctor visit or a coffee order. When you need to say something, you tap a card and the message shows up in large text for the other person to read.\n\nI designed it, built it and tested it on my own.",
         },
         {
-          heading: "Why I Built It",
-          body: "I wanted communication to be simple, visual, and quick.\n\nInstead of making people read through many menus, I wanted them to find what they need and show it.\n\nSee → Tap → Show.",
+          heading: "The problem",
+          body: "Typing the same message over and over is slow. It is even harder during a medical visit or an emergency. Sometimes you just need to show a message fast, without speaking.\n\nShowCard lets you write a message once, save it as a card, and show it later with one tap.",
         },
         {
-          heading: "How I Built It",
-          body: "I focused on making the cards clear and easy to understand.\n\nWhile building it, I kept asking:\n“Can someone understand this quickly?”\n\nThat helped me think more about the user instead of just adding features.",
+          heading: "What I did",
+          body: "I did the whole product. That included the design, the interface, the accessibility work, the private-card security, the tests and the documentation.",
         },
         {
-          heading: "Tech I Used",
-          body: "React + Card-Based UI\n\nI kept the interface simple with large visual cards and clear text.",
+          heading: "What it does",
+          body: "You can make your own cards. You can show a card full screen. You can sort cards into groups. Emergency cards are easy to reach. There is a quick-write option for a message you only need once.\n\nPrivate cards are locked with a six-digit code. You can also use a one-time backup key if you forget the code.\n\nYou can change the text size, and pick light, dark or high-contrast colors in Settings. The change shows right away. It also works with touch, a mouse, a keyboard and a screen reader.",
         },
         {
           heading: "Accessibility",
-          body: "Accessibility is the main purpose of this project.\n\nI focused on:\n\n✓ Visual communication\n✓ Clear text\n✓ Easy-to-understand cards\n✓ Large tap areas\n✓ No need for sound",
+          body: "I treated accessibility as part of the design from the start, not as something to add later. The buttons are large. The text is easy to read. Focus is easy to see. Icon buttons have clear names. You can use the whole app with a keyboard.\n\nI used Atkinson Hyperlegible for the text, because it is made to help people tell letters apart.",
         },
         {
-          heading: "What I Learned",
-          body: "This project taught me that simple design can be difficult.\n\nAdding more features is easy.\n\nMaking something clear, fast, and easy to understand takes more thought.",
+          heading: "Privacy",
+          body: "Private cards are encrypted before they are saved. I do not store the six-digit code. I store a derived hash, and a random key protects the private data.\n\nThe key can be opened with the code or with the backup key. After too many wrong codes, the app locks for a short time.\n\nI should be honest about one limit. A six-digit code is short. If someone gets a copy of the browser data, they could try to guess it.",
         },
         {
-          heading: "What's Next",
-          body: "I have two ideas I want to add:\n\nQuick Card — quickly type something that is not already available as a card.\n\nHistory — look back at messages used during a conversation.\n\nI also plan to improve the design and turn it into a PWA so it can feel more like an installed app.",
+          heading: "How I built it",
+          body: "React and TypeScript, with Vite and Tailwind CSS. The data is stored in the browser, and encryption uses the Web Crypto API. For testing I used Vitest with Testing Library, and Playwright with axe.",
         },
         {
-          heading: "Status",
-          body: "Improvements planned.",
+          heading: "How I tested it",
+          body: "I tested it as a responsive web app. Playwright checked the features, the error messages, the phone-sized layouts, keyboard use and accessibility. Vitest covered the unit tests.\n\nI have not tested it with Expo or Xcode. It is a web app right now, not a native iPhone app, so I have not tried it on a real iPhone. That would be the next phase.",
+        },
+        {
+          heading: "What was hard",
+          body: "The hardest part was keeping private data safe without making sign-in confusing. I kept the code separate from the encryption key. That way, changing the code does not mean re-encrypting every private card.\n\nI also added the backup key. Forgetting the code should not mean losing the private cards.\n\nThe other hard part was making it work for touch, mouse, keyboard and screen readers. The automatic accessibility tests found real problems. But I still need to test it with real users and real phones.",
+        },
+        {
+          heading: "What's next",
+          body: "Test it with Deaf and hard-of-hearing people. Test it with screen readers on a real iPhone and an Android phone. Make it work offline and installable. Decide whether to build a native app with Expo, or wrap this web app with Capacitor. Add secure backup and sync. Offer a longer passcode for private cards.",
         },
       ],
     },
