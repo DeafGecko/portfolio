@@ -290,39 +290,15 @@ const {
         { src: "/images/monolith-mockup.png", alt: "Monolith storefront on a desktop monitor" },
       ],
       summary:
-        "A structured website built in a three-step process: layout, accent colors, and animation. It is a small online store for simple home and office goods.",
+        "A small online store built in a three-step process: layout, accent colors, and animation.",
       tags: ["Next.js", "React", "Prisma", "Zustand", "Tailwind CSS"],
       githubUrl: "https://github.com/DeafGecko/swiss-ecommerce/tree/main/swiss-ecommerce",
       websiteUrl: "https://ecommerce.09labs.dev",
       caseStudyStatus: "Live",
       caseStudySections: [
         {
-          heading: "What it is",
-          body: "Monolith is a small online store for simple home and office goods. You can browse by category, add items to a cart or wishlist, and check out without an account. There are three looks you can switch between in the header.",
-        },
-        {
           heading: "How I built it, in three steps",
-          body: "I built Monolith in three steps: the layout first, then the accent colors, then the animation.\n\nFirst I built the layout in grayscale. I wanted the grid, the spacing and the section order to work before anything looked finished.\n\nThen I added the accent color on top of that base. I did not use color to fix a layout that wasn't working yet.\n\nLast, I added the animation, so it wouldn't hide problems in the layout or the colors.\n\nThe hardest part was not jumping ahead. As a designer, I wanted to add color and motion early. The three looks in the header come from these steps: grayscale, color and animated.",
-        },
-        {
-          heading: "What is not real yet",
-          body: "The checkout is a mock. It doesn't call a payment company, and orders are saved in the browser, not the database. I kept it that way on purpose for the first version.",
-        },
-        {
-          heading: "Testing",
-          body: "I ran 60 tests in 9 files, and none failed. The TypeScript check is clean. I did not run a full production build for this pass, because the build queries the database while it renders.",
-        },
-        {
-          heading: "What the tests found",
-          body: "The header crashed when the category request failed, so it now only uses a real list.\n\nThe checkout accepted a zero or negative quantity, so every cart item is checked now.\n\nA visit to the success page with an empty cart saved a $0 order. Now an order is saved only when the cart has items.\n\nThe contact email subject showed HTML codes and could take extra mail headers. It now uses the plain name, with line breaks removed.",
-        },
-        {
-          heading: "What I learned",
-          body: "The tests that mattered most were on the API routes and the stores, because those hold the rules the screens depend on. Most bugs were at the edges: bad input, failed network calls, and saved data that didn't match what the screen expected.",
-        },
-        {
-          heading: "Next",
-          body: "Move the checks and pricing to the server, save orders in the database, and get lint working again.",
+          body: "I built Monolith in three steps: the layout first, then the accent colors, then the animation.\n\nFirst I built the layout in grayscale. I wanted the grid, the spacing and the section order to work before anything looked finished.\n\nThen I added the accent color on top of that base. I did not use color to fix a layout that wasn't working yet.\n\nLast, I added the animation, so it would not hide problems in the layout or the colors.\n\nThe hardest part was not jumping ahead. As a designer, I wanted to add color and motion early. The three looks in the header come from these steps: grayscale, color and animated.",
         },
       ],
     },
