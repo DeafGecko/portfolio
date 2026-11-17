@@ -33,8 +33,10 @@ const labs = [
       labs.map((lab) => (
         <li class="labs-card">
           <p class="labs-eyebrow">{lab.eyebrow}</p>
-          <h3 class="labs-name">{lab.title}</h3>
-          {lab.image && <img class="labs-image" src={lab.image} alt="" width="56" height="56" aria-hidden="true" />}
+          <div class="labs-name-row">
+            {lab.image && <img class="labs-image" src={lab.image} alt="" width="36" height="36" aria-hidden="true" />}
+            <h3 class="labs-name">{lab.title}</h3>
+          </div>
           <p class="labs-summary">{lab.summary}</p>
           <div class="labs-links">
             {lab.caseStudy && (
@@ -91,12 +93,20 @@ const labs = [
     gap: 1.25rem;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   }
+  .labs-name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.4rem;
+  }
+  .labs-name-row .labs-name {
+    margin: 0;
+  }
   .labs-image {
     display: block;
-    width: 3.5rem;
-    height: 3.5rem;
-    margin-top: 0.75rem;
-    border-radius: 8px;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 6px;
   }
   .labs-card {
     padding: 1.5rem;
