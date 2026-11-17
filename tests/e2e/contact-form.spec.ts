@@ -1,9 +1,11 @@
 import { expect, test } from "@playwright/test";
 
 test("the contact form requires every field", async ({ page }) => {
+  // Skip the intro splash so it does not cover the form.
+  await page.addInitScript(() => sessionStorage.setItem("introSeen", "1"));
   await page.goto("/#contact-section");
   const form = page.locator("form[data-contact-form]");
-  await form.getByRole("button", { name: /Compose email/ }).click();
+  await form.getByRole("button", { name: /Send message/ }).click();
   const invalid = await form.locator("input:invalid, textarea:invalid").count();
   expect(invalid).toBe(4);
   await expect(page).toHaveURL(/#contact-section$/);
