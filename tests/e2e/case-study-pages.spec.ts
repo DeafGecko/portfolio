@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const slugs = ["the-factory", "vantage", "showcard", "chromatique", "09labs"];
+const slugs = ["the-factory", "vantage", "showcard", "chromatique"];
 
 for (const slug of slugs) {
   test(`/work/${slug} loads with a heading, sections and a way back`, async ({ page }) => {
@@ -26,4 +26,11 @@ test("case study links open in a new tab with safe rel", async ({ page }) => {
     await expect(external.nth(i)).toHaveAttribute("target", "_blank");
     await expect(external.nth(i)).toHaveAttribute("rel", /noopener/);
   }
+});
+
+test("/lab/09labs loads with a heading and a way back to Labs", async ({ page }) => {
+  const response = await page.goto("/lab/09labs");
+  expect(response?.status()).toBe(200);
+  await expect(page.locator("main h1")).toHaveCount(1);
+  await expect(page.getByRole("link", { name: /Back to Labs/ })).toHaveAttribute("href", "/#labs-section");
 });
