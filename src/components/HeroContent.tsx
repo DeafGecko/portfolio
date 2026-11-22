@@ -59,7 +59,16 @@ export default function HeroContent({
       </motion.p>
 
       <motion.h1 className="hero-title" variants={reduced ? stillVisible : fadeUp}>
-        {title}
+        {title.split(" ").map((word, wi, arr) => (
+          <span key={`w-${wi}`}>
+            {Array.from(word).map((letter, li) => (
+              <span className="hero-letter" key={`l-${wi}-${li}`}>
+                {letter}
+              </span>
+            ))}
+            {wi < arr.length - 1 ? " " : null}
+          </span>
+        ))}
         {subtitle && (
           <>
             <br />

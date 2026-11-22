@@ -199,18 +199,15 @@ const {
     text-shadow: 0 2px 30px rgba(30, 80, 200, 0.08);
   }
 
-  /* hover: the title turns the site blue and fades back when the mouse leaves */
-  :global(.hero-title) {
-    cursor: default;
-    transition: color 0.35s ease;
+  /* hover: each letter turns from solid to an outline while the mouse is on it */
+  :global(.hero-title .hero-letter) {
+    transition: color 0.25s ease, -webkit-text-stroke-color 0.25s ease;
+    -webkit-text-stroke: 0 transparent;
   }
 
-  :global(.hero-title:hover) {
-    color: #2a52cc;
-  }
-
-  :global(.dark .hero-title:hover) {
-    color: #6a9eff;
+  :global(.hero-title .hero-letter:hover) {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.5px currentColor;
   }
 
   :global(.hero-title .accent) {
