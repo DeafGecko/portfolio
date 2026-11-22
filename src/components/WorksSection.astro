@@ -13,6 +13,8 @@ export interface WorkItem {
   featured?: boolean;
   /** hide from the grid without deleting the content */
   hidden?: boolean;
+  /** position in the grid, lowest first */
+  order?: number;
   summary?: string;
   tags?: string[];
   /** reserved for future case study page — not yet implemented */
@@ -45,6 +47,7 @@ const {
   hint = "Explore working projects, design decisions, and what is still in development.",
   works = [
     {
+      order: 1,
       featured: true,
       eyebrow: "VENUE OPERATIONS PLATFORM",
       title: ["THE MILLS"],
@@ -91,6 +94,7 @@ const {
       ],
     },
     {
+      order: 2,
       eyebrow: "EVENT PHOTO SHARING",
       title: ["VANTGE"],
       category: "vantge",
@@ -138,6 +142,7 @@ const {
       ],
     },
     {
+      order: 4,
       featured: true,
       eyebrow: "VISUAL COMMUNICATION APP",
       title: ["SHOWCARD"],
@@ -192,6 +197,7 @@ const {
       ],
     },
     {
+      order: 3,
       eyebrow: "DESIGN TOKEN & CONTRAST ENGINE",
       title: ["CHROMATIQUE"],
       category: "chromatique",
@@ -305,6 +311,7 @@ const {
       ],
     },
     {
+      order: 5,
       eyebrow: "EXPENSE TRACKING · IN PROGRESS",
       title: ["FLUVIO"],
       category: "folio",
@@ -332,7 +339,7 @@ const {
 
   <ul class="works-accordion" id="worksAccordion">
     {
-      [...works].filter((work) => !work.hidden).sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))).map((work, i) => (
+      [...works].filter((work) => !work.hidden).sort((a, b) => (a.order ?? 99) - (b.order ?? 99)).map((work, i) => (
         <li
           class="slice"
           class:list={[{ "is-active": true }]}
