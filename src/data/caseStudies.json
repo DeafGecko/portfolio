@@ -293,5 +293,41 @@
         "body": "I built Monolith in three steps: the layout first, then the accent colors, then the animation.\n\nFirst I built the layout in grayscale. I wanted the grid, the spacing and the section order to work before anything looked finished.\n\nThen I added the accent color on top of that base. I did not use color to fix a layout that wasn't working yet.\n\nLast, I added the animation, so it would not hide problems in the layout or the colors.\n\nThe hardest part was not jumping ahead. As a designer, I wanted to add color and motion early. The three looks in the header come from these steps: grayscale, color and animated."
       }
     ]
+  },
+  "quality-lab": {
+    "title": "Quality Lab",
+    "summary": "One dashboard that shows the latest automated test results for my apps, so I can see at a glance whether each one still works.",
+    "status": "Live",
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "GitHub Actions",
+      "GitHub API"
+    ],
+    "image": "/brand/lab-icon.png",
+    "websiteUrl": "https://lab.09folio.com",
+    "githubUrl": "",
+    "sections": [
+      {
+        "heading": "The problem",
+        "body": "I build several small apps. Each one has automated tests that run in GitHub Actions. The tests were working, but I had to open each project's GitHub page to see whether it passed.\n\nI wanted one page that shows the state of every project."
+      },
+      {
+        "heading": "What it does",
+        "body": "Quality Lab reads the latest GitHub Actions run for each project and shows it as passed, failed or unknown. Each card shows the last run's time, the branch and the commit.\n\nIt reads the results from GitHub each time, so it does not keep its own copy that could go out of date."
+      },
+      {
+        "heading": "Decisions I made",
+        "body": "I read the results from GitHub instead of storing them by hand. A hand-edited file would have been out of date as soon as a test ran.\n\nTests run on each push and pull request, and also on a timer, four times a day per project. The timed runs show whether a project is quiet or still working.\n\nThe layout is simple. The status and the last run sit in one panel, and the history stays in a corner."
+      },
+      {
+        "heading": "What went wrong",
+        "body": "The page asked GitHub for every project on every load. After about an hour, GitHub refused the requests, and every card showed unknown. A GitHub token fixed it.\n\nA billing lock on my GitHub account made every run fail before any test ran. The dashboard showed those as broken tests, which made it look like my code was failing."
+      },
+      {
+        "heading": "What I would do next",
+        "body": "Show a clear message on the card when GitHub refuses a request, instead of unknown.\n\nRun accessibility checks on this dashboard too. I have not done that yet, so I make no accessibility claims for it.\n\nCount failures over the last 20 runs, so flaky tests are easy to spot."
+      }
+    ]
   }
 }

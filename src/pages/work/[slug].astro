@@ -6,7 +6,7 @@ export const prerender = true;
 
 export function getStaticPaths() {
   return Object.keys(caseStudies)
-    .filter((slug) => !["09labs", "kanso", "monolith"].includes(slug))
+    .filter((slug) => !["09labs", "kanso", "monolith", "quality-lab"].includes(slug))
     .map((slug) => ({ params: { slug } }));
 }
 
