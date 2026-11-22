@@ -5,7 +5,7 @@ import caseStudies from "../../data/caseStudies.json";
 export const prerender = true;
 
 export function getStaticPaths() {
-  return ["09labs"].map((slug) => ({ params: { slug } }));
+  return ["09labs", "kanso", "monolith", "quality-lab"].map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;
@@ -31,7 +31,7 @@ const study = caseStudies[slug as keyof typeof caseStudies];
     <div class="links">
       {study.githubUrl && (
         <a class="icon-btn" href={study.githubUrl} target="_blank" rel="noopener" aria-label="View code on GitHub" title="View code on GitHub">
-          <img src="/github.svg" alt="" width="18" height="18" aria-hidden="true" />
+          <img src="/github-blue.svg" alt="" width="18" height="18" aria-hidden="true" />
         </a>
       )}
       {study.websiteUrl && (
@@ -51,6 +51,14 @@ const study = caseStudies[slug as keyof typeof caseStudies];
         {section.body.split("\n\n").map((para) => <p>{para}</p>)}
       </section>
     ))}
+
+    {study.gallery && (
+      <div class="gallery">
+        {study.gallery.map((src) => (
+          <img src={src} alt="" width="1672" height="941" loading="lazy" />
+        ))}
+      </div>
+    )}
   </main>
 </BaseLayout>
 
@@ -82,7 +90,7 @@ const study = caseStudies[slug as keyof typeof caseStudies];
     justify-content: center;
     width: 2.75rem;
     height: 2.75rem;
-    color: #eef4ff;
+    color: #6a9eff;
     background: #0a0e17;
     border: 1px solid rgba(106, 158, 255, 0.35);
     border-radius: 4px;
@@ -90,11 +98,21 @@ const study = caseStudies[slug as keyof typeof caseStudies];
   }
   .icon-btn:hover,
   .icon-btn:focus-visible { border-color: #6a9eff; }
-  .icon-btn img { filter: brightness(0) invert(1); }
   .section { margin-top: 2rem; }
   .section h2 { font-family: "Space Grotesk", sans-serif; font-size: 1.3rem; margin: 0 0 0.5rem; }
   .section p { margin: 0 0 0.9rem; }
   :global(.dark) .status,
   :global(.dark) .back,
   :global(.dark) .links a { color: #6a9eff; }
+  .gallery {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid rgba(106, 158, 255, 0.25);
+  }
 </style>
