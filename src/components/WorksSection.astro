@@ -11,6 +11,8 @@ export interface WorkItem {
   title: string[];
   category: string;
   featured?: boolean;
+  /** hide from the grid without deleting the content */
+  hidden?: boolean;
   summary?: string;
   tags?: string[];
   /** reserved for future case study page — not yet implemented */
@@ -236,7 +238,7 @@ const {
       ],
     },
     {
-      eyebrow: "STOREFRONT & CHECKOUT",
+      hidden: true,      eyebrow: "STOREFRONT & CHECKOUT",
       title: ["MONOLITH"],
       category: "swiss",
       image: "/images/monolith-mockup.png",
@@ -257,7 +259,7 @@ const {
       ],
     },
     {
-      eyebrow: "MINIMALIST WRITING APP",
+      hidden: true,      eyebrow: "MINIMALIST WRITING APP",
       title: ["KANSO"],
       category: "kanso",
       image: "/images/kanso-mockup.png",
@@ -302,6 +304,20 @@ const {
         },
       ],
     },
+    {
+      eyebrow: "EXPENSE TRACKING · IN PROGRESS",
+      title: ["FLUVIO"],
+      category: "folio",
+      summary: "An expense tracking app. Still in progress.",
+      tags: [],
+      caseStudyStatus: "In progress",
+      caseStudySections: [
+        {
+          heading: "Status",
+          body: "Fluvio is an expense tracking app that I am still building. Details will be added as it takes shape.",
+        },
+      ],
+    },
   ],
 } = Astro.props;
 ---
@@ -316,7 +332,7 @@ const {
 
   <ul class="works-accordion" id="worksAccordion">
     {
-      [...works].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))).map((work, i) => (
+      [...works].filter((work) => !work.hidden).sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))).map((work, i) => (
         <li
           class="slice"
           class:list={[{ "is-active": true }]}
