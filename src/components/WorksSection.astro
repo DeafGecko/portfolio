@@ -15,6 +15,8 @@ export interface WorkItem {
   hidden?: boolean;
   /** position in the grid, lowest first */
   order?: number;
+  /** short role shown under the title, e.g. 'Full-stack developer' */
+  role?: string;
   summary?: string;
   tags?: string[];
   /** reserved for future case study page — not yet implemented */
@@ -51,6 +53,7 @@ const {
       featured: true,
       eyebrow: "VENUE OPERATIONS PLATFORM",
       title: ["THE MILLS"],
+      role: "Full-stack developer (design, app and backend)",
       category: "factory",
       image: "/images/factory-dashboard-laptop.png",
       screenshots: [
@@ -97,6 +100,7 @@ const {
       order: 2,
       eyebrow: "EVENT PHOTO SHARING",
       title: ["VANTGE"],
+      role: "Product designer and developer",
       category: "vantge",
       image: "/images/vantge-mockup.png",
       screenshots: [
@@ -146,6 +150,7 @@ const {
       featured: true,
       eyebrow: "VISUAL COMMUNICATION APP",
       title: ["SHOWCARD"],
+      role: "Designer and developer, with accessibility focus",
       category: "clearcard",
       image: "/images/showcard-mockup.png",
       screenshots: [
@@ -200,6 +205,7 @@ const {
       order: 3,
       eyebrow: "DESIGN TOKEN & CONTRAST ENGINE",
       title: ["CHROMATIQUE"],
+      role: "Designer and developer",
       category: "chromatique",
       image: "/images/chromatique-mockup.png",
       screenshots: [
@@ -314,6 +320,7 @@ const {
       order: 5,
       eyebrow: "EXPENSE TRACKING · IN PROGRESS",
       title: ["FLUVIO"],
+      role: "Developer (in progress)",
       category: "folio",
       summary: "An expense tracking app. Still in progress.",
       tags: [],
@@ -378,6 +385,7 @@ const {
                 </>
               ))}
             </h3>
+            {work.role && <p class="slice-role">Role: {work.role}</p>}
             {work.summary && <p class="slice-summary">{work.summary}</p>}
             {work.tags && work.tags.length > 0 && (
               <div class="slice-tags">
@@ -1828,6 +1836,17 @@ const {
     aspect-ratio: 16 / 10;
     z-index: 1;
     cursor: pointer;
+  }
+  .slice-role {
+    margin: 0.35rem 0 0;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.4px;
+    color: rgba(214, 230, 255, 0.8);
+  }
+
+  html:not(.dark) .slice-role {
+    color: rgba(52, 59, 69, 0.85);
   }
 </style>
 
