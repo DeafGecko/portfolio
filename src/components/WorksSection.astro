@@ -132,6 +132,10 @@ const {
           body: "The demo uses an in-browser stand-in for the database, so it is safe to share and easy to reset.\n\nThe preview stays beside the settings while you scroll.\n\nEach page loads only when it is opened. The home page bundle went from about 930KB to about 225KB.",
         },
         {
+          heading: "Backend",
+          body: "Vantge runs on Supabase. It gives the app a Postgres database, sign-in, and file storage.\n\nDatabase: events are stored in Postgres. Every change to the database is a migration file in the code. Recent examples are background zoom and title alignment, which were added as new columns.\n\nSign-in: hosts sign in with email and password. A new host waits on a pending page until an admin approves the account.\n\nFile storage: background photos, logos and guest photos are kept in a Supabase storage bucket. When a photo is deleted in the dashboard, its file is removed from storage too.\n\nDeployment: the app is a Vite build deployed on Vercel. A rewrite sends every address to the app, so links like /try/event open correctly.\n\nThe browser demo does not use this backend. It uses an in-browser stand-in, so visitors never touch real event data.",
+        },
+        {
           heading: "Testing",
           body: "I ran 6 unit tests with Vitest, and none failed.\n\nI ran Playwright with axe on the home and login pages. The scans found 15 low-contrast text problems, which I fixed.\n\nI checked 5 pages at 360, 390 and 430 pixels. None scrolled sideways.",
         },
