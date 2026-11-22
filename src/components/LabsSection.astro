@@ -4,36 +4,47 @@ const labs = [
   {
     title: "09 Labs",
     eyebrow: "IN DEVELOPMENT",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     summary:
       "A snippet vault and small design system. Save code snippets, group them, and switch between three themes. Still in development.",
     caseStudy: "/lab/09labs",
     githubUrl: "https://github.com/DeafGecko/09-labs-snippet",
     websiteUrl: "https://09-labs-snippet-zeta.vercel.app",
+    preview: "/images/09labs-mockup.png",
+    shows: "component reuse and design systems",
   },
   {
     title: "Kanso",
-    eyebrow: "MINIMALIST WRITING APP",
+    eyebrow: "LIVE",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS"],
     summary: "A distraction-free writing app.",
     caseStudy: "/lab/kanso",
     githubUrl: "https://github.com/DeafGecko/kanso-2.0",
     websiteUrl: "https://kanso.09labs.dev",
+    preview: "/images/Kanso01.png",
+    shows: "focused interface design and accessibility checks",
   },
   {
     title: "Monolith",
     eyebrow: "EXPERIMENT",
+    tags: ["Next.js", "React", "Prisma", "Zustand", "Tailwind CSS"],
     summary: "A demo online store.",
     caseStudy: "/lab/monolith",
     githubUrl: "https://github.com/DeafGecko/swiss-ecommerce/tree/main/swiss-ecommerce",
     websiteUrl: "https://ecommerce.09labs.dev",
+    preview: "/images/monolith-mockup.png",
+    shows: "a complete store flow, from browsing to checkout",
   },
   {
     title: "Quality Lab",
-    eyebrow: "TEST DASHBOARD · LIVE",
+    eyebrow: "LIVE",
+    tags: ["Next.js", "TypeScript", "GitHub Actions"],
     summary:
       "A dashboard that shows the automated test results for my apps in one place. Open the website, or the app being tested.",
     image: "/brand/lab-icon.png",
     caseStudy: "/lab/quality-lab",
     websiteUrl: "https://lab.09folio.com",
+    shows: "automated testing and CI results in one dashboard",
   },
 ];
 ---
@@ -48,12 +59,19 @@ const labs = [
     {
       labs.map((lab) => (
         <li class="labs-card">
+          {lab.preview && <img class="labs-preview" src={lab.preview} alt="" width="800" height="500" loading="lazy" aria-hidden="true" />}
           <p class="labs-eyebrow">{lab.eyebrow}</p>
           <div class="labs-name-row">
             {lab.image && <img class="labs-image" src={lab.image} alt="" width="36" height="36" aria-hidden="true" />}
             <h3 class="labs-name">{lab.title}</h3>
           </div>
           <p class="labs-summary">{lab.summary}</p>
+          <p class="labs-shows"><span>Shows:</span> {lab.shows}</p>
+          <ul class="labs-tags" aria-label="Tools">
+            {lab.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
           <div class="labs-links">
             {lab.caseStudy && (
             <a class="lab-btn lab-btn-text" href={lab.caseStudy}>
@@ -202,5 +220,51 @@ const labs = [
     .labs-list {
       grid-template-columns: minmax(0, 1fr);
     }
+  }
+  .labs-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    list-style: none;
+    padding: 0;
+    margin: 0.9rem 0 0;
+  }
+  .labs-tags li {
+    padding: 0.3rem 0.55rem;
+    border: 1px solid #7a879a;
+    border-radius: 4px;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+  :global(.dark) .labs-tags li {
+    color: #c7dbff;
+    border-color: #445a79;
+  }
+  .labs-preview {
+    display: block;
+    width: calc(100% + 3rem);
+    max-width: none;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    margin: -1.5rem -1.5rem 1rem;
+    border-radius: 6px 6px 0 0;
+  }
+  .labs-shows {
+    margin: 0.6rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(214, 230, 255, 0.8);
+  }
+  .labs-shows span {
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #6a9eff;
+  }
+  html:not(.dark) .labs-shows {
+    color: rgba(52, 59, 69, 0.85);
   }
 </style>
