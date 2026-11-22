@@ -199,6 +199,20 @@ const {
     text-shadow: 0 2px 30px rgba(30, 80, 200, 0.08);
   }
 
+  /* hover: the title turns the site blue and fades back when the mouse leaves */
+  :global(.hero-title) {
+    cursor: default;
+    transition: color 0.35s ease;
+  }
+
+  :global(.hero-title:hover) {
+    color: #2a52cc;
+  }
+
+  :global(.dark .hero-title:hover) {
+    color: #6a9eff;
+  }
+
   :global(.hero-title .accent) {
     --accent-outline: #2a52cc;
     display: inline-block;
