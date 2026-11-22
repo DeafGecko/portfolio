@@ -243,7 +243,7 @@
       "Vite",
       "Tailwind CSS"
     ],
-    "image": "",
+    "image": "/images/Kanso01.png",
     "websiteUrl": "https://kanso.09labs.dev",
     "githubUrl": "https://github.com/DeafGecko/kanso-2.0",
     "sections": [
@@ -275,6 +275,9 @@
         "heading": "What I learned",
         "body": "Run the same build command the host runs before merging. Measure the live site, not the dev server. When you change a color, search for the color itself, not one class name. And check small icons at their real size, since the pen's details disappeared at 32 pixels."
       }
+    ],
+    "gallery": [
+      "/images/Kanso02.png"
     ]
   },
   "monolith": {
@@ -288,7 +291,7 @@
       "Zustand",
       "Tailwind CSS"
     ],
-    "image": "",
+    "image": "/images/monolith-mockup.png",
     "websiteUrl": "https://ecommerce.09labs.dev",
     "githubUrl": "https://github.com/DeafGecko/swiss-ecommerce/tree/main/swiss-ecommerce",
     "sections": [
