@@ -11,6 +11,12 @@ export interface WorkItem {
   title: string[];
   category: string;
   featured?: boolean;
+  /** hide from the grid without deleting the content */
+  hidden?: boolean;
+  /** position in the grid, lowest first */
+  order?: number;
+  /** short role shown under the title, e.g. 'Full-stack developer' */
+  role?: string;
   summary?: string;
   tags?: string[];
   /** reserved for future case study page — not yet implemented */
@@ -43,9 +49,11 @@ const {
   hint = "Explore working projects, design decisions, and what is still in development.",
   works = [
     {
+      order: 1,
       featured: true,
       eyebrow: "VENUE OPERATIONS PLATFORM",
       title: ["THE MILLS"],
+      role: "Full-stack developer (design, app and backend)",
       category: "factory",
       image: "/images/factory-dashboard-laptop.png",
       screenshots: [
@@ -89,8 +97,10 @@ const {
       ],
     },
     {
+      order: 2,
       eyebrow: "EVENT PHOTO SHARING",
       title: ["VANTGE"],
+      role: "Product designer and developer",
       category: "vantge",
       image: "/images/vantge-mockup.png",
       screenshots: [
@@ -107,7 +117,7 @@ const {
       caseStudySections: [
         {
           heading: "Summary",
-          body: "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo.",
+          body: "Vantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo.",
         },
         {
           heading: "The problem",
@@ -122,6 +132,10 @@ const {
           body: "The demo uses an in-browser stand-in for the database, so it is safe to share and easy to reset.\n\nThe preview stays beside the settings while you scroll.\n\nEach page loads only when it is opened. The home page bundle went from about 930KB to about 225KB.",
         },
         {
+          heading: "Backend",
+          body: "Vantge runs on Supabase. It gives the app a Postgres database, sign-in, and file storage.\n\nDatabase: events are stored in Postgres. Every change to the database is a migration file in the code. Recent examples are background zoom and title alignment, which were added as new columns.\n\nSign-in: hosts sign in with email and password. A new host waits on a pending page until an admin approves the account.\n\nFile storage: background photos, logos and guest photos are kept in a Supabase storage bucket. When a photo is deleted in the dashboard, its file is removed from storage too.\n\nDeployment: the app is a Vite build deployed on Vercel. A rewrite sends every address to the app, so links like /try/event open correctly.\n\nThe browser demo does not use this backend. It uses an in-browser stand-in, so visitors never touch real event data.",
+        },
+        {
           heading: "Testing",
           body: "I ran 6 unit tests with Vitest, and none failed.\n\nI ran Playwright with axe on the home and login pages. The scans found 15 low-contrast text problems, which I fixed.\n\nI checked 5 pages at 360, 390 and 430 pixels. None scrolled sideways.",
         },
@@ -131,14 +145,16 @@ const {
         },
         {
           heading: "Next steps",
-          body: "The access code is Demo, at vantge.app/try.\n\nI want to cut the JavaScript still loaded on the demo page, and measure how long a new host takes to create an event with real users.",
+          body: "I want to cut the JavaScript still loaded on the demo page, and measure how long a new host takes to create an event with real users.",
         },
       ],
     },
     {
+      order: 4,
       featured: true,
       eyebrow: "VISUAL COMMUNICATION APP",
       title: ["SHOWCARD"],
+      role: "Designer and developer, with accessibility focus",
       category: "clearcard",
       image: "/images/showcard-mockup.png",
       screenshots: [
@@ -157,41 +173,39 @@ const {
       caseStudySections: [
         {
           heading: "What it is",
-          body: "ShowCard is a card app for Deaf and hard-of-hearing people. You save the messages you use most, like a doctor visit or a coffee order. When you need to say something, you tap a card and the message shows in large text for the other person to read.\n\nI designed it, built it and tested it on my own.",
+          body: "ShowCard is an app for Deaf and hard-of-hearing people. You write a message once and save it as a card. When you need it, you tap the card, and the words show in large letters for the other person to read.\n\nI made it by myself. I designed it, built it and tested it.",
         },
         {
-          heading: "The problem",
-          body: "Typing the same message over and over is slow, and harder during a medical visit or an emergency. Sometimes you just need to show a message fast, without speaking.",
+          heading: "What you can do",
+          body: "Make, change, delete and sort your cards, in groups such as Medical, Services and Daily. An emergency button shows your emergency cards in one tap.\n\nA big-screen view shows one card in large text, and you can flip it for someone across a table. On a phone, you can swipe a card to change or delete it.\n\nAfter a delete, an Undo button stays for five seconds. You can also write a quick note and show it without saving it.",
         },
         {
-          heading: "What I did",
-          body: "I created the whole product, including the product and interaction design, the responsive interface, accessibility improvements, private-card security and encryption, automated unit and browser tests, and the documentation.",
+          heading: "Keeping private cards safe",
+          body: "The Private area has a 6-digit code. The code is never saved. Only a hash of it is saved.\n\nPrivate cards are scrambled and saved as one block. The key that unscrambles them has two locks: your code, and a backup key shown once when you set your code. Five wrong codes lock the keypad for a minute.\n\nThe limit: a 6-digit code is short. If someone copies the saved data from the browser, they could guess it on their own computer. A longer code is the next thing I want to add.",
         },
         {
-          heading: "What it does",
-          body: "You make your own cards and show any card full screen. You can sort cards into groups, and emergency cards are easy to reach. There is a quick-write option for a one-time message.\n\nPrivate cards are locked with a six-digit code, with a one-time backup key if you forget it. You can change the text size and pick light, dark or high-contrast colors.",
-        },
-        {
-          heading: "Privacy",
-          body: "Private cards are encrypted before they are saved. I don't store the six-digit code. I store a derived hash, and a random key protects the data. After too many wrong codes, the app locks for a short time.\n\nA six-digit code is short, so if someone gets a copy of the browser data, they could try to guess it. I want to be clear about that limit.",
+          heading: "Accessibility",
+          body: "I used a font made for people who have trouble with small letters, and three color modes: light, dark and high contrast. Buttons are large, and every icon has a name a screen reader can read.\n\nThe app works with a keyboard, with a skip link, a clear focus ring, and the Escape key to close pop-ups. Automatic checks find no color contrast problems on the main and settings screens.",
         },
         {
           heading: "How I tested it",
-          body: "I tested it as a responsive web app. Playwright checked the features, the error messages, phone-sized layouts, keyboard use and accessibility. Vitest covered the unit tests.\n\nI have not tested it with Expo or Xcode. It is a web app, not a native iPhone app, so I have not tried it on a real iPhone yet.",
+          body: "I wrote 62 unit tests with Vitest, and 76 browser tests with Playwright at phone and desktop sizes. The browser tests include accessibility checks with axe. Type checking runs with TypeScript.\n\nI have not tested it in Expo or Xcode. It is a web app, not a native iPhone app, so I have not tried it on a real iPhone yet.",
         },
         {
-          heading: "What was hard",
-          body: "Keeping private data safe without making sign-in confusing. I kept the code separate from the encryption key, so changing the code doesn't mean re-encrypting every private card.\n\nThe automatic accessibility tests found real problems, but I still need to test with real users and real phones.",
+          heading: "Tools",
+          body: "React 19 and TypeScript for the screens, Vite to build, and Tailwind CSS for styles. The scrambling uses Web Crypto, which is built into the browser. The AI helper runs on a server function, so its secret key stays off the page.",
         },
         {
           heading: "What's next",
-          body: "Test with Deaf and hard-of-hearing people, and with screen readers on a real iPhone and Android phone. Make it installable and work offline. Decide whether to build a native app with Expo or wrap this one with Capacitor.",
-        },
+          body: "Test it with Deaf and hard-of-hearing people, and with screen readers on a real iPhone and Android phone. Add a longer code option. Decide whether to build a native app with Expo.",
+        }
       ],
     },
     {
+      order: 3,
       eyebrow: "DESIGN TOKEN & CONTRAST ENGINE",
       title: ["CHROMATIQUE"],
+      role: "Designer and developer",
       category: "chromatique",
       image: "/images/chromatique-mockup.png",
       screenshots: [
@@ -207,36 +221,32 @@ const {
       caseStudySections: [
         {
           heading: "The problem",
-          body: "Picking a text color and a background color is easy to get wrong. A pair can look fine on my screen and still be hard to read for someone else.\n\nWCAG and APCA also disagree. WCAG can pass some pale pairs that read badly. APCA tracks how people see lightness, but most tools don't show it next to WCAG.",
+          body: "A color pair can look fine on my screen and still be hard to read. Picking a text color and a background color is easy to get wrong.\n\nI wanted a tool that answers one question before I put a hex value into a stylesheet: does this text actually read on this background?",
         },
         {
-          heading: "What I built",
-          body: "Chromatique Studio is a tool for testing two colors before they go into code. You enter a surface color and a text color, and it shows both checks side by side.\n\nThe preview uses the same two colors, and you can edit the text to try your own copy. There are color-blindness previews, a shade scale, saved pairs and exports to CSS, Tailwind and design tokens. The current pair goes in the URL, so a link opens the same colors.",
+          heading: "What it does",
+          body: "Pick a surface color and a text color. The tool shows the WCAG AA and AAA results and an APCA score as you type.\n\nThe live preview uses the same two colors, and you can edit the text to try your own copy. There are previews for color blindness, a shade scale, saved pairs, and an eyedropper where the browser supports it.\n\nYou can export the colors as CSS, as a Tailwind config, or as design tokens. The current pair goes in the URL, so a link opens the same colors.",
         },
         {
           heading: "Why I show both checks",
-          body: "I didn't want to pick a winner. The useful part is where the two checks agree and where they split. If a pair passes one and fails the other, you should stop and look.",
+          body: "WCAG can pass some pale pairs that read badly. APCA follows how people see lightness, but most tools do not show it next to WCAG.\n\nI did not want to pick a winner. The useful part is seeing where the two agree and where they split.",
         },
         {
           heading: "How I built it",
-          body: "It's Vue 3 with the Composition API. The color state and the contrast math live in one composable, so I could test the math without opening the UI.\n\nI also laid the tool out on one card, so a laptop and an iPad fit the screen with no scrolling.",
+          body: "I built it with Vue 3 and the Composition API to learn how Vue handles state and components. The color state and the contrast math live in one composable, so I could test the math without opening the screen.\n\nThe current pair lives in the URL. Saved palettes live in the browser. Nothing needs a server.",
         },
         {
           heading: "Testing",
-          body: "I ran 30 unit tests with Vitest, and none failed. I ran 16 browser tests with Playwright, including axe scans on every preset and color-blindness mode, and none failed.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
+          body: "I ran 30 unit tests with Vitest. I ran 16 browser tests with Playwright, including axe accessibility scans on every preset, every color-blindness mode, the edit mode and the export window. Lighthouse on the production build scores 100 in all four categories.",
         },
         {
-          heading: "What went wrong",
-          body: "Playwright was quietly testing another project, because both used the same port. Moving it to its own port fixed that.\n\nMy APCA score for black on white was 114, but the reference is 106. The unit test caught it.\n\nA hint at 95 percent opacity dropped the red below AA contrast. Removing the opacity fixed it.\n\nThe scans ran during a color fade and read blended colors. They now wait for the final color.",
-        },
-        {
-          heading: "Next",
-          body: "I want an accent color with suggestions that already pass contrast, component tests for the Vue parts, and a manual screen-reader pass. Automated checks miss reading order and meaning.",
-        },
+          heading: "What's next",
+          body: "A third color, an accent, with suggestions that already pass contrast. A helper that adjusts a failing pair until it passes. A manual pass with a screen reader, since automated checks miss reading order and meaning.",
+        }
       ],
     },
     {
-      eyebrow: "STOREFRONT & CHECKOUT",
+      hidden: true,      eyebrow: "STOREFRONT & CHECKOUT",
       title: ["MONOLITH"],
       category: "swiss",
       image: "/images/monolith-mockup.png",
@@ -257,7 +267,7 @@ const {
       ],
     },
     {
-      eyebrow: "MINIMALIST WRITING APP",
+      hidden: true,      eyebrow: "MINIMALIST WRITING APP",
       title: ["KANSO"],
       category: "kanso",
       image: "/images/kanso-mockup.png",
@@ -302,6 +312,22 @@ const {
         },
       ],
     },
+    {
+      order: 5,
+      eyebrow: "EXPENSE TRACKING · IN PROGRESS",
+      title: ["FLUVIO"],
+      role: "Developer (in progress)",
+      category: "folio",
+      summary: "An expense tracking app. Still in progress.",
+      tags: [],
+      caseStudyStatus: "In progress",
+      caseStudySections: [
+        {
+          heading: "Status",
+          body: "Fluvio is an expense tracking app that I am still building. Details will be added as it takes shape.",
+        },
+      ],
+    },
   ],
 } = Astro.props;
 ---
@@ -316,7 +342,7 @@ const {
 
   <ul class="works-accordion" id="worksAccordion">
     {
-      [...works].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))).map((work, i) => (
+      [...works].filter((work) => !work.hidden).sort((a, b) => (a.order ?? 99) - (b.order ?? 99)).map((work, i) => (
         <li
           class="slice"
           class:list={[{ "is-active": true }]}
@@ -355,6 +381,7 @@ const {
                 </>
               ))}
             </h3>
+            {work.role && <p class="slice-role">Role: {work.role}</p>}
             {work.summary && <p class="slice-summary">{work.summary}</p>}
             {work.tags && work.tags.length > 0 && (
               <div class="slice-tags">
@@ -444,11 +471,11 @@ const {
                 <a
                   class="project-link project-link-lab"
                   href={work.labUrl}
-                  data-tip="App Quality Lab"
+                  data-tip="Quality Lab"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label={`Open ${work.title.join(" ")} in App Quality Lab`}
-                  title="Open App Quality Lab"
+                  aria-label={`Open ${work.title.join(" ")} in Quality Lab`}
+                  title="Open Quality Lab"
                 >
                   <img
                     class="project-link-lab-icon"
@@ -1805,6 +1832,17 @@ const {
     aspect-ratio: 16 / 10;
     z-index: 1;
     cursor: pointer;
+  }
+  .slice-role {
+    margin: 0.35rem 0 0;
+    font-family: "Azeret Mono", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.4px;
+    color: rgba(214, 230, 255, 0.8);
+  }
+
+  html:not(.dark) .slice-role {
+    color: rgba(52, 59, 69, 0.85);
   }
 </style>
 
