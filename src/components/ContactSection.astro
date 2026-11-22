@@ -8,6 +8,9 @@ export interface Props {
   location?: string;
 }
 
+// Hidden until the Resend key is set in Vercel. Copy email still works.
+const showContactForm = false;
+
 const {
   email = "dwirog@gmail.com",
   name = "Dwight Rogers",
@@ -76,6 +79,7 @@ const vCardHref = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCard)}`;
       </dl>
     </div>
 
+    {showContactForm && (
     <form class="contact-form" data-contact-form data-recipient={email}>
       <div class="field-row">
         <label for="contact-name">
@@ -129,6 +133,7 @@ const vCardHref = `data:text/vcard;charset=utf-8,${encodeURIComponent(vCard)}`;
         Your message goes straight to my inbox. I reply to the email address you enter.
       </p>
     </form>
+    )}
   </div>
 </section>
 
