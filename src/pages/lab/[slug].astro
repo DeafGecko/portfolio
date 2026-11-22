@@ -51,6 +51,14 @@ const study = caseStudies[slug as keyof typeof caseStudies];
         {section.body.split("\n\n").map((para) => <p>{para}</p>)}
       </section>
     ))}
+
+    {study.gallery && (
+      <div class="gallery">
+        {study.gallery.map((src) => (
+          <img src={src} alt="" width="1672" height="941" loading="lazy" />
+        ))}
+      </div>
+    )}
   </main>
 </BaseLayout>
 
@@ -97,4 +105,15 @@ const study = caseStudies[slug as keyof typeof caseStudies];
   :global(.dark) .status,
   :global(.dark) .back,
   :global(.dark) .links a { color: #6a9eff; }
+  .gallery {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid rgba(106, 158, 255, 0.25);
+  }
 </style>

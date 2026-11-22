@@ -184,6 +184,10 @@
         "heading": "Next",
         "body": "The theme can flash the wrong color on load, because the saved theme is applied after the page mounts. Starter snippet edits only last for the session. Sidebar.tsx is about 755 lines and I would split it up."
       }
+    ],
+    "gallery": [
+      "/images/09-labs-snippet-01.png",
+      "/images/09-labs-snippet-02.png"
     ]
   },
   "vantage": {
