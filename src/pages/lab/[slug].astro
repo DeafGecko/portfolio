@@ -31,7 +31,7 @@ const study = caseStudies[slug as keyof typeof caseStudies];
     <div class="links">
       {study.githubUrl && (
         <a class="icon-btn" href={study.githubUrl} target="_blank" rel="noopener" aria-label="View code on GitHub" title="View code on GitHub">
-          <img src="/github-blue.svg" alt="" width="18" height="18" aria-hidden="true" />
+          <img src="/github.svg" alt="" width="18" height="18" aria-hidden="true" />
         </a>
       )}
       {study.websiteUrl && (
@@ -98,6 +98,7 @@ const study = caseStudies[slug as keyof typeof caseStudies];
   }
   .icon-btn:hover,
   .icon-btn:focus-visible { border-color: #6a9eff; }
+  .icon-btn img { filter: brightness(0) invert(1); }
   .section { margin-top: 2rem; }
   .section h2 { font-family: "Space Grotesk", sans-serif; font-size: 1.3rem; margin: 0 0 0.5rem; }
   .section p { margin: 0 0 0.9rem; }
