@@ -221,32 +221,28 @@ const {
       caseStudySections: [
         {
           heading: "The problem",
-          body: "Picking a text color and a background color is easy to get wrong. A pair can look fine on my screen and still be hard to read for someone else.\n\nWCAG and APCA also disagree. WCAG can pass some pale pairs that read badly. APCA tracks how people see lightness, but most tools don't show it next to WCAG.",
+          body: "A color pair can look fine on my screen and still be hard to read. Picking a text color and a background color is easy to get wrong.\n\nI wanted a tool that answers one question before I put a hex value into a stylesheet: does this text actually read on this background?",
         },
         {
-          heading: "What I built",
-          body: "Chromatique Studio is a tool for testing two colors before they go into code. You enter a surface color and a text color, and it shows both checks side by side.\n\nThe preview uses the same two colors, and you can edit the text to try your own copy. There are color-blindness previews, a shade scale, saved pairs and exports to CSS, Tailwind and design tokens. The current pair goes in the URL, so a link opens the same colors.",
+          heading: "What it does",
+          body: "Pick a surface color and a text color. The tool shows the WCAG AA and AAA results and an APCA score as you type.\n\nThe live preview uses the same two colors, and you can edit the text to try your own copy. There are previews for color blindness, a shade scale, saved pairs, and an eyedropper where the browser supports it.\n\nYou can export the colors as CSS, as a Tailwind config, or as design tokens. The current pair goes in the URL, so a link opens the same colors.",
         },
         {
           heading: "Why I show both checks",
-          body: "I didn't want to pick a winner. The useful part is where the two checks agree and where they split. If a pair passes one and fails the other, you should stop and look.",
+          body: "WCAG can pass some pale pairs that read badly. APCA follows how people see lightness, but most tools do not show it next to WCAG.\n\nI did not want to pick a winner. The useful part is seeing where the two agree and where they split.",
         },
         {
           heading: "How I built it",
-          body: "It's Vue 3 with the Composition API. The color state and the contrast math live in one composable, so I could test the math without opening the UI.\n\nI also laid the tool out on one card, so a laptop and an iPad fit the screen with no scrolling.",
+          body: "I built it with Vue 3 and the Composition API to learn how Vue handles state and components. The color state and the contrast math live in one composable, so I could test the math without opening the screen.\n\nThe current pair lives in the URL. Saved palettes live in the browser. Nothing needs a server.",
         },
         {
           heading: "Testing",
-          body: "I ran 30 unit tests with Vitest, and none failed. I ran 16 browser tests with Playwright, including axe scans on every preset and color-blindness mode, and none failed.\n\nLighthouse on the live build scores 100 for performance, accessibility, best practices and SEO.",
+          body: "I ran 30 unit tests with Vitest. I ran 16 browser tests with Playwright, including axe accessibility scans on every preset, every color-blindness mode, the edit mode and the export window. Lighthouse on the production build scores 100 in all four categories.",
         },
         {
-          heading: "What went wrong",
-          body: "Playwright was quietly testing another project, because both used the same port. Moving it to its own port fixed that.\n\nMy APCA score for black on white was 114, but the reference is 106. The unit test caught it.\n\nA hint at 95 percent opacity dropped the red below AA contrast. Removing the opacity fixed it.\n\nThe scans ran during a color fade and read blended colors. They now wait for the final color.",
-        },
-        {
-          heading: "Next",
-          body: "I want an accent color with suggestions that already pass contrast, component tests for the Vue parts, and a manual screen-reader pass. Automated checks miss reading order and meaning.",
-        },
+          heading: "What's next",
+          body: "A third color, an accent, with suggestions that already pass contrast. A helper that adjusts a failing pair until it passes. A manual pass with a screen reader, since automated checks miss reading order and meaning.",
+        }
       ],
     },
     {
