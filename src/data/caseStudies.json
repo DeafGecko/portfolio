@@ -228,5 +228,70 @@
         "body": "The access code is Demo, at vantge.app/try.\n\nI want to cut the JavaScript still loaded on the demo page, and measure how long a new host takes to create an event with real users."
       }
     ]
+  },
+  "kanso": {
+    "title": "KANSO",
+    "summary": "A writing app with no dashboard and no big toolbar. Just a page and the few tools you need to write.",
+    "status": "Live",
+    "tags": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS"
+    ],
+    "image": "",
+    "websiteUrl": "https://kanso.09labs.dev",
+    "githubUrl": "https://github.com/DeafGecko/kanso-2.0",
+    "sections": [
+      {
+        "heading": "What it is",
+        "body": "Kanso is a writing app for focus. There is no dashboard and no big toolbar, just a page and the few tools you need to write. It is React and TypeScript, with no backend, so your work stays in the browser."
+      },
+      {
+        "heading": "The problem I fixed first",
+        "body": "The sidebar had two close controls. The header button opened it, but once it was open, the close button moved inside the panel, so it was hard to find. I wanted one button in the header that works in both states."
+      },
+      {
+        "heading": "What I changed",
+        "body": "The header button now opens and closes the sidebar, and its label and icon change with the state. I removed the second close button.\n\nI added a pen logo beside the KANSO name. I also replaced the favicon with the same pen.\n\nThe accessibility scan flagged the small sidebar labels, so I raised their opacity from 40 or 50 percent to 70 percent. It took three rounds, because the first change missed some label styles."
+      },
+      {
+        "heading": "Tests",
+        "body": "I used Vitest for unit tests on the header button, and Playwright for browser tests on desktop and phone sizes. Each browser run also runs an axe scan, with the sidebar open and closed. The tests work whether the saved setting opens or closes the sidebar."
+      },
+      {
+        "heading": "The build that was failing",
+        "body": "The production build was failing before I started. A Vite setting was written in a form this version rejects, and Vercel would have failed the same way. I changed it, and the build passes."
+      },
+      {
+        "heading": "Results",
+        "body": "Vitest passes 2 of 2 tests and Playwright passes 6 of 6, including the axe scans. Lint is clean, and the live site scores 100 in all four Lighthouse categories. The dev server scores lower, because it doesn't bundle the code."
+      },
+      {
+        "heading": "What I learned",
+        "body": "Run the same build command the host runs before merging. Measure the live site, not the dev server. When you change a color, search for the color itself, not one class name. And check small icons at their real size, since the pen's details disappeared at 32 pixels."
+      }
+    ]
+  },
+  "monolith": {
+    "title": "MONOLITH",
+    "summary": "A small online store built in a three-step process: layout, accent colors, and animation.",
+    "status": "Live",
+    "tags": [
+      "Next.js",
+      "React",
+      "Prisma",
+      "Zustand",
+      "Tailwind CSS"
+    ],
+    "image": "",
+    "websiteUrl": "https://ecommerce.09labs.dev",
+    "githubUrl": "https://github.com/DeafGecko/swiss-ecommerce/tree/main/swiss-ecommerce",
+    "sections": [
+      {
+        "heading": "How I built it, in three steps",
+        "body": "I built Monolith in three steps: the layout first, then the accent colors, then the animation.\n\nFirst I built the layout in grayscale. I wanted the grid, the spacing and the section order to work before anything looked finished.\n\nThen I added the accent color on top of that base. I did not use color to fix a layout that wasn't working yet.\n\nLast, I added the animation, so it would not hide problems in the layout or the colors.\n\nThe hardest part was not jumping ahead. As a designer, I wanted to add color and motion early. The three looks in the header come from these steps: grayscale, color and animated."
+      }
+    ]
   }
 }
