@@ -314,17 +314,37 @@ const {
     },
     {
       order: 5,
-      eyebrow: "EXPENSE TRACKING · IN PROGRESS",
+      eyebrow: "EXPENSE TRACKING · DEMO",
       title: ["FLUVIO"],
       role: "Developer (in progress)",
       category: "folio",
-      summary: "An expense tracking app. Still in progress.",
-      tags: [],
-      caseStudyStatus: "In progress",
+      summary: "A demo expense tracker for iPhone and the web. I built it to learn the full path from idea to working code.",
+      tags: ["Expo", "React Native", "Expo Router", "AsyncStorage", "Figma"],
+      image: "/images/fluvio-mockup.png",
+      screenshots: ["/images/fluvio-mockup.png"],
+      githubUrl: "https://github.com/DeafGecko/fluvio-demo",
+      websiteUrl: "https://fluvio-demo.netlify.app",
+      caseStudyStatus: "Demo",
       caseStudySections: [
         {
-          heading: "Status",
-          body: "Fluvio is an expense tracking app that I am still building. Details will be added as it takes shape.",
+          heading: "What it does",
+          body: "Fluvio shows where your money goes. The home screen shows total spent and recent purchases. Activity lists every purchase by date, and you can edit or delete one. Accounts and cash withdrawals each have their own screen. Insights show spending by category and warn about a subscription charged twice in one month. Everything in the app is fictional. No real bank is connected.",
+        },
+        {
+          heading: "How I built it",
+          body: "The app uses Expo and React Native with Expo Router, so each screen is a file. Data stays on the device in AsyncStorage, and there is no server. Colors, spacing, and text sizes are design tokens, so the light and dark themes stay consistent. A demo data generator creates six months of sample money with a fixed seed, so it looks the same every time.",
+        },
+        {
+          heading: "Design process",
+          body: "I designed each screen in Figma first, then built it in code and checked it on the iPhone simulator. Figma holds one agreed design and a separate review file for changes, so the agreed design is never changed by accident. I wrote notes as I went, so I could see what was done, what was not, and why I made each choice.",
+        },
+        {
+          heading: "What I learned",
+          body: "Starting from a design makes the code easier, because most questions are already answered. The small details, such as spacing, tap targets, and empty lists, take the most time. Writing things down helped more than I expected. Some libraries crash on new versions, so I replaced a swipe-row library with a simple one I could test.",
+        },
+        {
+          heading: "Still to do",
+          body: "Savings goals are not built yet. The AI tips feature still calls its AI service directly from the app. That has to move to a server before anyone else uses it. Some features only work on iPhone.",
         },
       ],
     },
