@@ -28,6 +28,7 @@ export interface WorkItem {
   websiteUrl2?: string;
   websiteUrl2Label?: string;
   labUrl?: string;
+  figmaUrl?: string;
   /** optional real screenshot — falls back to a generated pattern */
   image?: string;
   /** rich case study sections rendered inside the modal */
@@ -314,17 +315,41 @@ const {
     },
     {
       order: 5,
-      eyebrow: "EXPENSE TRACKING · IN PROGRESS",
+      eyebrow: "EXPENSE TRACKING · DEMO",
       title: ["FLUVIO"],
       role: "Developer (in progress)",
       category: "folio",
-      summary: "An expense tracking app. Still in progress.",
-      tags: [],
-      caseStudyStatus: "In progress",
+      summary: "A demo expense tracker for iPhone and the web. I built it to learn the full path from idea to working code.",
+      tags: ["Expo", "React Native", "Expo Router", "AsyncStorage", "Figma"],
+      image: "/images/fluvio-mockup.png",
+      screenshots: [
+        { src: "/images/fluvio-mockup.png", alt: "Fluvio app on a tablet, showing the home screen" },
+      ],
+      githubUrl: "https://github.com/DeafGecko/fluvio-demo",
+      websiteUrl: "https://fluvio-demo.netlify.app",
+      labUrl: "https://lab.09folio.com",
+      figmaUrl: "https://www.figma.com/design/YKg4Bruni3UasjQX6CwbQz/Fluvio-%E2%80%94-Mobile-App-Design?node-id=0-1&t=vQ30AB1P6F3Vz1Ua-1",
+      caseStudyStatus: "Demo",
       caseStudySections: [
         {
-          heading: "Status",
-          body: "Fluvio is an expense tracking app that I am still building. Details will be added as it takes shape.",
+          heading: "What it does",
+          body: "Fluvio shows where your money goes. The home screen shows total spent and recent purchases. Activity lists every purchase by date, and you can edit or delete one. Accounts and cash withdrawals each have their own screen. Insights show spending by category and warn about a subscription charged twice in one month. Everything in the app is fictional. No real bank is connected.",
+        },
+        {
+          heading: "How I built it",
+          body: "The app uses Expo and React Native with Expo Router, so each screen is a file. Data stays on the device in AsyncStorage, and there is no server. Colors, spacing, and text sizes are design tokens, so the light and dark themes stay consistent. A demo data generator creates six months of sample money with a fixed seed, so it looks the same every time.",
+        },
+        {
+          heading: "Design process",
+          body: "I designed each screen in Figma first, then built it in code and checked it on the iPhone simulator. Figma holds one agreed design and a separate review file for changes, so the agreed design is never changed by accident. I wrote notes as I went, so I could see what was done, what was not, and why I made each choice.",
+        },
+        {
+          heading: "What I learned",
+          body: "Starting from a design makes the code easier, because most questions are already answered. The small details, such as spacing, tap targets, and empty lists, take the most time. Writing things down helped more than I expected. Some libraries crash on new versions, so I replaced a swipe-row library with a simple one I could test.",
+        },
+        {
+          heading: "Still to do",
+          body: "Savings goals are not built yet. The AI tips feature still calls its AI service directly from the app. That has to move to a server before anyone else uses it. Some features only work on iPhone.",
         },
       ],
     },
@@ -467,6 +492,25 @@ const {
                   />
                 </a>
               )}
+              {work.figmaUrl && (
+                <a
+                  class="project-link"
+                  href={work.figmaUrl}
+                  data-tip="Figma"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`View ${work.title.join(" ")} design in Figma`}
+                  title="View design in Figma"
+                >
+                  <img
+                    class="project-link-icon project-link-figma-icon"
+                    src="/figma-white.svg"
+                    alt=""
+                    aria-hidden="true"
+                    height="28"
+                  />
+                </a>
+              )}
               {work.labUrl && (
                 <a
                   class="project-link project-link-lab"
@@ -552,16 +596,16 @@ const {
       <div class="case-study-body" id="caseStudyBody" hidden></div>
       <div class="case-study-actions">
         <a
-          class="case-study-action"
           id="caseStudyGithub"
+          class="case-study-action project-link"
           target="_blank"
           rel="noreferrer"
           aria-label="View on GitHub"
           title="View on GitHub"
         >
           <img
-            class="case-study-action-icon"
-            src="/github-blue.svg"
+            class="case-study-action-icon case-study-github-icon"
+            src="/github.svg"
             alt=""
             aria-hidden="true"
           />
@@ -570,7 +614,7 @@ const {
         <span class="case-study-github-note" id="caseStudyGithubNote" hidden
         ></span>
         <a
-          class="case-study-action"
+          class="case-study-action project-link"
           id="caseStudyWebsite"
           target="_blank"
           rel="noreferrer"
@@ -585,7 +629,7 @@ const {
           />
         </a>
         <a
-          class="case-study-action"
+          class="case-study-action project-link"
           id="caseStudyWebsite2"
           target="_blank"
           rel="noreferrer"
@@ -835,11 +879,11 @@ const {
   }
 
   html:not(.dark) .slice-bg {
-    filter: grayscale(1) contrast(0.94) brightness(1.02);
+    filter: grayscale(0) contrast(0.94) brightness(1.02);
   }
 
   html:not(.dark) .slice.is-active .slice-bg {
-    filter: grayscale(1) contrast(0.96) brightness(1.04);
+    filter: grayscale(0) contrast(0.96) brightness(1.04);
   }
 
   /* real photos need more light than flat CSS patterns */
@@ -850,10 +894,10 @@ const {
     filter: grayscale(1) contrast(1) brightness(0.88);
   }
   html:not(.dark) .slice-bg.has-image {
-    filter: grayscale(1) contrast(0.9) brightness(1.08);
+    filter: grayscale(0) contrast(0.9) brightness(1.08);
   }
   html:not(.dark) .slice.is-active .slice-bg.has-image {
-    filter: grayscale(1) contrast(0.92) brightness(1.12);
+    filter: grayscale(0) contrast(0.92) brightness(1.12);
   }
 
   /* generated circuit-like placeholder patterns — swap via the `image` prop */
@@ -1208,7 +1252,7 @@ const {
     height: 2.75rem;
     color: #343b45;
     background: transparent;
-    border: 1px solid #929ba2;
+    border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1.5rem;
@@ -1217,11 +1261,10 @@ const {
 
   :global(.dark) .case-study-close {
     color: #eef4ff;
-    border-color: rgba(106, 158, 255, 0.4);
   }
 
   .case-study-close:hover {
-    border-color: #2a52cc;
+    border: none;
   }
 
   .case-study-kicker {
@@ -1309,11 +1352,10 @@ const {
     object-fit: contain;
   }
 
-  .case-study-action:hover {
-    color: #2a52cc;
-    border-color: #2a52cc;
-    border-width: 2px;
+  :global(.dark) .case-study-github-icon {
+    filter: brightness(0) invert(1);
   }
+
 
   /* rich case study body */
   .case-study-body {
@@ -1500,6 +1542,11 @@ const {
     height: 1.1rem;
     object-fit: contain;
     filter: brightness(0) invert(1);
+  }
+
+  .project-link-figma-icon {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   .project-link:focus-visible {
