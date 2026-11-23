@@ -323,12 +323,12 @@ const {
       tags: ["Expo", "React Native", "Expo Router", "AsyncStorage", "Figma"],
       image: "/images/fluvio-mockup.png",
       screenshots: [
-        { src: "/images/fluvio-mockup.png", alt: "Fluvio app on a tablet, showing the home screen" },
+        { src: "/images/fluvio-original-final.png", alt: "Original Fluvio home screen with total cash and recent activity, next to the final home screen with money left to spend this month and spending by category." },
       ],
       githubUrl: "https://github.com/DeafGecko/fluvio-demo",
       websiteUrl: "https://fluvio-demo.netlify.app",
       labUrl: "https://lab.09folio.com",
-      figmaUrl: "https://www.figma.com/design/YKg4Bruni3UasjQX6CwbQz/Fluvio-%E2%80%94-Mobile-App-Design?node-id=0-1&t=vQ30AB1P6F3Vz1Ua-1",
+      figmaUrl: "https://www.figma.com/design/YKg4Bruni3UasjQX6CwbQz/Fluvio-%E2%80%94-Mobile-App-Design?node-id=0-1&t=sixeqg81i89j2Oxk-1",
       caseStudyStatus: "Demo",
       caseStudySections: [
         {
@@ -338,6 +338,10 @@ const {
         {
           heading: "How I built it",
           body: "The app uses Expo and React Native with Expo Router, so each screen is a file. Data stays on the device in AsyncStorage, and there is no server. Colors, spacing, and text sizes are design tokens, so the light and dark themes stay consistent. A demo data generator creates six months of sample money with a fixed seed, so it looks the same every time.",
+        },
+        {
+          heading: "Before and after",
+          body: "The first design showed total cash and recent activity on the home screen. In the built version, the home screen shows how much is left to spend this month, with spending by category. I changed it because the first version showed balances, but did not answer whether I could still afford my week.",
         },
         {
           heading: "Design process",
@@ -474,24 +478,6 @@ const {
                   />
                 </a>
               )}
-              {work.websiteUrl && (
-                <a
-                  class="project-link"
-                  href={work.websiteUrl}
-                  data-tip="View live"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Visit ${work.title.join(" ")} website`}
-                  title="Open live demo"
-                >
-                  <img
-                    class="project-link-icon-blue"
-                    src="/website-icon-blue.svg"
-                    alt=""
-                    aria-hidden="true"
-                  />
-                </a>
-              )}
               {work.figmaUrl && (
                 <a
                   class="project-link"
@@ -508,6 +494,24 @@ const {
                     alt=""
                     aria-hidden="true"
                     height="28"
+                  />
+                </a>
+              )}
+              {work.websiteUrl && (
+                <a
+                  class="project-link"
+                  href={work.websiteUrl}
+                  data-tip="View live"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Visit ${work.title.join(" ")} website`}
+                  title="Open live demo"
+                >
+                  <img
+                    class="project-link-icon-blue"
+                    src="/website-icon-blue.svg"
+                    alt=""
+                    aria-hidden="true"
                   />
                 </a>
               )}
