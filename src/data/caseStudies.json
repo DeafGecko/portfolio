@@ -311,7 +311,7 @@
       "GitHub Actions",
       "GitHub API"
     ],
-    "image": "/brand/lab-icon.png",
+    "image": "/images/quality-lab-dashboard.png",
     "websiteUrl": "https://lab.09folio.com",
     "githubUrl": "",
     "sections": [
@@ -321,11 +321,11 @@
       },
       {
         "heading": "What it does",
-        "body": "Quality Lab reads the latest GitHub Actions run for each project and shows it as passed, failed or unknown. Each card shows the last run's time, the branch and the commit.\n\nIt reads the results from GitHub each time, so it does not keep its own copy that could go out of date."
+        "body": "Quality Lab reads the latest GitHub Actions run for each project and shows it as passed, failed or unknown. It currently covers five projects: Kanso, Vantge, ShowCard, Chromatique Studio and Fluvio. Each card shows the last run's time, the branch and the commit.\n\nIt reads the results from GitHub each time, so it does not keep its own copy that could go out of date."
       },
       {
         "heading": "Decisions I made",
-        "body": "I read the results from GitHub instead of storing them by hand. A hand-edited file would have been out of date as soon as a test ran.\n\nTests run on each push and pull request, and also on a timer, four times a day per project. The timed runs show whether a project is quiet or still working.\n\nThe layout is simple. The status and the last run sit in one panel, and the history stays in a corner."
+        "body": "I read the results from GitHub instead of storing them by hand. A hand-edited file would have been out of date as soon as a test ran.\n\nTests run on each push and pull request, and also on a timer for each project. The timed runs show whether a project is quiet or still working.\n\nThe layout is simple. The status and the last run sit in one panel, and the history stays in a corner."
       },
       {
         "heading": "What went wrong",

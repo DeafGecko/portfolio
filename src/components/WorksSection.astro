@@ -28,6 +28,7 @@ export interface WorkItem {
   websiteUrl2?: string;
   websiteUrl2Label?: string;
   labUrl?: string;
+  figmaUrl?: string;
   /** optional real screenshot — falls back to a generated pattern */
   image?: string;
   /** rich case study sections rendered inside the modal */
@@ -327,6 +328,7 @@ const {
       githubUrl: "https://github.com/DeafGecko/fluvio-demo",
       websiteUrl: "https://fluvio-demo.netlify.app",
       labUrl: "https://lab.09folio.com",
+      figmaUrl: "https://www.figma.com/design/YKg4Bruni3UasjQX6CwbQz/Fluvio-%E2%80%94-Mobile-App-Design?node-id=0-1&t=vQ30AB1P6F3Vz1Ua-1",
       caseStudyStatus: "Demo",
       caseStudySections: [
         {
@@ -487,6 +489,25 @@ const {
                     src="/website-icon-blue.svg"
                     alt=""
                     aria-hidden="true"
+                  />
+                </a>
+              )}
+              {work.figmaUrl && (
+                <a
+                  class="project-link"
+                  href={work.figmaUrl}
+                  data-tip="Figma"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`View ${work.title.join(" ")} design in Figma`}
+                  title="View design in Figma"
+                >
+                  <img
+                    class="project-link-icon project-link-figma-icon"
+                    src="/figma-white.svg"
+                    alt=""
+                    aria-hidden="true"
+                    height="28"
                   />
                 </a>
               )}
@@ -858,11 +879,11 @@ const {
   }
 
   html:not(.dark) .slice-bg {
-    filter: grayscale(1) contrast(0.94) brightness(1.02);
+    filter: grayscale(0) contrast(0.94) brightness(1.02);
   }
 
   html:not(.dark) .slice.is-active .slice-bg {
-    filter: grayscale(1) contrast(0.96) brightness(1.04);
+    filter: grayscale(0) contrast(0.96) brightness(1.04);
   }
 
   /* real photos need more light than flat CSS patterns */
@@ -873,10 +894,10 @@ const {
     filter: grayscale(1) contrast(1) brightness(0.88);
   }
   html:not(.dark) .slice-bg.has-image {
-    filter: grayscale(1) contrast(0.9) brightness(1.08);
+    filter: grayscale(0) contrast(0.9) brightness(1.08);
   }
   html:not(.dark) .slice.is-active .slice-bg.has-image {
-    filter: grayscale(1) contrast(0.92) brightness(1.12);
+    filter: grayscale(0) contrast(0.92) brightness(1.12);
   }
 
   /* generated circuit-like placeholder patterns — swap via the `image` prop */
@@ -1521,6 +1542,11 @@ const {
     height: 1.1rem;
     object-fit: contain;
     filter: brightness(0) invert(1);
+  }
+
+  .project-link-figma-icon {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   .project-link:focus-visible {
