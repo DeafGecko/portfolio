@@ -22,6 +22,7 @@ export interface WorkItem {
   /** reserved for future case study page — not yet implemented */
   caseStudyUrl?: string;
   githubUrl?: string;
+  githubPrivate?: boolean;
   /** shown as text in the modal instead of an icon link (e.g. "Private — available on request") */
   githubNote?: string;
   websiteUrl?: string;
@@ -63,7 +64,9 @@ const {
       summary:
         "A demo booking and admin app for an event venue, built for my own practice. It covers bookings, payments and role-based access.",
       tags: ["Astro", "React", "TypeScript", "Tailwind CSS", "Cloudflare Workers", "D1", "Sanity"],
-      githubUrl: "https://github.com/DeafGecko/venue-operations",
+      // the-factory-v1 is private for now; set githubUrl to https://github.com/DeafGecko/the-factory-v1 and remove githubPrivate once it is public
+      githubUrl: "",
+      githubPrivate: true,
       websiteUrl: "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
       caseStudyStatus: "Demo",
       caseStudySections: [
@@ -477,6 +480,21 @@ const {
                     aria-hidden="true"
                   />
                 </a>
+              )}
+              {!work.githubUrl && work.githubPrivate && (
+                <span
+                  class="project-link project-link-dimmed"
+                  data-tip="Private for now"
+                  aria-disabled="true"
+                  title="GitHub repository is private for now"
+                >
+                  <img
+                    class="project-link-icon"
+                    src="/github.svg"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </span>
               )}
               {work.figmaUrl && (
                 <a
@@ -1546,6 +1564,12 @@ const {
     height: 1.1rem;
     object-fit: contain;
     filter: brightness(0) invert(1);
+  }
+
+  .project-link-dimmed {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   .project-link-figma-icon {
