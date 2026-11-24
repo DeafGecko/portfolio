@@ -1,48 +1,42 @@
 {
   "the-factory": {
-    "title": "The Mills",
-    "summary": "A demo booking and admin app for an event venue, built for my own practice. It covers bookings, payments and role-based access.",
-    "status": "Demo",
+    "title": "The Mills at Sugarcreek",
+    "summary": "A venue operations app I built first as The Factory V1. I'm now redesigning it as V2 to make daily work simpler.",
+    "status": "V2 in development",
     "tags": [
       "Astro",
       "React",
       "TypeScript",
-      "Tailwind CSS",
-      "Cloudflare Workers",
-      "D1",
-      "Sanity"
+      "Sanity",
+      "Cloudflare"
     ],
-    "image": "/images/factory-dashboard-laptop.png",
+    "image": "/images/the-mills-v2.png",
     "websiteUrl": "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
     "githubUrl": "",
     "sections": [
       {
-        "heading": "Who uses it",
-        "body": "This is a demo app for an event venue. I built it for myself to practice and test ideas. It is not used by a real venue.\n\nIt has four staff roles: admin, manager, developer and viewer."
+        "heading": "Overview",
+        "body": "The Factory V1 is a demo venue app I built. It handles bookings, the calendar, client records, and payments in one place.\n\nI'm now redesigning it as The Mills at Sugarcreek V2. The goal is simpler daily work, more accurate data, and an app that is easier to use.\n\nV1 is built. V2 is still in planning."
       },
       {
-        "heading": "Why I built it",
-        "body": "Some venue software is too hard to use. I wanted something simpler, with one place to see events, make bookings, check the calendar and find clients.\n\nI also wanted a real project to learn Astro and practice full-stack work."
+        "heading": "The Problem",
+        "body": "Venue software is often hard to use. I wanted an app where staff could find a booking, check an event, or see a payment without a lot of clicks.\n\nThis is a portfolio project. No real venue uses it."
       },
       {
-        "heading": "What I built",
-        "body": "A two-step booking form that checks the details before it saves.\n\nA dashboard with money by month, money by event type and upcoming events.\n\nA calendar that shows paid, partly paid or unpaid events.\n\nRoles that limit what each person can change. The server enforces this, not only the screen.\n\nA read-only public view. Other pages need an access code."
+        "heading": "What I Built in V1",
+        "body": "• Bookings: Forms that check the details before saving, plus client records and event scheduling.\n• Dashboard: Revenue, upcoming events, and booking details.\n• Calendar: Events with a payment status on each one.\n• Access: Four staff roles, with the server checking permissions.\n• Stack: Astro, React, TypeScript, Sanity, Cloudflare Workers, and D1."
       },
       {
-        "heading": "Choices I made",
-        "body": "Astro, because most pages only show data. React, only where a page needs interaction.\n\nCloudflare Workers runs the app, D1 is the database, and Sanity stores the venue data.\n\nThe server builds each booking, so the form cannot change the price."
+        "heading": "Engineering Challenges",
+        "body": "• Sessions: My first session approach was not safe. I switched to signed sessions (HMAC).\n• Deployment: Cloudflare would not read my secrets at runtime. I fixed that.\n• Validation: I moved the booking checks to the server, so the browser can't change fields the server should control.\n• Testing: Vitest for the logic, Playwright for the user flows."
       },
       {
-        "heading": "What I fixed after testing",
-        "body": "A fake cookie got into the admin area. I fixed it by signing sessions with HMAC.\n\nSign-in failed on Cloudflare because secrets were not readable at runtime. I turned on runtime access.\n\nI learned that working locally does not mean it will work in production."
+        "heading": "What I Want to Change in V2",
+        "body": "• A dashboard that starts with the tasks staff do most.\n• Stop double bookings, and show a clear status on each booking.\n• More reliable money math and a payment history.\n• Better accessibility, and layouts that work on phones.\n• Design the screens in Figma first, then build them."
       },
       {
-        "heading": "Testing",
-        "body": "I ran 19 unit tests with Vitest, and none failed.\n\nI ran Playwright browser tests at desktop and phone sizes. The last full run had two failures. I fixed both and ran it again."
-      },
-      {
-        "heading": "Still to do",
-        "body": "Color contrast still fails on many pages. Invite and reset emails need an email key. I deploy by hand with Wrangler."
+        "heading": "Current Status",
+        "body": "V1: Built and tested. It still has accessibility problems and some deployment issues I haven't fixed.\n\nV2: I've finished the UI, UX, and code review. I'm working on the data model and the booking workflows.\n\nThe V2 image is a design preview, not a working app."
       }
     ]
   },
