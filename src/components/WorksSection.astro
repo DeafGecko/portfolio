@@ -29,6 +29,7 @@ export interface WorkItem {
   websiteUrl2?: string;
   websiteUrl2Label?: string;
   labUrl?: string;
+  labPending?: boolean;
   figmaUrl?: string;
   figmaPending?: boolean;
   /** optional real screenshot — falls back to a generated pattern */
@@ -68,6 +69,7 @@ const {
       // the-factory-v1 is private for now; set githubUrl to https://github.com/DeafGecko/the-factory-v1 and remove githubPrivate once it is public
       githubUrl: "",
       githubPrivate: true,
+      labPending: true,
       figmaPending: true,
       websiteUrl: "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
       caseStudyStatus: "V1 implemented · V2 planning in progress",
@@ -545,6 +547,23 @@ const {
                     aria-hidden="true"
                   />
                 </a>
+              )}
+              {!work.labUrl && work.labPending && (
+                <span
+                  class="project-link project-link-dimmed"
+                  data-tip="Quality Lab coming soon"
+                  aria-disabled="true"
+                  title="Quality Lab page coming soon"
+                >
+                  <img
+                    class="project-link-lab-icon"
+                    src="/brand/lab-icon.png"
+                    alt=""
+                    aria-hidden="true"
+                    width="28"
+                    height="28"
+                  />
+                </span>
               )}
               {work.labUrl && (
                 <a
