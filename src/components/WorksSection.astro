@@ -56,7 +56,7 @@ const {
       order: 1,
       featured: true,
       eyebrow: "FEATURED PROJECT · V2 IN DEVELOPMENT",
-      title: ["THE MILLS"],
+      title: ["THE MILLS AT SUGARCREEK"],
       role: "Full-Stack Development · Design Engineering",
       category: "factory",
       image: "/images/the-mills-v2.png",
@@ -64,19 +64,19 @@ const {
         { src: "/images/the-mills-v2.png", alt: "The Mills at Sugarcreek V2 concept: dashboard on a laptop and calendar on a tablet" },
       ],
       summary:
-        "Redesigning an existing full-stack venue management application to simplify booking workflows, improve financial accuracy, and make everyday operations easier for staff.",
-      tags: ["Astro", "React", "TypeScript", "Sanity", "Cloudflare", "Figma"],
+        "Redesigning a venue management application to simplify booking workflows, improve financial accuracy, and make daily operations easier for staff.",
+      tags: ["Astro", "React", "TypeScript", "Sanity", "Cloudflare"],
       // the-factory-v1 is private for now; set githubUrl to https://github.com/DeafGecko/the-factory-v1 and remove githubPrivate once it is public
       githubUrl: "",
       githubPrivate: true,
       labPending: true,
       figmaPending: true,
       websiteUrl: "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
-      caseStudyStatus: "V1 implemented · V2 planning in progress",
+      caseStudyStatus: "V2 concept preview — not a released application.",
       caseStudySections: [
         {
           heading: "Overview",
-          body: "The Factory V1 is a demo venue app I built. It handles bookings, the calendar, client records, and payments in one place.\n\nI'm now redesigning it as The Mills at Sugarcreek V2. The goal is simpler daily work, more accurate data, and an app that is easier to use.\n\nV1 is built. V2 is still in planning.",
+          body: "The Factory V1 is a demo venue app I built. It handles bookings, the calendar, client records, and payments in one place.\n\nI'm now redesigning it as The Mills at Sugarcreek V2. The goal is simpler daily work, more accurate data, and an app that is easier to use.",
         },
         {
           heading: "The Problem",
@@ -91,12 +91,12 @@ const {
           body: "• Sessions: My first session approach was not safe. I switched to signed sessions (HMAC).\n• Deployment: Cloudflare would not read my secrets at runtime. I fixed that.\n• Validation: I moved the booking checks to the server, so the browser can't change fields the server should control.\n• Testing: Vitest for the logic, Playwright for the user flows.",
         },
         {
-          heading: "What I Want to Change in V2",
+          heading: "V2 Engineering & UX Goals",
           body: "• A dashboard that starts with the tasks staff do most.\n• Stop double bookings, and show a clear status on each booking.\n• More reliable money math and a payment history.\n• Better accessibility, and layouts that work on phones.\n• Design the screens in Figma first, then build them.",
         },
         {
           heading: "Current Status",
-          body: "V1: Built and tested. It still has accessibility problems and some deployment issues I haven't fixed.\n\nV2: I've finished the UI, UX, and code review. I'm working on the data model and the booking workflows.\n\nThe V2 image is a design preview, not a working app.",
+          body: "V1 — Original application: Implemented with known accessibility and financial-data consistency issues.\n\nV2 — In development: UI/UX and code audit completed. Data modeling and booking workflows underway.\n\nThe featured image is a V2 concept, not a screenshot of the finished application.",
         },
       ],
     },
@@ -484,8 +484,9 @@ const {
               {!work.githubUrl && work.githubPrivate && (
                 <span
                   class="project-link project-link-dimmed"
-                  data-tip="Private for now"
-                  aria-disabled="true"
+                  data-tip="GitHub private for now"
+                  role="img"
+                  aria-label="GitHub repository is private for now"
                   title="GitHub repository is private for now"
                 >
                   <img
@@ -500,7 +501,8 @@ const {
                 <span
                   class="project-link project-link-dimmed"
                   data-tip="Figma coming soon"
-                  aria-disabled="true"
+                  role="img"
+                  aria-label="Figma design coming soon"
                   title="Figma design coming soon"
                 >
                   <img
@@ -534,11 +536,11 @@ const {
                 <a
                   class="project-link"
                   href={work.websiteUrl}
-                  data-tip="View live"
+                  data-tip="Original V1 demo"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label={`Visit ${work.title.join(" ")} website`}
-                  title="Open live demo"
+                  aria-label={`Open the original V1 demo of ${work.title.join(" ")}`}
+                  title="Original V1 demo, not the V2 concept"
                 >
                   <img
                     class="project-link-icon-blue"
@@ -552,7 +554,8 @@ const {
                 <span
                   class="project-link project-link-dimmed"
                   data-tip="Quality Lab coming soon"
-                  aria-disabled="true"
+                  role="img"
+                  aria-label="Quality Lab page coming soon"
                   title="Quality Lab page coming soon"
                 >
                   <img
@@ -1369,7 +1372,7 @@ const {
   }
 
   :global(.dark) :global(.case-study-tag) {
-    color: #6880a8;
+    color: #8aacdf;
     border-color: rgba(106, 158, 255, 0.2);
   }
 
@@ -1453,7 +1456,7 @@ const {
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.75;
-    color: #5a6472;
+    color: #4a5361;
     margin: 0;
   }
 
