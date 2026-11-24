@@ -14,7 +14,7 @@
     ],
     "image": "/images/factory-dashboard-laptop.png",
     "websiteUrl": "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
-    "githubUrl": "https://github.com/DeafGecko/venue-operations",
+    "githubUrl": "",
     "sections": [
       {
         "heading": "Who uses it",
