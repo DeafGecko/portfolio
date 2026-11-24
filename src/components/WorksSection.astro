@@ -30,6 +30,7 @@ export interface WorkItem {
   websiteUrl2Label?: string;
   labUrl?: string;
   figmaUrl?: string;
+  figmaPending?: boolean;
   /** optional real screenshot — falls back to a generated pattern */
   image?: string;
   /** rich case study sections rendered inside the modal */
@@ -55,7 +56,7 @@ const {
       featured: true,
       eyebrow: "FEATURED PROJECT · V2 IN DEVELOPMENT",
       title: ["THE MILLS"],
-      role: undefined,
+      role: "Full-Stack Development · Design Engineering",
       category: "factory",
       image: "/images/the-mills-v2.png",
       screenshots: [
@@ -63,10 +64,11 @@ const {
       ],
       summary:
         "Redesigning an existing full-stack venue management application to simplify booking workflows, improve financial accuracy, and make everyday operations easier for staff.",
-      tags: ["Astro", "React", "TypeScript", "Sanity", "Cloudflare"],
+      tags: ["Astro", "React", "TypeScript", "Sanity", "Cloudflare", "Figma"],
       // the-factory-v1 is private for now; set githubUrl to https://github.com/DeafGecko/the-factory-v1 and remove githubPrivate once it is public
       githubUrl: "",
       githubPrivate: true,
+      figmaPending: true,
       websiteUrl: "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
       caseStudyStatus: "V1 implemented · V2 planning in progress",
       caseStudySections: [
@@ -487,6 +489,21 @@ const {
                   <img
                     class="project-link-icon"
                     src="/github.svg"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </span>
+              )}
+              {!work.figmaUrl && work.figmaPending && (
+                <span
+                  class="project-link project-link-dimmed"
+                  data-tip="Figma coming soon"
+                  aria-disabled="true"
+                  title="Figma design coming soon"
+                >
+                  <img
+                    class="project-link-icon project-link-figma-icon"
+                    src="/figma-white.svg"
                     alt=""
                     aria-hidden="true"
                   />
