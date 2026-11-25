@@ -15,7 +15,7 @@ export interface WorkItem {
   hidden?: boolean;
   /** position in the grid, lowest first */
   order?: number;
-  /** short role shown under the title, e.g. 'Full-stack developer' */
+  /** short role shown under the title, e.g. 'Developer' */
   role?: string;
   summary?: string;
   tags?: string[];
@@ -27,6 +27,7 @@ export interface WorkItem {
   githubNote?: string;
   websiteUrl?: string;
   websiteUrl2?: string;
+  websiteLabel?: string;
   websiteUrl2Label?: string;
   labUrl?: string;
   labPending?: boolean;
@@ -57,7 +58,7 @@ const {
       featured: true,
       eyebrow: "FEATURED PROJECT · V2 IN DEVELOPMENT",
       title: ["THE MILLS"],
-      role: "Full-Stack Development · Design Engineering",
+      role: "Development · Design Engineering",
       category: "factory",
       image: "/images/the-mills-v2.png",
       screenshots: [
@@ -65,13 +66,14 @@ const {
       ],
       summary:
         "Redesigning a venue management application to simplify booking workflows, improve financial accuracy, and make daily operations easier for staff.",
-      tags: ["Astro", "React", "TypeScript", "Sanity", "Cloudflare"],
+      tags: ["Astro", "React", "TypeScript", "Cloudflare", "Figma"],
       // the-factory-v1 is private for now; set githubUrl to https://github.com/DeafGecko/the-factory-v1 and remove githubPrivate once it is public
       githubUrl: "",
       githubPrivate: true,
       labPending: true,
       figmaUrl: "https://www.figma.com/design/iNaCahvfmajS5GzVmVKPos/The-Mills-at-Sugarcreek---UI-UX-v2?node-id=0-1&t=KCNPrnCq3N7uJqWr-1",
       websiteUrl: "https://venue-operations-api.dwirog.workers.dev/admin/dashboard",
+      websiteLabel: "Original V1 demo",
       caseStudyStatus: "V2 concept preview — not a released application.",
       caseStudySections: [
         {
@@ -84,7 +86,7 @@ const {
         },
         {
           heading: "What I Built in V1",
-          body: "• Bookings: Forms that check the details before saving, plus client records and event scheduling.\n• Dashboard: Revenue, upcoming events, and booking details.\n• Calendar: Events with a payment status on each one.\n• Access: Four staff roles, with the server checking permissions.\n• Stack: Astro, React, TypeScript, Sanity, Cloudflare Workers, and D1.",
+          body: "• Bookings: Forms that check the details before saving, plus client records and event scheduling.\n• Dashboard: Revenue, upcoming events, and booking details.\n• Calendar: Events with a payment status on each one.\n• Access: Four staff roles, with the server checking permissions.\n• Stack: Astro, React, TypeScript, and Cloudflare Workers.",
         },
         {
           heading: "Engineering Challenges",
@@ -115,13 +117,16 @@ const {
         "A web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.",
       tags: ["Product Design", "Host & Guest Workflows", "Browser demo"],
       websiteUrl: "https://vantge.app/try",
+      websiteLabel: "Try the demo",
+      websiteUrl2: "https://vantge.app",
+      websiteUrl2Label: "Use the live app",
       labUrl: "https://lab.09folio.com",
       githubUrl: "https://github.com/DeafGecko/vantge",
       caseStudyStatus: "Live demo",
       caseStudySections: [
         {
           heading: "Summary",
-          body: "Vantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo.",
+          body: "Vantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard and the guest pages. The live app is where anyone can create their own event. The demo at /try runs in the browser with sample data, so nothing is saved to the live database.",
         },
         {
           heading: "The problem",
@@ -536,11 +541,11 @@ const {
                 <a
                   class="project-link"
                   href={work.websiteUrl}
-                  data-tip="Original V1 demo"
+                  data-tip={work.websiteLabel ?? "View live"}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label={`Open the original V1 demo of ${work.title.join(" ")}`}
-                  title="Original V1 demo, not the V2 concept"
+                  aria-label={`${work.websiteLabel ?? "View live"}: ${work.title.join(" ")}`}
+                  title={work.websiteLabel ?? "View live"}
                 >
                   <img
                     class="project-link-icon-blue"

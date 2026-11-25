@@ -7,7 +7,6 @@
       "Astro",
       "React",
       "TypeScript",
-      "Sanity",
       "Cloudflare"
     ],
     "image": "/images/the-mills-v2.png",
@@ -24,7 +23,7 @@
       },
       {
         "heading": "What I Built in V1",
-        "body": "• Bookings: Forms that check the details before saving, plus client records and event scheduling.\n• Dashboard: Revenue, upcoming events, and booking details.\n• Calendar: Events with a payment status on each one.\n• Access: Four staff roles, with the server checking permissions.\n• Stack: Astro, React, TypeScript, Sanity, Cloudflare Workers, and D1."
+        "body": "• Bookings: Forms that check the details before saving, plus client records and event scheduling.\n• Dashboard: Revenue, upcoming events, and booking details.\n• Calendar: Events with a payment status on each one.\n• Access: Four staff roles, with the server checking permissions.\n• Stack: Astro, React, TypeScript, and Cloudflare Workers."
       },
       {
         "heading": "Engineering Challenges",
@@ -199,7 +198,7 @@
     "sections": [
       {
         "heading": "Summary",
-        "body": "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard, the guest pages, and a browser-only demo."
+        "body": "Try the demo at vantge.app/try. The access code is Demo.\n\nVantge is a web app for hosting an event. A host shares a photo gallery and an invitation through one link or QR code, and runs everything from one dashboard.\n\nI designed and built the host dashboard and the guest pages. The live app is where anyone can create their own event. The demo at /try runs in the browser with sample data, so nothing is saved to the live database."
       },
       {
         "heading": "The problem",
